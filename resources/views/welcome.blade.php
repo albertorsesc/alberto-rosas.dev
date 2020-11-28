@@ -1,0 +1,43 @@
+@extends('layouts.guest')
+
+@section('content')
+    <div class="inline-block items-center text-center shadow-md rounded-full">
+        <img src="/me.jpg" class="object-cover w-52 h-52 rounded-full" alt="">
+    </div>
+
+    <div class="w-full mt-4">
+        <span class="text-2xl font-bold text-purple-500">Who am I</span>
+
+        <div class="mb-20 md:mb-0 my-4 w-full md:w-1/3 md:flex-wrap md:justify-center items-center mx-auto text-gray-600 font-bold text-xl">
+            I am a Fullstack PHP developer that loves to create awesome web applications in particular
+            for companies that want to optimize their workflow and obtain control of their assets.
+        </div>
+
+        <div class="my-10 flex justify-center absolute inset-x-0 bottom-0 b-transition hover:b-transform"
+             :class="[isOpen ? 'ml-10 md:ml-0 fixed z-10' : '']">
+            <a href="https://github.com/albertorsesc"
+               class="mr-4"
+               title="Alberto's Github Repositories"
+               target="_blank">
+                <i class="fab fa-github text-5xl"></i>
+            </a>
+            <a href="https://exam.laravelcert.com/is/alberto-rosas-escareno/certified-since/2020-11-25"
+               class="mr-4"
+               title="Alberto's Laravel Certification"
+               target="_blank">
+                <img src="https://laravel.com/img/logomark.min.svg" class="w-12 h-12" alt="">
+            </a>
+            <a href="https://www.linkedin.com/in/albertorsesc/"
+               class="mr-3"
+               title="Alberto's LinkedIn Profile"
+               target="_blank">
+                <i class="fab fa-linkedin-in text-blue-600 text-5xl"></i>
+            </a>
+            <a href="https://twitter.com/bcryp7"
+               title="Alberto's Twitter Account"
+               target="_blank">
+                <i class="fab fa-twitter text-blue-400 text-5xl"></i>
+            </a>
+        </div>
+    </div>
+@endsection

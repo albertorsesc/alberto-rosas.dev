@@ -1,0 +1,23 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+a {
+    @apply no-underline;
+    transition: all .2s ease !important;
+}
+a:hover {
+    @apply no-underline translate-r-2 font-semibold;
+}
+.translate-r-2 {
+    transform: translateX(2px) !important;
+}
+.b-transition {
+    -webkit-transition: all .45s ease;
+    transition: all .45s ease;
+}
+.b-transform {
+    transform: translateY(5px);
+}
+
+[x-cloak] { display: none; }
