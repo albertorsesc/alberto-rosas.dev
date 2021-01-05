@@ -1,19 +1,21 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="inline-block items-center text-center shadow-md rounded-full">
-        <img src="/me.jpg" class="object-cover w-52 h-52 rounded-full" alt="">
+    <div class="mt-2 md:mt-0 inline-block items-center text-center shadow-md rounded-full">
+        <img src="/me.jpg" class="object-cover w-40 h-40 md:w-52 md:h-52 rounded-full" alt="">
     </div>
 
     <div class="w-full mt-4">
         <span class="text-2xl font-bold text-purple-500">Who am I</span>
 
         <div class="mb-20 md:mb-0 my-4 w-full md:w-1/3 md:flex-wrap md:justify-center items-center mx-auto text-gray-600 font-bold text-xl">
-            I am a Fullstack PHP developer that loves to create awesome web applications in particular
-            for companies that want to optimize their workflow and obtain control of their assets.
+            <div class="mx-4">
+                I am a Fullstack PHP developer that loves to create awesome web applications in particular
+                for companies that want to optimize their workflow and obtain control of their assets.
+            </div>
         </div>
 
-        <div class="my-10 flex justify-center absolute inset-x-0 bottom-0 b-transition hover:b-transform"
+        <div class="mb-10 md:mb-16 flex justify-center absolute inset-x-0 bottom-0 b-transition hover:b-transform"
              :class="[isOpen ? 'ml-10 md:ml-0 fixed z-10' : '']">
             <a href="https://github.com/albertorsesc"
                class="mr-4"

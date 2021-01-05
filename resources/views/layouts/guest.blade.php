@@ -20,12 +20,22 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJD4HZ07VC"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-GJD4HZ07VC');
+        </script>
     </head>
     <body class="antialiased">
-        <div class="flex items-top justify-center min-h-screen bg-blue-100 dark:bg-gray-900 sm:items-center sm:pt-0"
+        <div class="flex items-top justify-center min-h-screen bg-blue-100 dark:bg-gray-900 md:items-center md:pt-0"
              x-data="{ isOpen: false }"
              @close.stop="isOpen = false">
-                <div class="fixed top-0 right-0 px-6 py-4 sm:block">
+                <div class="fixed top-0 right-0 px-6 py-4 md:block">
                     <button class="py-2 px-2" @click="isOpen = ! isOpen">
                         <svg class="cursor-pointer h-8 w-8 md:h-10 md:w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -35,11 +45,13 @@
 
             @include('components.mobile-menu')
 
-            <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto md:px-6 lg:px-8">
+
                 <div class="flex-wrap justify-center align-middle items-center text-center my-10">
                     @yield('content')
                 </div>
             </div>
         </div>
+
     </body>
 </html>
