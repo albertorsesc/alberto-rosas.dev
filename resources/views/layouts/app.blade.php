@@ -7,15 +7,17 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        @if (app()->environment('production'))
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJD4HZ07VC"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJD4HZ07VC"></script>
+            <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
 
-            gtag('config', 'G-GJD4HZ07VC');
-        </script>
+                gtag('config', 'G-GJD4HZ07VC');
+            </script>
+        @endif
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

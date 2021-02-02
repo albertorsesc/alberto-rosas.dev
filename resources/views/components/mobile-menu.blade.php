@@ -33,7 +33,7 @@
                     <button @click="isOpen = false" class="rounded-md text-gray-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-white">
                         <span class="sr-only">Close panel</span>
                         <!-- Heroicon name: x -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -55,6 +55,10 @@
                                 <a href="{{ route('tech-stack') }}"
                                    class="my-4 block text-2xl text-gray-700 hover:underline hover:font-semibold hover:text-gray-900">
                                     Techologies I use
+                                </a>
+                                <a href="{{ route('portfolio') }}"
+                                   class="my-4 block text-2xl text-gray-700 hover:underline hover:font-semibold hover:text-gray-900">
+                                    Portfolio
                                 </a>
                             </div>
                         </div>

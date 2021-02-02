@@ -32,7 +32,8 @@
         </script>
     </head>
     <body class="antialiased">
-        <div class="flex items-top justify-center min-h-screen bg-blue-100 dark:bg-gray-900 md:items-center md:pt-0"
+        <div class="flex items-top justify-center min-h-screen dark:bg-gray-900 md:items-center md:pt-0"
+             style="background-color: #a3ddcb" {{--a2d0c1--}}
              x-data="{ isOpen: false }"
              @close.stop="isOpen = false">
                 <div class="fixed top-0 right-0 px-6 py-4 md:block">

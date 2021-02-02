@@ -1,17 +1,17 @@
 @extends('layouts.guest')
 
 @section('content')
-    <div class="mt-2 md:mt-0 inline-block items-center text-center shadow-md rounded-full">
+    <div class="-mt-4 mb-4 md:mb-8 inline-block text-center shadow-md rounded-full">
         <img src="/me.jpg" class="object-cover w-40 h-40 md:w-52 md:h-52 rounded-full" alt="">
     </div>
 
-    <div class="w-full mt-4">
-        <span class="text-2xl font-bold text-purple-500">Who am I</span>
+    <div class="w-full">
+        <span class="text-2xl font-bold" style="color: #387F4B">Who am I</span>
 
-        <div class="mb-20 md:mb-0 my-4 w-full md:w-1/3 md:flex-wrap md:justify-center items-center mx-auto text-gray-600 font-bold text-xl">
-            <div class="mx-4">
+        <div class="mt-4 mb-48 md:mb-0 w-full md:w-1/3 md:flex-wrap md:justify-start items-center mx-auto font-bold text-xl" style="color: #337545">
+            <div class="mx-4 text-justify">
                 I am a Fullstack PHP developer that loves to create awesome web applications in particular
-                for companies that want to optimize their workflow and obtain control of their assets.
+                for companies that want to optimize and secure their processes and obtain control of their assets.
             </div>
         </div>
 
