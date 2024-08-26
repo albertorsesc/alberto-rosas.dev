@@ -1,51 +1,29 @@
 <header
     class="sticky top-0 z-50 flex flex-none flex-wrap items-center justify-between bg-white px-4 py-5 shadow-md shadow-stone-900/5 transition duration-500 sm:px-6 lg:px-8"
 >
-    <div class="relative flex flex-grow basis-0 items-center">
-        <button
-            aria-label="Menu"
-            class="mr-4 rounded-lg p-1.5 hover:bg-stone-100 active:bg-stone-200 lg:hidden"
-            x-on:click="showSidebar = ! showSidebar"
-        >
-            <svg
-                class="h-6 w-6 text-stone-600"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
-                <line x1="4" x2="20" y1="12" y2="12"></line>
-                <line x1="4" x2="20" y1="6" y2="6"></line>
-                <line x1="4" x2="20" y1="18" y2="18"></line>
-            </svg>
-        </button>
+    <div class="relative flex flex-grow basis-0 items-center gap-48">
 
-        <a aria-label="Home" href="{{ route('prezet.index') }}">
-            <svg
-                class="h-9 w-auto"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 141 36"
-            >
-                <path
-                    d="m5 31 7-26h5l-7 26H5ZM18 14V9l13 6.5v5L18 27v-5l8-4-8-4Z"
-                    class="fill-orange-600"
-                />
-                <path
-                    d="M44.517 27V9.545h6.886c1.324 0 2.452.253 3.384.759.932.5 1.642 1.196 2.13 2.088.495.886.742 1.91.742 3.068 0 1.16-.25 2.182-.75 3.068-.5.887-1.224 1.577-2.173 2.071-.943.495-2.085.742-3.426.742h-4.39v-2.957h3.793c.71 0 1.295-.123 1.756-.367.466-.25.812-.594 1.04-1.031.233-.443.349-.952.349-1.526 0-.58-.116-1.085-.35-1.517a2.333 2.333 0 0 0-1.04-1.014c-.465-.244-1.056-.367-1.772-.367h-2.489V27h-3.69Zm15.54 0V9.545h6.885c1.319 0 2.444.236 3.376.708.937.466 1.65 1.128 2.139 1.986.494.852.741 1.855.741 3.008 0 1.16-.25 2.156-.75 2.992-.5.83-1.224 1.465-2.173 1.909-.943.443-2.085.665-3.426.665h-4.611v-2.966h4.014c.705 0 1.29-.097 1.756-.29.466-.193.812-.483 1.04-.87.233-.386.349-.866.349-1.44 0-.58-.117-1.068-.35-1.466-.227-.398-.576-.699-1.048-.903-.466-.21-1.054-.316-1.764-.316h-2.489V27h-3.69Zm9.425-7.943L73.82 27h-4.074l-4.244-7.943h3.98ZM75.806 27V9.545h11.761v3.043h-8.07v4.16h7.465v3.042h-7.466v4.167h8.106V27H75.806Zm14.508 0v-2.19l8.71-12.222h-8.727V9.545h13.364v2.19l-8.72 12.222h8.737V27H90.314Zm16.195 0V9.545h11.762v3.043H110.2v4.16h7.465v3.042H110.2v4.167h8.105V27h-11.796Zm14.031-14.412V9.545h14.335v3.043h-5.344V27h-3.647V12.588h-5.344Z"
-                    class="fill-stone-900"
-                />
+        <a aria-label="Home" href="/" class="flex items-center text-cyan-800 font-semibold hover:bg-cyan-50">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9 fill-cyan-500 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z" />
             </svg>
+
+            Back to Home
+        </a>
+
+        <a aria-label="Blog" href="/blog" class="flex items-center text-cyan-800 font-semibold hover:bg-cyan-50">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9 mr-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
+            </svg>
+
+            Blog
         </a>
     </div>
     <div class="relative flex basis-0 justify-end gap-6 sm:gap-8 md:flex-grow">
         <a
             class="group"
             aria-label="GitHub"
-            href="https://github.com/benbjurstrom/prezet"
+            href="https://github.com/albertorsesc"
             target="_blank"
         >
             <svg

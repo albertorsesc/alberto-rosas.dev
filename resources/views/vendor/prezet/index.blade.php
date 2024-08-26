@@ -4,9 +4,9 @@
 
 <x-prezet::template>
     @seo([
-        'title' => 'Prezet: Markdown Blogging for Laravel',
+        'title' => 'Alberto Rosas: Software Engineer and AI Researcher',
         'description' =>
-            'Transform your markdown files into SEO-friendly blogs, articles, and documentation!',
+            'AI Engineer and Researcher. I write about AI, software engineering, and more.',
         'url' => route('prezet.index'),
     ])
     <x-slot name="left">
@@ -15,7 +15,7 @@
     <section class="mt-12">
         <div class="mb-9 space-y-1">
             <p class="font-display text-sm font-medium text-primary-600">
-                Prezet
+                Alberto Rosas
             </p>
             <h1
                 class="font-display text-4xl font-medium tracking-tight text-stone-900"

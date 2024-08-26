@@ -20,7 +20,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         activeSection = entry.target.getAttribute('data-section');
-                        console.log('Active section:', activeSection);
                     }
                 });
             }, { threshold: 0.6 }); // Adjust threshold as needed

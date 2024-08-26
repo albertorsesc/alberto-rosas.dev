@@ -95,6 +95,14 @@
             >
                 <i class="fa-brands fa-github"></i>
             </a>
+
+            <a
+                class="bg-white dark:bg-white/10 p-4 text-gray-700 dark:text-white/60 hover:text-gray-950 dark:hover:text-white flex items-center gap-2 rounded-full shadow-lg focus:scale-[1.15] hover:scale-[1.15] active:scale-105 transition cursor-pointer"
+                href="https://x.com/bcryp7"
+                target="_blank"
+            >
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
         </div>
     </div>
 </section>

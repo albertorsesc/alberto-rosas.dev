@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>http://alberto-rosas.test/blog/advanced-prezet-features</loc>
-        <lastmod>2024-08-24T04:41:32+00:00</lastmod>
+        <loc>http://alberto-rosas.dev.test/blog/langgraph-studio-agent-development</loc>
+        <lastmod>2024-08-26T03:16:55+00:00</lastmod>
 
             </url>
     <url>
-        <loc>http://alberto-rosas.test/blog/customization/customizing-prezet</loc>
-        <lastmod>2024-08-24T04:41:32+00:00</lastmod>
+        <loc>http://alberto-rosas.dev.test/blog/langchain-tools-and-chains-for-developers</loc>
+        <lastmod>2024-08-26T03:15:56+00:00</lastmod>
 
             </url>
     <url>
-        <loc>http://alberto-rosas.test/blog/building-laravel%20api-using-tdd</loc>
-        <lastmod>2024-08-26T00:28:53+00:00</lastmod>
+        <loc>http://alberto-rosas.dev.test/blog/hume-ai-understanding-human-emotions</loc>
+        <lastmod>2024-08-26T03:16:30+00:00</lastmod>
+
+            </url>
+    <url>
+        <loc>http://alberto-rosas.dev.test/blog/the-art-of-fine-tunning-llm</loc>
+        <lastmod>2024-08-26T03:17:15+00:00</lastmod>
 
             </url>
 </urlset>
