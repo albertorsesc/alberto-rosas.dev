@@ -26,7 +26,7 @@ export default {
                 '8xl': '88rem',
             },
             colors: {
-                primary: colors.orange,
+                primary: colors.cyan,
 				black: {
 					DEFAULT: '#000',
 					100: '#000319',

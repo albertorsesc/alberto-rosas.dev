@@ -1,6 +1,6 @@
 <header class="z-[999] relative"
         x-data="{
-            activeSection: 'Home', // Initialize the activeSection here
+            activeSection: 'Home',
             darkMode: localStorage.getItem('darkMode') === 'true',
             showHeader: false,
             links: {{ json_encode($links) }},
@@ -101,15 +101,15 @@
         <div x-show="open" class="fixed inset-0 flex items-end justify-center overflow-hidden">
             <!-- Mobile Drawer -->
             <div
-                    x-show="open"
-                    @click.away="open = false"
-                    x-transition:enter="transform transition ease-in-out duration-500"
-                    x-transition:enter-start="translate-y-full"
-                    x-transition:enter-end="translate-y-0"
-                    x-transition:leave="transform transition ease-in-out duration-500"
-                    x-transition:leave-start="translate-y-0"
-                    x-transition:leave-end="translate-y-full"
-                    class="pointer-events-auto w-full max-w-md bg-white dark:bg-gray-900 shadow-3xl rounded-t-3xl"
+                x-show="open"
+                @click.away="open = false"
+                x-transition:enter="transform transition ease-in-out duration-500"
+                x-transition:enter-start="translate-y-full"
+                x-transition:enter-end="translate-y-0"
+                x-transition:leave="transform transition ease-in-out duration-500"
+                x-transition:leave-start="translate-y-0"
+                x-transition:leave-end="translate-y-full"
+                class="pointer-events-auto w-full max-w-md bg-white dark:bg-gray-900 shadow-3xl rounded-t-3xl"
             >
                 <div class="flex h-full flex-col overflow-y-scroll bg-white dark:bg-gray-800 py-6 rounded-t-xl">
                     <div class="px-4 sm:px-6">
@@ -117,9 +117,9 @@
                             <h2 class="text-base font-semibold leading-6 text-gray-900 dark:text-gray-200" id="slide-over-title">Menu</h2>
                             <div class="ml-3 flex h-7 items-center">
                                 <button
-                                        @click="open = false"
-                                        type="button"
-                                        class="relative rounded-md bg-white dark:bg-gray-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                    @click="open = false"
+                                    type="button"
+                                    class="relative rounded-md bg-white dark:bg-gray-900 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                 >
                                     <span class="sr-only">Close panel</span>
                                     <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
@@ -134,7 +134,7 @@
                         <ul class="flex flex-col items-start gap-y-4">
                             <template x-for="(link, index) in links" :key="index">
                                 <li class="flex items-center">
-                                    <svg x-show="link.hash === '#home'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+                                    <svg x-show="link.hash === '/'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205 3 1m1.5.5-1.5-.5M6.75 7.364V3h-3v18m3-13.636 10.5-3.819" />
                                     </svg>
 
@@ -146,7 +146,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
                                     </svg>
 
-                                    <svg x-show="link.hash === '#blog'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
+                                    <svg x-show="link.hash === '/blog'" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-7">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 0 1-2.25 2.25M16.5 7.5V18a2.25 2.25 0 0 0 2.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 0 0 2.25 2.25h13.5M6 7.5h3v3H6v-3Z" />
                                     </svg>
 

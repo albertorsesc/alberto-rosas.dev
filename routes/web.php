@@ -6,7 +6,7 @@ Route::get('/', function () {
     $links = [
         [
             'name' => 'Home',
-            'hash' => '#home',
+            'hash' => '/',
         ],
         [
             'name' => 'About',
