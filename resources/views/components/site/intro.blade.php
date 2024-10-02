@@ -12,7 +12,7 @@
                 class="h-32 w-32 md:h-24 md:w-24 rounded-full object-cover border-[0.20rem] border-white shadow-xl"
             >
                 <img
-                    src="https://avatars.githubusercontent.com/u/22654040?s=400&u=b4c45a0a60117314537fa0ef7aec04e2038e07da&v=4"
+                    src="https://avatars.githubusercontent.com/u/22654040?v=4"
                     alt="Alberto Rosas"
                     width="auto"
                     height="auto"
