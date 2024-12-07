@@ -36,14 +36,13 @@ Route::get('/', function () {
     
     $services = [
         [
-            'title' => 'Web Applications',
-            'description' => 'Elevate your business with custom web applications that boost user engagement and drive growth. Partner with me to build secure, scalable, and high-performance solutions that convert visitors into loyal customers.',
+            'title' => 'Web & Mobile Applications',
+            'description' => "I create custom applications tailored precisely to your business needs. Whether it's internal systems or customer-facing platforms, I develop solutions that streamline operations, enhance efficiency, and empower seamless business management.",
             'tags' => ['React', 'Next.js', 'MongoDB', 'Tailwind', 'Prisma'],
         ],
         [
-            'title' => 'Mobile Applications',
-            'description' => 'Turn your ideas into engaging mobile apps that captivate users and expand your brand’s reach. I create intuitive, high-quality mobile applications that transform downloads into active, loyal users.',
-            'tags' => ['React', 'TypeScript', 'Next.js', 'Tailwind', 'Redux'],
+            'title' => 'AI Engineering & Automation',
+            'description' => "Transform your business with AI automation. From process automations to chatbots, voicebots, custom AI agents, and LLM integrations, I deliver tailored solutions to streamline workflows and enhance efficiency.",
         ],
         [
             'title' => 'Consulting',
@@ -126,9 +125,9 @@ Route::get('/', function () {
     
     $aiTools = [
         'AI' => [
-            'RAG',
-            'Langchain',
-            'LM Studio'
+            'Pydantic AI',
+            'Crawl4AI',
+            'Langchain Ecosystem',
         ]
     ];
     
@@ -137,7 +136,7 @@ Route::get('/', function () {
         'services' => $services,
         'experiences' => $experiences,
         'skillsData' => $skillsData,
-        'aiTools' => $aiTools,
+//        'aiTools' => $aiTools,
     ]);
 });
 

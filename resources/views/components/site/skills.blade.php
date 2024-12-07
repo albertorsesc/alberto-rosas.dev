@@ -34,7 +34,7 @@
             </ul>
         @endforeach
 
-        @foreach ($aiTools as $category => $skills)
+        {{--@foreach ($aiTools as $category => $skills)
             <!-- Category Heading -->
             <h3 class="mt-6 mb-4 text-2xl font-semibold text-cyan-500">{{ $category }}</h3>
 
@@ -51,6 +51,6 @@
                 @endforeach
 
             </ul>
-        @endforeach
+        @endforeach--}}
     </div>
 </section>
