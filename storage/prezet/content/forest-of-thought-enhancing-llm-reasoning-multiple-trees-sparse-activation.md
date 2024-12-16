@@ -29,7 +29,7 @@ The Forest-of-Thought framework proposes a novel solution by integrating multipl
 1. **Multiple Reasoning Trees**: Instead of relying on a single tree structure, FoT creates several independent trees that approach problems from various angles. This diversity allows for richer exploration of potential solutions.
 2. **Sparse Activation**: To optimize both efficiency and accuracy, FoT employs sparse activation strategies. This means that only the most relevant reasoning paths are selected for consideration, reducing computational overhead while maintaining high-quality outputs.
 3. **Dynamic Self-Correction**: One of the standout features of FoT is its dynamic self-correction mechanism. This allows for real-time detection and correction of errors during the reasoning process, preventing inaccuracies from propagating through subsequent steps.
-4. **Consensus-Guided Expert Decision Making**: By utilizing consensus among the multiple reasoning trees, FoT enhances decision-making accuracy. This approach ensures that the final output is not only correct but also resource-efficient.
+4. **Consensus-Guided Expert Decision-Making**: By utilizing consensus among the multiple reasoning trees, FoT enhances decision-making accuracy. This approach ensures that the final output is not only correct but also resource-efficient.
 
 ## Key Insights from the Research
 
