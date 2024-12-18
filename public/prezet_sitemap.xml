@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/graph-rag-software-requirements-compliance-verification-ai</loc>
-        <lastmod>2024-12-16T04:19:30+00:00</lastmod>
+        <loc>http://alberto-rosas.dev.test/blog/flash-rnn-turbocharging-recurrent-neural-networks-for-faster-ai</loc>
+        <lastmod>2024-12-16T03:45:01+00:00</lastmod>
+
+            </url>
+    <url>
+        <loc>http://alberto-rosas.dev.test/blog/getting-started-with-llamaindex-a-beginners-overview</loc>
+        <lastmod>2024-12-16T02:59:16+00:00</lastmod>
 
             </url>
     <url>
