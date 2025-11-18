@@ -50,14 +50,34 @@
     }"
         class="group mb-3 sm:mb-8 last:mb-0 transform transition-all duration-1000 ease-out w-full"
 >
-    <section class="bg-white items-center mx-auto max-w-[48rem] border-2 border-cyan-400 dark:border-none rounded-lg shadow-lg dark:shadow-cyan-500 overflow-hidden sm:pr-8 relative sm:h-[15rem] transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
+    <section class="bg-white items-center mx-auto max-w-[48rem] border-2 border-cyan-400 dark:border-none rounded-lg shadow-lg dark:shadow-cyan-500 overflow-hidden sm:pr-8 relative min-h-[16rem] h-auto transition dark:text-white dark:bg-white/10 dark:hover:bg-white/20">
         <div class="pt-4 pb-7 px-5 sm:pt-10 sm:max-w-full flex flex-col h-full">
-            <h3 class="text-2xl font-semibold">{{ $service['title'] }}</h3>
+            <div class="flex items-center gap-3">
+                @if(isset($service['icon']))
+                    <span class="text-3xl">{{ $service['icon'] }}</span>
+                @endif
+                <h3 class="text-2xl font-semibold">{{ $service['title'] }}</h3>
+            </div>
             <p class="mt-2 leading-relaxed text-xl text-gray-700 dark:text-white/70">
                 {{ $service['description'] }}
             </p>
-            <ul class="flex flex-wrap mt-4 gap-2 sm:mt-auto">
+            <ul class="flex flex-wrap mt-4 gap-2">
+                @if(isset($service['tags']))
+                    @foreach ($service['tags'] as $tag)
+                        <li class="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full dark:text-white/70">
+                            {{ $tag }}
+                        </li>
+                    @endforeach
+                @endif
             </ul>
+            
+            @if(isset($service['url']))
+                <div class="mt-6">
+                    <a href="{{ $service['url'] }}" target="_blank" class="inline-flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-medium hover:underline">
+                        Visit Triage Ops <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    </a>
+                </div>
+            @endif
         </div>
     </section>
 </div>

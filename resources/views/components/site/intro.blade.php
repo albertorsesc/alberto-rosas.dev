@@ -1,4 +1,4 @@
-<section id="home" data-section="Home" class="mb-28 max-w-full lg:max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]">
+<section id="home" data-section="Home" class="mb-28 max-w-full lg:max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" x-cloak>
     <div class="flex items-center justify-center">
         <div class="relative">
             <!-- Animated Image -->
@@ -45,10 +45,9 @@
         x-transition:enter-end="opacity-100 translate-y-0"
         class="mb-10 mt-8 md:mt-4 px-4 text-2xl md:text-4xl font-medium leading-8 sm:text-4xl text-center"
     >
-        <span class="font-medium">Hello, I'm Alberto Rosas.</span> I'm a
-        <span class="font-bold">Software Engineer</span> with
-        <span class="font-bold">over a decade</span> of experience building
-        <span class="italic">Web/Mobile apps</span>.
+        <span class="font-medium">Hello, I'm Alberto Rosas.</span> I architect
+        <span class="font-bold">Intelligent Systems</span> and <span class="font-bold">AI Agents</span>
+        that eliminate operational friction.
     </h1>
 
     <!-- Animated Buttons -->

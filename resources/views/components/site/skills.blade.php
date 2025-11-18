@@ -25,32 +25,19 @@
                     <li
                         x-show="skillsVisible"
                         style="opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease-out, transform 0.3s ease-out;"
-                        class="flex items-center bg-white border border-black shadow-lg dark:shadow-cyan-500 rounded-xl px-5 py-3 dark:bg-white/10 dark:text-white/80"
+                        class="flex items-center bg-white border border-black shadow-lg dark:shadow-cyan-500 rounded-xl px-5 py-3 dark:bg-white/10 dark:text-white/80 gap-2"
                     >
-                        <img src="/tech/{{ $image }}" class="mr-2 object-contain rounded-full h-10 w-10" alt="">
-                        {{ $title }}
+                        @if(!empty($image) && file_exists(public_path('tech/' . $image)))
+                            <img src="/tech/{{ $image }}" class="object-contain rounded-full h-10 w-10" alt="{{ $title }}">
+                        @else
+                            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-gray-100 dark:bg-gray-800 text-cyan-600 dark:text-cyan-400">
+                                <i class="fa-solid fa-code text-xl"></i>
+                            </div>
+                        @endif
+                        <span class="font-medium">{{ $title }}</span>
                     </li>
                 @endforeach
             </ul>
         @endforeach
-
-        {{--@foreach ($aiTools as $category => $skills)
-            <!-- Category Heading -->
-            <h3 class="mt-6 mb-4 text-2xl font-semibold text-cyan-500">{{ $category }}</h3>
-
-            <!-- Skills List -->
-            <ul class="flex flex-wrap justify-center gap-2">
-                @foreach ($skills as $title)
-                    <li
-                        x-show="skillsVisible"
-                        style="opacity: 0; transform: translateY(10px); transition: opacity 0.3s ease-out, transform 0.3s ease-out;"
-                        class="flex items-center bg-white border border-black shadow-lg dark:shadow-cyan-500 rounded-xl px-5 py-3 dark:bg-white/10 dark:text-white/80"
-                    >
-                        {{ $title }}
-                    </li>
-                @endforeach
-
-            </ul>
-        @endforeach--}}
     </div>
 </section>

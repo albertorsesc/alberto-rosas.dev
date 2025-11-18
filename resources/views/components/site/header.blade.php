@@ -19,6 +19,7 @@
     <!-- Animated Background -->
     <div
             x-show="showHeader"
+            x-cloak
             x-transition:enter="transition transform duration-1000"
             x-transition:enter-start="translate-y-[-100%] opacity-0"
             x-transition:enter-end="translate-y-0 opacity-100"

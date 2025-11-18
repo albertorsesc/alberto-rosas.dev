@@ -1,63 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/flash-rnn-turbocharging-recurrent-neural-networks-for-faster-ai</loc>
-        <lastmod>2024-12-16T03:45:01+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/byte-latent-transformer-blt-architecture-efficiency-robustness</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/getting-started-with-llamaindex-a-beginners-overview</loc>
-        <lastmod>2024-12-16T02:59:16+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/graph-rag-software-requirements-compliance-verification-ai</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/autoreason-deep-dive-into-automatic-reasoning-decomposition-for-llms</loc>
-        <lastmod>2024-12-12T18:08:43+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/flash-rnn-turbocharging-recurrent-neural-networks-for-faster-ai</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/understanding-llm-agents-a-new-era-in-artificial-intelligence</loc>
-        <lastmod>2024-12-07T17:33:24+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/getting-started-with-llamaindex-a-beginners-overview</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/utilizing-ai-to-address-crime-in-mexico</loc>
-        <lastmod>2024-09-02T04:51:53+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/autoreason-deep-dive-into-automatic-reasoning-decomposition-for-llms</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/understanding-instruction-tuning-fine-tuning-llm-optimization</loc>
-        <lastmod>2024-08-26T21:36:51+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/understanding-llm-agents-a-new-era-in-artificial-intelligence</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/best-practices-for-llm-optimization</loc>
-        <lastmod>2024-12-07T17:35:51+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/utilizing-ai-to-address-crime-in-mexico</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/mastering-codebase-organization-strategies</loc>
-        <lastmod>2024-08-26T16:56:27+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/understanding-instruction-tuning-fine-tuning-llm-optimization</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/langgraph-studio-agent-development</loc>
-        <lastmod>2024-08-26T03:16:55+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/best-practices-for-llm-optimization</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/langchain-tools-and-chains-for-developers</loc>
-        <lastmod>2024-08-26T03:15:56+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/mastering-codebase-organization-strategies</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/hume-ai-understanding-human-emotions</loc>
-        <lastmod>2024-08-26T03:16:30+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/langgraph-studio-agent-development</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
     <url>
-        <loc>http://alberto-rosas.dev.test/blog/the-art-of-fine-tunning-llm</loc>
-        <lastmod>2024-08-26T03:17:15+00:00</lastmod>
-
+    <loc>http://alberto-rosas.dev.test/blog/langchain-tools-and-chains-for-developers</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://alberto-rosas.dev.test/blog/hume-ai-understanding-human-emotions</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+            </url>
+    <url>
+    <loc>http://alberto-rosas.dev.test/blog/the-art-of-fine-tunning-llm</loc>
+    <lastmod>2025-11-18T19:14:50+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
             </url>
 </urlset>

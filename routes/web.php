@@ -36,99 +36,86 @@ Route::get('/', function () {
     
     $services = [
         [
-            'title' => 'Web & Mobile Applications',
-            'description' => "I create custom applications tailored precisely to your business needs. Whether it's internal systems or customer-facing platforms, I develop solutions that streamline operations, enhance efficiency, and empower seamless business management.",
-            'tags' => ['React', 'Next.js', 'MongoDB', 'Tailwind', 'Prisma'],
+            'title' => 'AI Engineering & Agentic Systems',
+            'description' => "I build custom AI agents and intelligent systems that automate complex workflows. From RAG (Retrieval-Augmented Generation) pipelines to autonomous agents, I turn manual operational drag into automated efficiency.",
+            'tags' => ['Python', 'LangGraph', 'Vector Databases', 'Agentic RAG', 'CAG', 'Docker', 'MongoDB'],
+            'icon' => '🤖',
         ],
         [
-            'title' => 'AI Engineering & Automation',
-            'description' => "Transform your business with AI automation. From process automations to chatbots, voicebots, custom AI agents, and LLM integrations, I deliver tailored solutions to streamline workflows and enhance efficiency.",
+            'title' => 'Strategic Consulting',
+            'description' => 'Stop guessing with your technical strategy. I provide high-level architectural guidance and "Triage" audits to identify operational waste, ensuring your engineering efforts are aligned with business ROI. Co-founder of Triage Ops.',
+            'tags' => ['System Design', 'Operational Audit', 'Tech Strategy'],
+            'url' => 'https://triageops.com',
+            'icon' => '📈',
         ],
         [
-            'title' => 'Consulting',
-            'description' => 'Optimize your software strategy and drive success with expert consulting. I provide actionable insights and solutions to streamline your processes, innovate effectively, and achieve your business goals.',
-            'tags' => ['React', 'Next.js', 'SQL', 'Tailwind', 'Framer'],
+            'title' => 'Full-Stack Architecture',
+            'description' => "Solid foundations matter. I architect and build scalable, secure web applications using modern standards. Whether it's a SaaS platform or a complex internal tool, I deliver production-grade code.",
+            'tags' => ['SaaS Platforms', 'Microservices', 'System Scalability', 'Security Automation', 'Legacy Refactoring'],
+            'icon' => '🏗️',
         ],
     ];
     
-    $experiences = array_reverse([
+    $experiences = [
         [
-            'title' => 'Engineer Manager | Global Cybersec',
-            'location' => 'Remote',
-            'description' => 'I developed internal applications to automate processes, enhance service efficiency, and protect client assets. I created a microservice ecosystem, upgraded legacy systems with security integrations, built a central data management app, and a Helpdesk system. I also engaged in blue team tasks, including threat detection, vulnerability analysis, incident response, and firewall and IDS sensor configuration.',
+            'title' => 'AI Engineer | Storage360',
+            'location' => 'Contract',
+            'description' => "Developing 'SADIE', a Natural Language to SQL engine. Architected a multi-agent system using LangGraph for orchestrating query understanding and SQL generation. Achieved sub-300ms response times and implemented MCP servers for secure database connectivity.",
             'icon' => 'CgWorkAlt',
-            'date' => '2017 - 2020',
+            'logo' => '', // Placeholder or missing
+            'date' => 'July 2024 - Present',
         ],
         [
-            'title' => 'Full Stack Engineer | Fulcrum',
-            'location' => 'Remote',
-            'description' => 'As part of a 10+ developer team, I helped maintain a U.S.-based Medical SaaS, focusing on refactoring and testing legacy code, implementing fully tested new features, and redesigning app components using TailwindCSS.',
+            'title' => 'Consultant AI Engineer Lead | Founders Workshop',
+            'location' => 'Contract',
+            'description' => "Leading AI strategy and development for enterprise clients. I guide the implementation of custom AI solutions, from internal automation tools to customer-facing products, ensuring technical feasibility and alignment with business goals.",
             'icon' => 'CgWorkAlt',
-            'date' => '2020 - 2021',
+            'logo' => 'logos/foundersworkshop.png',
+            'date' => 'Present',
         ],
         [
-            'title' => 'Senior Software Engineer | Buddhi',
+            'title' => 'Technical Lead & Senior Software Engineer | Bizee (IncFile)',
             'location' => 'Remote',
-            'description' => "As part of a small team, I contributed to developing Buddhi, a single-page application (SPA) platform for the cancer community, focusing on building a safe space for discussions. I implemented fully tested features and integrated with third-party services.",
+            'description' => "Leading technical initiatives and rebuilding core products. Additionally, I architected and built internal AI tools, including a multi-agent document processing system (1,000+ daily requests) and a Hybrid RAG pipeline for efficient knowledge retrieval.",
             'icon' => 'CgWorkAlt',
-            'date' => '2021 - 2022',
+            'logo' => 'logos/bizee.png',
+            'date' => 'Dec 2022 - Present',
         ],
         [
-            'title' => 'Senior Software Engineer | HQ Rental Software',
+            'title' => 'Previous Experience',
             'location' => 'Remote',
-            'description' => "I optimized application performance and provided strategic guidance to enhance software efficiency, usability, and scalability, aligning with technological standards and business goals. I resolved client issues promptly, initiated a comprehensive test suite, developed an email parsing application to streamline workflows, and led refactoring efforts to reduce code duplication and improve maintainability.",
+            'description' => 'Before specializing in AI, I spent nearly a decade as a Senior Full-Stack Engineer and Manager for various companies including Global Cybersec, HQ Rental, Buddhi, and Fulcrum Digital. I architected microservices, led security integrations, and built scalable SaaS platforms serving 10,000+ users.',
             'icon' => 'CgWorkAlt',
-            'date' => '2021 - 2022',
+            'logo' => '',
+            'date' => '2014 - 2022',
         ],
-        [
-            'title' => 'Senior Software Engineer | Bizee',
-            'location' => 'Remote',
-            'description' => "As the Project Technical Lead, I guided the rebuilding of the main product, enforced development standards and processes, and contributed to the architecture of new and existing projects. I mentored team members to deliver high-quality, testable code, implemented documentation, and assisted in reviewing pull requests.",
-            'icon' => 'CgWorkAlt',
-            'date' => '2022 - Present',
-        ],
-    ]);
+    ];
     
     $skillsData = [
-        'Frontend' => [
-            'JavaScript' => 'javascript.svg',
-            'React' => 'reactjs.svg',
-            'React Native' => 'reactjs.svg',
-            'Next.js' => 'nextjs.svg',
-            'Vue.js' => 'vuejs.svg',
-            'Nuxt.js' => 'nuxtjs.svg',
-            'Alpine.js' => 'alpinejs.svg',
-            'TailwindCSS' => 'tailwindcss.svg',
+        'Agentic Frameworks' => [
+            'LangGraph' => '',
+            'CrewAI' => '',
+            'AutoGen' => '',
+            'LangChain' => '',
         ],
-        'Backend' => [
-            'TypeScript' => 'typescript.svg',
-            'Node.js' => 'nodejs.svg',
-            'Express' => 'expressjs.svg',
-            'Nest.js' => 'nestjs.svg',
-            'PHP' => 'php.svg',
-            'Laravel' => 'laravel.svg',
-            'Livewire' => 'livewire.png',
+        'LLM Ops & Evaluation' => [
+            'LangSmith' => '',
+            'LangFuse' => '',
+            'Opik' => '',
+            'W&B' => '',
         ],
-        'Databases' => [
-            'PostgreSQL' => 'postgresql.svg',
-            'MySQL' => 'mysql.svg',
-            'MongoDB' => 'mongodb.svg',
+        'Vector Databases' => [
+            'MongoDB Atlas' => 'mongodb.svg',
+            'Qdrant' => '',
+            'Pinecone' => '',
+            'Weaviate' => '',
         ],
-        'DevOps' => [
-            'Docker' => 'docker.svg',
+        'Cloud & Infrastructure' => [
             'AWS' => 'aws.png',
             'Google Cloud' => 'googlecloud.svg',
-            'CircleCI' => 'circleci.svg',
-            'GitHub Actions' => 'githubactions.svg',
+            'Docker' => 'docker.svg',
+            'Python' => '',
         ],
-    ];
-    
-    $aiTools = [
-        'AI' => [
-            'Pydantic AI',
-            'Crawl4AI',
-            'Langchain Ecosystem',
-        ]
     ];
     
     return view('welcome', [
@@ -136,7 +123,6 @@ Route::get('/', function () {
         'services' => $services,
         'experiences' => $experiences,
         'skillsData' => $skillsData,
-//        'aiTools' => $aiTools,
     ]);
 });
 
