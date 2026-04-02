@@ -2,23 +2,355 @@
 @tailwind components;
 @tailwind utilities;
 
- [x-cloak] {
-     display: none !important;
- }
+/* ===========================
+   Design Tokens (CSS Custom Properties)
+   =========================== */
+:root {
+    /* Surfaces */
+    --color-surface:       #fafaf9;
+    --color-surface-alt:   #f5f5f4;
+    --color-border:        #e7e5e4;
 
+    /* Text */
+    --color-text:          #1c1917;
+    --color-text-muted:    #78716c;
+    --color-text-subtle:   #a8a29e;
+
+    /* Dark mode surfaces */
+    --color-dark-surface:     #0c0a09;
+    --color-dark-surface-alt: #1c1917;
+    --color-dark-border:      #292524;
+
+    /* Dark mode text */
+    --color-dark-text:        #fafaf9;
+    --color-dark-text-muted:  #a8a29e;
+
+    /* Motion */
+    --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --duration-fast:   150ms;
+    --duration-normal: 300ms;
+    --duration-slow:   500ms;
+    --duration-reveal: 800ms;
+}
+
+/* ===========================
+   Base Styles
+   =========================== */
+[x-cloak] {
+    display: none !important;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+html, body {
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* ===========================
+   View Transitions (MPA)
+   =========================== */
+@view-transition {
+    navigation: auto;
+}
+
+::view-transition-old(root) {
+    animation: 200ms ease-out fade-out;
+}
+::view-transition-new(root) {
+    animation: 200ms ease-out fade-in;
+}
+
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } }
+
+/* ===========================
+   Scroll-Driven Reveal Animation
+   =========================== */
+[data-reveal] {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 40%;
+}
+
+@keyframes reveal-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===========================
+   Reading Progress Bar (Blog)
+   =========================== */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background: oklch(65% 0.2 230);
+    transform-origin: left;
+    z-index: 100;
+    animation: grow-progress linear;
+    animation-timeline: scroll(root block);
+}
+
+@keyframes grow-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* ===========================
+   Component Styles
+   =========================== */
+
+/* Bento Card */
+.bento-card {
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.dark .bento-card {
+    background: var(--color-dark-surface-alt);
+    border-color: var(--color-dark-border);
+}
+
+.bento-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.06);
+}
+
+.dark .bento-card:hover {
+    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Link with draw-in underline */
+.text-link {
+    text-decoration: none;
+    background-image: linear-gradient(oklch(65% 0.2 230), oklch(65% 0.2 230));
+    background-size: 0% 1.5px;
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    transition: background-size var(--duration-normal) var(--ease-out);
+}
+
+.text-link:hover {
+    background-size: 100% 1.5px;
+}
+
+/* Tag pill */
+.tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    background: var(--color-surface-alt);
+    border: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+}
+
+.dark .tag {
+    background: var(--color-dark-surface-alt);
+    border-color: var(--color-dark-border);
+    color: var(--color-dark-text-muted);
+}
+
+/* External link icon */
 a.external-link::after {
     content: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IiM3ODcxNkMiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBjbGFzcz0ibHVjaWRlIGx1Y2lkZS1hcnJvdy11cC1yaWdodCI+PHBhdGggZD0iTTcgN2gxMHYxMCIvPjxwYXRoIGQ9Ik03IDE3IDE3IDciLz48L3N2Zz4=");
     margin-left: 1px;
 }
 
-html {
-    overflow-y: scroll; /* Forces the vertical scrollbar to be always visible */
+/* ===========================
+   Dark Mode Transition
+   =========================== */
+html.transitioning-colors,
+html.transitioning-colors * {
+    transition: background-color 300ms ease, border-color 300ms ease, color 200ms ease !important;
 }
 
-html, body {
-    overflow-x: hidden; /* Prevents horizontal scroll */
+/* ===========================
+   Cyberpunk / Synthwave Layer
+   =========================== */
+
+/* Slow pulse for ambient glow */
+@keyframes pulse-slow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
 }
 
-* {
-    box-sizing: border-box;
+.animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+}
+
+/* Dot grid background — dark mode only */
+.dark body {
+    background-image: radial-gradient(circle, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+/* Synthwave gradient divider */
+.synthwave-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #ff006e 20%, #00f5ff 50%, #8b5cf6 80%, transparent 100%);
+    opacity: 0.4;
+}
+
+.dark .synthwave-divider {
+    opacity: 0.6;
+}
+
+/* Neon glow — dark mode only, applied selectively */
+.dark .neon-glow {
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3), 0 0 40px rgba(0, 245, 255, 0.1);
+}
+
+/* Scan-line overlay */
+.scan-lines::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.03) 2px,
+        rgba(0, 0, 0, 0.03) 4px
+    );
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.dark .scan-lines::after {
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 245, 255, 0.015) 2px,
+        rgba(0, 245, 255, 0.015) 4px
+    );
+}
+
+/* Glitch text effect — hover only */
+@keyframes glitch {
+    0%   { clip-path: inset(40% 0 61% 0); transform: translate(-2px, 2px); }
+    20%  { clip-path: inset(92% 0 1% 0);  transform: translate(2px, -1px); }
+    40%  { clip-path: inset(43% 0 1% 0);  transform: translate(-1px, 3px); }
+    60%  { clip-path: inset(25% 0 58% 0); transform: translate(3px, 1px); }
+    80%  { clip-path: inset(54% 0 7% 0);  transform: translate(-3px, -2px); }
+    100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
+}
+
+.glitch-hover {
+    position: relative;
+}
+
+.glitch-hover::before,
+.glitch-hover::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.glitch-hover:hover::before {
+    opacity: 0.8;
+    color: #00f5ff;
+    animation: glitch 300ms linear;
+    text-shadow: -2px 0 #ff006e;
+}
+
+.glitch-hover:hover::after {
+    opacity: 0.8;
+    color: #ff006e;
+    animation: glitch 300ms linear reverse;
+    text-shadow: 2px 0 #00f5ff;
+}
+
+/* Typing cursor blink */
+@keyframes blink-cursor {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: currentColor; }
+}
+
+.typing-cursor {
+    border-right: 2px solid currentColor;
+    padding-right: 2px;
+    animation: blink-cursor 1s step-end infinite;
+}
+
+/* Circuit board pattern background */
+.circuit-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v15m0 30v15M0 30h15m30 0h15' stroke='%2300f5ff' stroke-width='0.5' opacity='0.04'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%2300f5ff' opacity='0.04'/%3E%3Ccircle cx='30' cy='0' r='1' fill='%2300f5ff' opacity='0.03'/%3E%3Ccircle cx='0' cy='30' r='1' fill='%2300f5ff' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+.dark .circuit-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0v15m0 30v15M0 30h15m30 0h15' stroke='%2300f5ff' stroke-width='0.5' opacity='0.07'/%3E%3Ccircle cx='30' cy='30' r='2' fill='%2300f5ff' opacity='0.07'/%3E%3Ccircle cx='30' cy='0' r='1' fill='%2300f5ff' opacity='0.05'/%3E%3Ccircle cx='0' cy='30' r='1' fill='%2300f5ff' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* Sacred geometry — Flower of Life hint */
+.sacred-geo-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='50' cy='30' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='67' cy='40' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='67' cy='60' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='50' cy='70' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='33' cy='60' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3Ccircle cx='33' cy='40' r='20' fill='none' stroke='%23d97706' stroke-width='0.3' opacity='0.06'/%3E%3C/svg%3E");
+}
+
+/* Synthwave mode — triggered by Konami code */
+.synthwave-mode {
+    animation: synthwave-pulse 2s ease-in-out infinite alternate;
+}
+
+.synthwave-mode .synthwave-divider {
+    opacity: 1;
+    height: 2px;
+}
+
+.synthwave-mode .neon-glow {
+    text-shadow: 0 0 20px rgba(0, 245, 255, 0.6), 0 0 60px rgba(0, 245, 255, 0.3), 0 0 100px rgba(139, 92, 246, 0.2) !important;
+}
+
+@keyframes synthwave-pulse {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.05); }
+}
+
+/* ===========================
+   Reduced Motion
+   =========================== */
+@media (prefers-reduced-motion: reduce) {
+    [data-reveal] {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .reading-progress {
+        animation: none;
+        transform: scaleX(1);
+    }
+
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
 }
