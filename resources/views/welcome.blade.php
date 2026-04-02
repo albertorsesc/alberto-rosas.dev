@@ -14,39 +14,36 @@
 
             <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
 
-                {{-- THE ENGINEER — dark card, cyan accents, circuit pattern --}}
-                <div class="identity-card col-span-1 md:col-span-8 md:row-span-2 relative overflow-hidden group cursor-pointer rounded-bento p-8 bg-gray-950 dark:bg-gray-950 text-white border border-cyan-500/20 circuit-bg" data-reveal data-hermetic="eye">
-                    <a href="/about" class="absolute inset-0 z-10" aria-label="Read about The Engineer"></a>
-                    {{-- Glow edge --}}
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+                {{-- THE ENGINEER — animated cyan gradient border --}}
+                <div class="identity-card gradient-border col-span-1 md:col-span-8 md:row-span-2 group cursor-pointer circuit-bg" data-reveal data-hermetic="eye">
+                    <a href="/about" class="absolute inset-0 z-10 rounded-bento" aria-label="Read about The Engineer"></a>
                     <div class="flex flex-col h-full justify-between relative">
                         <div>
-                            <p class="text-xs font-mono uppercase tracking-widest text-cyan-400 mb-4">// The Engineer</p>
-                            <h3 class="font-heading text-fluid-2xl text-white mb-3">I build AI systems that ship to production, not demos.</h3>
-                            <p class="text-sm text-gray-400 max-w-md">AI Engineer at Unified Compliance. Founder of TRIAGE Ops. Builder of SADIE. Production AI chat pipelines, multi-agent architectures, RAG over regulatory data.</p>
+                            <p class="text-xs font-mono uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-4">// The Engineer</p>
+                            <h3 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-3">I build AI systems that ship to production, not demos.</h3>
+                            <p class="text-sm text-muted dark:text-dark-muted max-w-md">AI Engineer at Unified Compliance. Founder of TRIAGE Ops. Builder of SADIE. Production AI chat pipelines, multi-agent architectures, RAG over regulatory data.</p>
                         </div>
                         <div class="mt-8">
                             <div class="flex flex-wrap gap-2">
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">Python</span>
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">LangGraph</span>
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">RAG</span>
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">MCP</span>
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">Neo4j</span>
-                                <span class="text-[11px] font-mono px-3 py-1 rounded-full border border-cyan-500/30 text-cyan-400 bg-cyan-500/5">Qdrant</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">LangGraph</span>
+                                <span class="tag">RAG</span>
+                                <span class="tag">MCP</span>
+                                <span class="tag">Neo4j</span>
+                                <span class="tag">Qdrant</span>
                             </div>
                         </div>
                     </div>
-                    <span class="absolute bottom-6 right-6 text-cyan-500/40 opacity-0 group-hover:opacity-100 transition-opacity text-sm font-mono">&rarr;</span>
+                    <span class="absolute bottom-6 right-6 text-muted dark:text-dark-muted opacity-0 group-hover:opacity-100 transition-opacity text-sm font-mono">&rarr;</span>
                 </div>
 
-                {{-- THE RONIN — amber glow card, sacred geometry --}}
-                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 flex flex-col justify-between rounded-bento p-8 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-500/20 group sacred-geo-bg relative overflow-hidden" data-reveal data-hermetic="caduceus">
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 dark:via-amber-500/50 to-transparent"></div>
+                {{-- THE RONIN — animated amber gradient border, sacred geometry --}}
+                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="identity-card gradient-border gradient-border-amber col-span-1 md:col-span-4 flex flex-col justify-between group sacred-geo-bg" data-reveal data-hermetic="caduceus">
                     <div>
                         <p class="text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-4">// The Ronin</p>
-                        <p class="font-heading text-5xl md:text-6xl text-amber-300/30 dark:text-amber-500/15 leading-none select-none mb-3" aria-hidden="true">&#28961;&#24515;</p>
-                        <h3 class="font-heading text-fluid-lg text-amber-900 dark:text-amber-100 mb-2">The Obsidian Way</h3>
-                        <p class="text-sm text-amber-700/70 dark:text-amber-200/50 leading-relaxed mb-3">
+                        <p class="font-heading text-5xl md:text-6xl text-amber-200/40 dark:text-amber-500/15 leading-none select-none mb-3" aria-hidden="true">&#28961;&#24515;</p>
+                        <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-2">The Obsidian Way</h3>
+                        <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
                             Philosophy. Consciousness. The operating system behind every decision.
                         </p>
                         <p class="text-[10px] font-mono text-amber-500/50 dark:text-amber-500/40 tracking-widest">Psychocybernetics &middot; Hermetics &middot; Mushin</p>
@@ -54,15 +51,13 @@
                     <span class="text-sm font-mono text-amber-600 dark:text-amber-400 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">Substack &rarr;</span>
                 </a>
 
-                {{-- THE ARCHITECT — cyberpunk gradient card --}}
-                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 relative overflow-hidden group rounded-bento p-8 bg-purple-50 dark:bg-gray-950 border border-purple-200 dark:border-purple-500/20 scan-lines" data-reveal>
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-fuchsia-500/15 dark:from-cyan-500/15 dark:via-purple-500/10 dark:to-fuchsia-500/20 rounded-[inherit]"></div>
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/40 via-purple-400/50 to-fuchsia-400/40 dark:from-cyan-500/50 dark:via-purple-500/50 dark:to-fuchsia-500/50"></div>
+                {{-- THE ARCHITECT — animated cyberpunk gradient border --}}
+                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="identity-card gradient-border gradient-border-cyber col-span-1 md:col-span-4 group scan-lines" data-reveal>
                     <div class="relative flex flex-col h-full justify-between">
                         <div>
                             <p class="text-xs font-mono uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-4">// The Architect</p>
-                            <h3 class="font-heading text-fluid-lg text-purple-900 dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
-                            <p class="text-sm text-purple-700/70 dark:text-dark-muted leading-relaxed">
+                            <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">
                                 Democratizing AI in Spanish. For builders across Latin America.
                             </p>
                         </div>
@@ -70,27 +65,26 @@
                     </div>
                 </a>
 
-                {{-- THE FATHER — warm, simple --}}
-                <div class="identity-card bento-card col-span-1 md:col-span-4 border-amber-500/15 dark:border-amber-500/20" data-reveal>
-                    <p class="text-xs font-mono uppercase tracking-widest text-amber-400/60 mb-4">// The Father</p>
+                {{-- THE FATHER — animated amber border --}}
+                <div class="identity-card gradient-border gradient-border-amber col-span-1 md:col-span-4" data-reveal>
+                    <p class="text-xs font-mono uppercase tracking-widest text-amber-600/60 dark:text-amber-400/60 mb-4">// The Father</p>
                     <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">The best technology serves people, not the other way around.</h3>
                     <p class="text-xs font-mono text-muted dark:text-dark-muted">Mexico &bull; Bicultural &bull; Bilingual</p>
                 </div>
 
-                {{-- THE RIDER — dark bold card --}}
-                <div class="identity-card col-span-1 md:col-span-8 relative overflow-hidden rounded-bento p-8 bg-gray-950 dark:bg-gray-950 text-white border border-white/10" data-reveal>
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+                {{-- THE RIDER — animated gradient border --}}
+                <div class="identity-card gradient-border col-span-1 md:col-span-8" data-reveal>
                     <div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
                         <div class="flex-1">
-                            <p class="text-xs font-mono uppercase tracking-widest text-white/40 mb-4">// The Rider</p>
-                            <h3 class="font-heading text-fluid-xl text-white mb-2">On the highway or in production, I don't leave until it runs clean.</h3>
-                            <p class="text-sm text-gray-400 leading-relaxed">
+                            <p class="text-xs font-mono uppercase tracking-widest text-muted dark:text-dark-muted mb-4">// The Rider</p>
+                            <h3 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-2">On the highway or in production, I don't leave until it runs clean.</h3>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">
                                 Harley Davidson Forty-Eight 1200cc. Katana owner. 4:20 AM workouts. Martial arts. The discipline isn't aspirational — it's operational infrastructure.
                             </p>
                         </div>
                         <div class="shrink-0 text-center">
-                            <p class="font-heading text-6xl md:text-7xl text-white/90 leading-none neon-glow">4:20</p>
-                            <p class="text-[10px] font-mono text-white/30 mt-2 tracking-widest uppercase">Every morning</p>
+                            <p class="font-heading text-6xl md:text-7xl text-body dark:text-dark-body leading-none neon-glow">4:20</p>
+                            <p class="text-[10px] font-mono text-muted dark:text-dark-muted mt-2 tracking-widest uppercase">Every morning</p>
                         </div>
                     </div>
                 </div>
