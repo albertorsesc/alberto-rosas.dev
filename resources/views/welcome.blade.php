@@ -40,33 +40,33 @@
                 </div>
 
                 {{-- THE RONIN — amber glow card, sacred geometry --}}
-                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 flex flex-col justify-between rounded-bento p-8 bg-amber-950/30 dark:bg-amber-950/40 border border-amber-500/20 group sacred-geo-bg relative overflow-hidden" data-reveal data-hermetic="caduceus">
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-500/50 to-transparent"></div>
+                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 flex flex-col justify-between rounded-bento p-8 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-500/20 group sacred-geo-bg relative overflow-hidden" data-reveal data-hermetic="caduceus">
+                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-400/50 dark:via-amber-500/50 to-transparent"></div>
                     <div>
-                        <p class="text-xs font-mono uppercase tracking-widest text-amber-400 mb-4">// The Ronin</p>
-                        <p class="font-heading text-5xl md:text-6xl text-amber-500/15 leading-none select-none mb-3" aria-hidden="true">&#28961;&#24515;</p>
-                        <h3 class="font-heading text-fluid-lg text-body dark:text-amber-100 mb-2">The Obsidian Way</h3>
-                        <p class="text-sm text-muted dark:text-amber-200/50 leading-relaxed mb-3">
+                        <p class="text-xs font-mono uppercase tracking-widest text-amber-600 dark:text-amber-400 mb-4">// The Ronin</p>
+                        <p class="font-heading text-5xl md:text-6xl text-amber-300/30 dark:text-amber-500/15 leading-none select-none mb-3" aria-hidden="true">&#28961;&#24515;</p>
+                        <h3 class="font-heading text-fluid-lg text-amber-900 dark:text-amber-100 mb-2">The Obsidian Way</h3>
+                        <p class="text-sm text-amber-700/70 dark:text-amber-200/50 leading-relaxed mb-3">
                             Philosophy. Consciousness. The operating system behind every decision.
                         </p>
-                        <p class="text-[10px] font-mono text-amber-500/40 tracking-widest">Psychocybernetics &middot; Hermetics &middot; Mushin</p>
+                        <p class="text-[10px] font-mono text-amber-500/50 dark:text-amber-500/40 tracking-widest">Psychocybernetics &middot; Hermetics &middot; Mushin</p>
                     </div>
-                    <span class="text-sm font-mono text-amber-400 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">Substack &rarr;</span>
+                    <span class="text-sm font-mono text-amber-600 dark:text-amber-400 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">Substack &rarr;</span>
                 </a>
 
                 {{-- THE ARCHITECT — cyberpunk gradient card --}}
-                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 relative overflow-hidden group rounded-bento p-8 border border-purple-500/20 scan-lines" data-reveal>
-                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-fuchsia-500/15 dark:from-cyan-500/20 dark:via-purple-500/15 dark:to-fuchsia-500/20 rounded-[inherit]"></div>
-                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-cyan-500/50 via-purple-500/50 to-fuchsia-500/50"></div>
+                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="identity-card col-span-1 md:col-span-4 relative overflow-hidden group rounded-bento p-8 bg-purple-50 dark:bg-gray-950 border border-purple-200 dark:border-purple-500/20 scan-lines" data-reveal>
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-purple-500/10 to-fuchsia-500/15 dark:from-cyan-500/15 dark:via-purple-500/10 dark:to-fuchsia-500/20 rounded-[inherit]"></div>
+                    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-cyan-400/40 via-purple-400/50 to-fuchsia-400/40 dark:from-cyan-500/50 dark:via-purple-500/50 dark:to-fuchsia-500/50"></div>
                     <div class="relative flex flex-col h-full justify-between">
                         <div>
-                            <p class="text-xs font-mono uppercase tracking-widest text-purple-400 mb-4">// The Architect</p>
-                            <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">
+                            <p class="text-xs font-mono uppercase tracking-widest text-purple-600 dark:text-purple-400 mb-4">// The Architect</p>
+                            <h3 class="font-heading text-fluid-lg text-purple-900 dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
+                            <p class="text-sm text-purple-700/70 dark:text-dark-muted leading-relaxed">
                                 Democratizing AI in Spanish. For builders across Latin America.
                             </p>
                         </div>
-                        <span class="text-sm font-mono text-purple-400 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">elarquitecto.ai &rarr;</span>
+                        <span class="text-sm font-mono text-purple-600 dark:text-purple-400 mt-4 opacity-0 group-hover:opacity-100 transition-opacity">elarquitecto.ai &rarr;</span>
                     </div>
                 </a>
 
