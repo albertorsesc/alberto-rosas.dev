@@ -135,26 +135,28 @@ html, body {
                 box-shadow var(--duration-normal) var(--ease-out);
 }
 
-/* Animated gradient border — the elarquitecto.ai signature effect */
+/* Animated gradient border — always visible, intensifies on hover */
 .gradient-border {
     position: relative;
     border-radius: 1.5rem;
     padding: 2rem;
     background: var(--color-surface-alt);
     overflow: hidden;
-    transition: transform var(--duration-normal) var(--ease-out);
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out);
 }
 
 .dark .gradient-border {
     background: var(--color-dark-surface-alt);
 }
 
+/* The rotating gradient border — always on */
 .gradient-border::before {
     content: '';
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    padding: 1px;
+    padding: 1.5px;
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 25%,
@@ -166,21 +168,57 @@ html, body {
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    opacity: 0.4;
+    transition: opacity 0.4s ease, padding 0.4s ease;
     animation: rotate-gradient 3s linear infinite;
 }
 
 .gradient-border:hover::before {
     opacity: 1;
+    padding: 2px;
 }
 
 .gradient-border:hover {
     transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.08);
+}
+
+.dark .gradient-border:hover {
+    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.15);
+}
+
+/* Ambient glow behind the card on hover */
+.gradient-border::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: conic-gradient(
+        from var(--gradient-angle, 0deg),
+        transparent 25%,
+        #00f5ff 35%,
+        #8b5cf6 50%,
+        #ff006e 65%,
+        transparent 75%
+    );
+    opacity: 0;
+    filter: blur(20px);
+    z-index: -1;
+    transition: opacity 0.4s ease;
+    animation: rotate-gradient 3s linear infinite;
+}
+
+.gradient-border:hover::after {
+    opacity: 0.15;
+}
+
+.dark .gradient-border:hover::after {
+    opacity: 0.25;
 }
 
 /* Amber variant */
-.gradient-border-amber::before {
+.gradient-border-amber::before,
+.gradient-border-amber::after {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 25%,
@@ -191,8 +229,17 @@ html, body {
     );
 }
 
+.gradient-border-amber:hover {
+    box-shadow: 0 10px 40px rgba(245, 158, 11, 0.08);
+}
+
+.dark .gradient-border-amber:hover {
+    box-shadow: 0 10px 40px rgba(245, 158, 11, 0.15);
+}
+
 /* Purple/cyberpunk variant */
-.gradient-border-cyber::before {
+.gradient-border-cyber::before,
+.gradient-border-cyber::after {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 20%,
@@ -202,6 +249,14 @@ html, body {
         #00f5ff 70%,
         transparent 80%
     );
+}
+
+.gradient-border-cyber:hover {
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);
+}
+
+.dark .gradient-border-cyber:hover {
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.2);
 }
 
 @keyframes rotate-gradient {
@@ -295,18 +350,22 @@ html.transitioning-colors * {
 
 /* Synthwave gradient divider */
 .synthwave-divider {
-    height: 1px;
+    height: 2px;
     background: linear-gradient(90deg, transparent 0%, #ff006e 20%, #00f5ff 50%, #8b5cf6 80%, transparent 100%);
-    opacity: 0.4;
-}
-
-.dark .synthwave-divider {
     opacity: 0.6;
 }
 
-/* Neon glow — dark mode only, applied selectively */
+.dark .synthwave-divider {
+    opacity: 0.8;
+}
+
+/* Neon glow — applied selectively */
+.neon-glow {
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.15), 0 0 40px rgba(0, 245, 255, 0.05);
+}
+
 .dark .neon-glow {
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3), 0 0 40px rgba(0, 245, 255, 0.1);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.4), 0 0 40px rgba(0, 245, 255, 0.15), 0 0 80px rgba(0, 245, 255, 0.05);
 }
 
 /* Scan-line overlay */

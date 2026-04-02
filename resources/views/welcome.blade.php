@@ -5,7 +5,7 @@
     @include('components.site.intro')
 
     <!-- ☿ As above, so below. As within, so without. -->
-    <div class="synthwave-divider mx-auto max-w-sm my-2"></div>
+    <div class="synthwave-divider mx-auto max-w-lg my-4"></div>
 
     {{-- Identity Cards --}}
     <section class="py-16 px-6">
@@ -93,7 +93,7 @@
         </div>
     </section>
 
-    <div class="synthwave-divider mx-auto max-w-sm my-2"></div>
+    <div class="synthwave-divider mx-auto max-w-lg my-4"></div>
 
     {{-- Experiments --}}
     <section class="py-16 px-6">
