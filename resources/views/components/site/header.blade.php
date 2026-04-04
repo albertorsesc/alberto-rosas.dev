@@ -5,7 +5,7 @@
 >
     {{-- Desktop Nav --}}
     <nav class="mx-auto max-w-5xl px-6 py-4">
-        <div class="flex items-center justify-between rounded-2xl border border-border/50 bg-surface/80 px-6 py-3 shadow-sm backdrop-blur-xl dark:border-dark-border/50 dark:bg-dark-surface/80">
+        <div class="flex items-center justify-between rounded-2xl border border-border/50 bg-surface/80 px-6 py-3 shadow-sm backdrop-blur-xl dark:border-cyan-500/10 dark:bg-[#0a0a0a]/90 dark:backdrop-blur-none dark:shadow-[0_0_20px_rgba(0,245,255,0.03)]">
             {{-- Logo --}}
             <a href="/" class="font-heading text-xl tracking-tight text-body dark:text-dark-body transition-colors hover:text-brand-cyan">
                 Alberto Rosas

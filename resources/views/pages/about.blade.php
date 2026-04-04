@@ -1,248 +1,338 @@
 @extends('layouts.app')
 
 @section('title', 'About — Alberto Rosas')
-@section('description', 'The story behind Alberto Rosas — from accounts receivable to building production AI systems. Philosophy, path, and the things that move me forward.')
+@section('description', 'AI & Agentic Systems Engineer with 12+ years in software engineering. Multi-agent orchestration, RAG pipelines, NL2SQL engines.')
 
 @section('content')
-<article class="pt-32 pb-20">
+<article class="pt-32 pb-20" x-data="{ tab: 'engineer' }">
 
     {{-- Hero --}}
-    <header class="mx-auto max-w-5xl px-6 mb-20" data-reveal>
+    <header class="mx-auto max-w-5xl px-6 mb-12" data-reveal>
         <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-            <img
-                src="https://avatars.githubusercontent.com/u/22654040?v=4"
-                alt="Alberto Rosas"
-                class="w-40 h-40 md:w-52 md:h-52 rounded-3xl object-cover ring-4 ring-border dark:ring-dark-border shadow-lg flex-shrink-0"
-                loading="eager"
-            >
+            <div class="relative shrink-0 float">
+                <div class="absolute -inset-1 rounded-3xl bg-gradient-to-r from-cyan-500 via-purple-500 to-fuchsia-500 opacity-20 dark:opacity-40 blur-md animate-pulse-slow"></div>
+                <img
+                    src="https://avatars.githubusercontent.com/u/22654040?v=4"
+                    alt="Alberto Rosas"
+                    class="relative w-36 h-36 md:w-44 md:h-44 rounded-3xl object-cover"
+                    loading="eager"
+                />
+            </div>
             <div>
-                <h1 class="font-heading text-fluid-hero text-body dark:text-dark-body mb-4">My Story</h1>
-                <p class="text-fluid-lg text-muted dark:text-dark-muted max-w-xl leading-relaxed">
-                    Twelve years ago I couldn't write a line of code. I said yes anyway. Everything started from that.
+                <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3 neon-text">Alberto Rosas</h1>
+                <p class="text-fluid-base text-muted dark:text-dark-muted max-w-xl leading-relaxed">
+                    AI & Agentic Systems Engineer with 12+ years in software engineering and 5+ years building production AI systems.
                 </p>
             </div>
         </div>
     </header>
 
-    {{-- The Mushin Moment --}}
-    <section class="mx-auto max-w-3xl px-6 mb-20" data-reveal>
-        <h2 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-6">The Mushin Moment</h2>
-
-        <p class="text-fluid-base text-muted dark:text-dark-muted leading-relaxed mb-4">
-            2014. Mexico. I was working accounts receivable. My only real skill was fluent English from growing up in the US.
-        </p>
-        <p class="text-fluid-base text-muted dark:text-dark-muted leading-relaxed mb-4">
-            My boss asked if I knew someone who could build an internal system. I didn't know anyone. I didn't know anything about coding.
-        </p>
-        <p class="text-fluid-base text-body dark:text-dark-body leading-relaxed font-medium mb-4">
-            I said "I can do it."
-        </p>
-        <p class="text-fluid-base text-muted dark:text-dark-muted leading-relaxed mb-4">
-            Zero knowledge. Complete commitment. I taught myself, built the system, delivered it. No one noticed anything unusual. They just used it.
-        </p>
-        <p class="text-fluid-base text-muted dark:text-dark-muted leading-relaxed">
-            Years later I found the word for what happened that day. The Japanese call it <span class="font-heading text-brand-amber">Mushin</span> &mdash; <span class="font-mono text-fluid-sm text-brand-amber/80">無心</span> &mdash; No-Mind. The state where you free yourself from every obstacle by refusing to acknowledge them in the first place.
-        </p>
-    </section>
-
-    {{-- Divider Quote --}}
-    <div class="mx-auto max-w-3xl px-6 mb-20" data-reveal>
-        <blockquote class="border-l-2 border-brand-amber/40 pl-6 py-2">
-            <p class="text-fluid-lg font-heading text-muted dark:text-dark-muted italic">
-                "The mind must be freed from techniques and deliberation. Let it act on its own."
-            </p>
-            <cite class="text-fluid-sm text-brand-amber not-italic mt-2 block">&mdash; Miyamoto Musashi</cite>
-        </blockquote>
+    {{-- Tab Navigation --}}
+    <div class="mx-auto max-w-5xl px-6 mb-12" data-reveal>
+        <div class="flex gap-1 p-1 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border w-fit">
+            <button
+                @click="tab = 'engineer'"
+                :class="tab === 'engineer' ? 'bg-white dark:bg-white/10 text-body dark:text-dark-body shadow-sm' : 'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body'"
+                class="px-5 py-2.5 rounded-lg text-sm font-mono transition-all duration-200"
+            >
+                <span class="text-cyan-500 dark:text-cyan-400">//</span> The Engineer
+            </button>
+            <button
+                @click="tab = 'person'"
+                :class="tab === 'person' ? 'bg-white dark:bg-white/10 text-body dark:text-dark-body shadow-sm' : 'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body'"
+                class="px-5 py-2.5 rounded-lg text-sm font-mono transition-all duration-200"
+            >
+                <span class="text-amber-500 dark:text-amber-400">//</span> The Person
+            </button>
+        </div>
     </div>
 
-    {{-- The Obsidian Way --}}
-    <section class="mx-auto max-w-5xl px-6 mb-20">
-        <h2 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-4 text-center" data-reveal>The Obsidian Way</h2>
-        <p class="text-fluid-base text-muted dark:text-dark-muted text-center max-w-2xl mx-auto mb-12" data-reveal>
-            A personal operating system. Not a philosophy I read &mdash; one I built from experience, failure, and obsessive iteration.
-        </p>
+    {{-- ===== THE ENGINEER TAB ===== --}}
+    <div x-show="tab === 'engineer'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
 
-        <div class="grid gap-6 md:grid-cols-2">
-            {{-- Mushin --}}
-            <div class="bento-card" data-reveal>
-                <p class="font-mono text-fluid-sm text-brand-cyan mb-2">01</p>
-                <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">Mushin <span class="font-mono text-fluid-sm text-brand-amber/80">無心</span></h3>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    Commit first. Learn in motion. The moment you decide, the obstacle stops being an obstacle and becomes terrain.
-                </p>
+        {{-- Key Projects --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Key Projects</h2>
+            <div class="grid gap-4 md:grid-cols-3">
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">UCF AI Engine</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Sole architect of the AI layer for a compliance SaaS</p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Hybrid retrieval (Qdrant + Neo4j) over 91K+ regulatory records, LangGraph agentic chat, CRAG hallucination verification. Docker/AWS.</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">SADIE</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Production NL2SQL agentic platform</p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">LangGraph + MCP tool-calling, MongoDB Atlas RAG pipeline, 93&ndash;97% query accuracy, Langfuse observability. FastAPI SSE.</p>
+                </div>
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">TriageOps Framework</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">6-step AI adoption methodology</p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints recovered 70+ hrs/month ($42K annually) for one operations team.</p>
+                </div>
             </div>
+        </section>
 
-            {{-- Future Self Extraction --}}
-            <div class="bento-card" data-reveal>
-                <p class="font-mono text-fluid-sm text-brand-cyan mb-2">02</p>
-                <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">Future Self Extraction</h3>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    Inspired by the film <em>Arrival</em>. Pull certainty from the version of you that already succeeded. Time is not always linear in the mind. Use that.
-                </p>
+        {{-- Technical Skills --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Technical Skills</h2>
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">LLMs & Models</p>
+                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">GPT-4o, Claude, Gemini, Llama 3, Mistral, Qwen3, ModernBERT; fine-tuning (Unsloth, HuggingFace)</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Agentic Systems</p>
+                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">LangGraph, LangChain, MCP/tool-calling, multi-agent orchestration, multi-step reasoning, intent classification, memory systems</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">RAG & Retrieval</p>
+                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Qdrant, MongoDB Atlas, FAISS, Chroma, Neo4j, GraphRAG, hybrid retrieval (dense + sparse + graph), NL2SQL, context engineering</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Evaluation & LLMOps</p>
+                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">RAGAS, hallucination detection, latency benchmarking, Langfuse, Opik, Langsmith, MLflow, prompt versioning, CI/CD eval pipelines</p>
+                </div>
+                <div class="gradient-border md:col-span-2" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Engineering</p>
+                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Python, TypeScript, PHP/Laravel, FastAPI, Docker, Kubernetes, AWS (Bedrock, SageMaker, EC2, S3, Lambda), CI/CD, Clean Architecture, microservices, event-driven systems</p>
+                </div>
             </div>
+        </section>
 
-            {{-- Consider vs. Believe --}}
-            <div class="bento-card" data-reveal>
-                <p class="font-mono text-fluid-sm text-brand-cyan mb-2">03</p>
-                <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">Consider vs. Believe</h3>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    I don't believe things. I consider them with probabilities. Belief is a cage. Consideration is a tool. One locks the mind. The other keeps it fluid.
-                </p>
+        {{-- Experience Timeline --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Experience</h2>
+
+            <div class="space-y-6">
+                {{-- Unified Compliance --}}
+                <div class="gradient-border" data-reveal>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-body dark:text-dark-body font-medium">Unified Compliance</h3>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Senior AI Engineer (Contract)</p>
+                        </div>
+                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2025 &ndash; 2026</p>
+                    </div>
+                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Sole architect of the entire AI Engine for UCF's ControlSight compliance platform &mdash; 91K+ regulatory records.</p>
+                    <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
+                        <li>&bull; Built EEL pipeline: PostgreSQL &rarr; dense (ModernBERT) + sparse (BM25) embeddings &rarr; dual-load into Qdrant and Neo4j</li>
+                        <li>&bull; Designed hybrid retrieval: Qdrant vector+BM25 with Neo4j graph traversal, plus CRAG grading</li>
+                        <li>&bull; Built LangGraph agentic chat with intent classification, multi-turn context, query rewriting</li>
+                        <li>&bull; Modeled 8 entity types and 10+ relationships in Neo4j with Cypher queries and cross-store validation</li>
+                        <li>&bull; Evaluated using RAGAS (context recall/precision, faithfulness, answer relevancy)</li>
+                        <li>&bull; Directed company AI strategy, aligning AI capabilities with product, GTM, and data privacy</li>
+                    </ul>
+                </div>
+
+                {{-- Storage360 --}}
+                <div class="gradient-border" data-reveal>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-body dark:text-dark-body font-medium">Storage360</h3>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Engineer (Contract)</p>
+                        </div>
+                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2024 &ndash; 2025</p>
+                    </div>
+                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Built SADIE &mdash; a production NL2SQL agentic platform for a property management SaaS.</p>
+                    <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
+                        <li>&bull; Built agentic workflow using LangGraph with MCP tool-calling and multi-step reasoning</li>
+                        <li>&bull; Implemented RAG pipeline with MongoDB Atlas vector search, Qwen3 embeddings</li>
+                        <li>&bull; Achieved 93&ndash;97% accuracy via RAGAS evaluation and CI/CD regression testing</li>
+                        <li>&bull; Built MCP server for secure read-only database access with schema caching</li>
+                        <li>&bull; Deployed via Docker Compose with Langfuse observability and FastAPI SSE streaming</li>
+                    </ul>
+                </div>
+
+                {{-- IncFile --}}
+                <div class="gradient-border" data-reveal>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-body dark:text-dark-body font-medium">IncFile (Bizee)</h3>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Engineer / Software Engineer / Technical Project Lead</p>
+                        </div>
+                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2022 &ndash; Present</p>
+                    </div>
+                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Leading AI strategy and platform architecture at a business formation SaaS.</p>
+                    <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
+                        <li>&bull; Designed multi-agent system for document processing, handling 1,000+ daily requests</li>
+                        <li>&bull; Built RAG pipeline with vector search; experimented with GraphRAG/KAG</li>
+                        <li>&bull; Implemented multi-layer memory systems for cross-session context retention</li>
+                        <li>&bull; Reduced manual data entry by 65% through intelligent form processing</li>
+                        <li>&bull; Led platform migration from legacy monolith to service-oriented stack with CI/CD</li>
+                        <li>&bull; Mentored 8 engineers on AI/ML development practices</li>
+                    </ul>
+                </div>
+
+                {{-- Global Cybersec --}}
+                <div class="gradient-border" data-reveal>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-body dark:text-dark-body font-medium">Global Cybersec</h3>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Engineering Manager</p>
+                        </div>
+                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2017 &ndash; 2021</p>
+                    </div>
+                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Led engineering for a cybersecurity firm building security automation and incident response.</p>
+                    <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
+                        <li>&bull; Event-driven architecture processing millions of daily security events</li>
+                        <li>&bull; Integrated SIEM, IDS/IPS, firewalls, and SOAR &mdash; 60% reduction in incident response time</li>
+                        <li>&bull; Built 4 microservice applications, managed team of 5 engineers</li>
+                    </ul>
+                </div>
+
+                {{-- Early Career --}}
+                <div class="gradient-border" data-reveal>
+                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+                        <div>
+                            <h3 class="text-body dark:text-dark-body font-medium">Multiple Companies</h3>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Software Engineer</p>
+                        </div>
+                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2014 &ndash; 2017</p>
+                    </div>
+                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Full-stack roles across logistics, healthcare, and proptech.</p>
+                    <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
+                        <li>&bull; Built logistics platform (GT Transport) handling AP/AR, routing, payroll, HR</li>
+                        <li>&bull; Healthcare and proptech platforms with API design, testing, security</li>
+                    </ul>
+                </div>
             </div>
+        </section>
 
-            {{-- The Three Cages --}}
-            <div class="bento-card" data-reveal>
-                <p class="font-mono text-fluid-sm text-brand-cyan mb-2">04</p>
-                <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">The Three Cages</h3>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    Belief. Certainty. Identity. Each one traps you deeper. Identity is the final boss &mdash; the cage you defend because you think it's you.
-                </p>
+        {{-- Education --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Education & Certifications</h2>
+            <div class="gradient-border" data-reveal>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Universidad Polit&eacute;cnica de Baja California</p>
+                <p class="text-xs text-muted dark:text-dark-muted mb-4">Information Technology Engineering (2014&ndash;2016)</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="tag">Laravel Certified Developer (2020)</span>
+                    <span class="tag">LangChain & LLMs Guide</span>
+                    <span class="tag">Gen AI Foundational Models</span>
+                    <span class="tag">Business Process Modeling with AI</span>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    {{-- Divider Quote --}}
-    <div class="mx-auto max-w-3xl px-6 mb-20" data-reveal>
-        <blockquote class="border-l-2 border-brand-cyan/40 pl-6 py-2">
-            <p class="text-fluid-lg font-heading text-muted dark:text-dark-muted italic">
-                "The delay is just processing time. Reality hasn't caught up to what you've already decided."
-            </p>
-        </blockquote>
+        {{-- Download Resume --}}
+        <section class="mx-auto max-w-5xl px-6 text-center" data-reveal>
+            <a
+                href="/alberto_rosas_ai_engineer.pdf"
+                download
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
+            >
+                Download Full Resume (PDF)
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+            </a>
+        </section>
     </div>
 
-    {{-- The Path --}}
-    <section class="mx-auto max-w-3xl px-6 mb-20" data-reveal>
-        <h2 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-12 text-center">The Path</h2>
+    {{-- ===== THE PERSON TAB ===== --}}
+    <div x-show="tab === 'person'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
 
-        <div class="relative">
-            {{-- Vertical line --}}
-            <div class="absolute left-[7px] md:left-[9px] top-2 bottom-2 w-px bg-border dark:bg-dark-border"></div>
-
-            <div class="space-y-10">
-                {{-- 2014 --}}
-                <div class="flex gap-6 items-start">
-                    <div class="relative flex-shrink-0">
-                        <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-amber border-2 border-surface-alt dark:border-dark-surface-alt"></div>
-                    </div>
-                    <div>
-                        <span class="font-mono text-fluid-sm text-brand-cyan block mb-1">2014</span>
-                        <p class="text-fluid-base text-body dark:text-dark-body font-medium">Accounts receivable &rarr; "I can do it"</p>
-                        <p class="text-fluid-sm text-muted dark:text-dark-muted">Zero coding knowledge. Built the system. Delivered. No one noticed.</p>
-                    </div>
-                </div>
-
-                {{-- 2014-2022 --}}
-                <div class="flex gap-6 items-start">
-                    <div class="relative flex-shrink-0">
-                        <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-cyan/60 border-2 border-surface-alt dark:border-dark-surface-alt"></div>
-                    </div>
-                    <div>
-                        <span class="font-mono text-fluid-sm text-brand-cyan block mb-1">2014 &ndash; 2022</span>
-                        <p class="text-fluid-base text-body dark:text-dark-body font-medium">Full-stack engineering across industries</p>
-                        <p class="text-fluid-sm text-muted dark:text-dark-muted">Cybersecurity, healthcare, education. Global Cybersec, HQ Rental, Buddhi, Fulcrum Digital. Laravel, PHP, JS, microservices.</p>
-                    </div>
-                </div>
-
-                {{-- 2022 --}}
-                <div class="flex gap-6 items-start">
-                    <div class="relative flex-shrink-0">
-                        <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-amber border-2 border-surface-alt dark:border-dark-surface-alt"></div>
-                    </div>
-                    <div>
-                        <span class="font-mono text-fluid-sm text-brand-cyan block mb-1">2022</span>
-                        <p class="text-fluid-base text-body dark:text-dark-body font-medium">The AI pivot at Bizee/IncFile</p>
-                        <p class="text-fluid-sm text-muted dark:text-dark-muted">Tech Lead. Built multi-agent document processing handling 1,000+ daily requests.</p>
-                    </div>
-                </div>
-
-                {{-- 2024 --}}
-                <div class="flex gap-6 items-start">
-                    <div class="relative flex-shrink-0">
-                        <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-cyan/60 border-2 border-surface-alt dark:border-dark-surface-alt"></div>
-                    </div>
-                    <div>
-                        <span class="font-mono text-fluid-sm text-brand-cyan block mb-1">2024</span>
-                        <p class="text-fluid-base text-body dark:text-dark-body font-medium">SADIE ships at Storage360</p>
-                        <p class="text-fluid-sm text-muted dark:text-dark-muted">Natural Language to SQL engine. 14.3% to 86% query success rate. Sub-300ms response times.</p>
-                    </div>
-                </div>
-
-                {{-- 2025 --}}
-                <div class="flex gap-6 items-start">
-                    <div class="relative flex-shrink-0">
-                        <div class="w-4 h-4 md:w-5 md:h-5 rounded-full bg-brand-amber border-2 border-surface-alt dark:border-dark-surface-alt"></div>
-                    </div>
-                    <div>
-                        <span class="font-mono text-fluid-sm text-brand-cyan block mb-1">2025 &ndash; Present</span>
-                        <p class="text-fluid-base text-body dark:text-dark-body font-medium">Unified Compliance + TRIAGE Ops</p>
-                        <p class="text-fluid-sm text-muted dark:text-dark-muted">AI Engineer at Unified Compliance &mdash; building production AI chat pipelines over regulatory compliance data. Founder of TRIAGE Ops.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    {{-- Divider Quote --}}
-    <div class="mx-auto max-w-3xl px-6 mb-20" data-reveal>
-        <blockquote class="border-l-2 border-brand-amber/40 pl-6 py-2">
-            <p class="text-fluid-lg font-heading text-muted dark:text-dark-muted italic">
-                "Absorb what is useful, discard what is useless, and add what is specifically your own."
+        {{-- The Mushin Moment --}}
+        <section class="mx-auto max-w-3xl px-6 mb-16" data-reveal>
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-6">The Mushin Moment</h2>
+            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
+                2014. Mexico. Working accounts receivable. Only skill: fluent English from growing up in the US.
             </p>
-            <cite class="text-fluid-sm text-brand-amber not-italic mt-2 block">&mdash; Bruce Lee</cite>
-        </blockquote>
-    </div>
-
-    {{-- Beyond the Code --}}
-    <section class="mx-auto max-w-5xl px-6 mb-20">
-        <h2 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-10 text-center" data-reveal>Beyond the Code</h2>
-
-        <div class="grid gap-6 md:grid-cols-3">
-            {{-- Harley + Katana --}}
-            <div class="bento-card border-brand-amber/30 dark:border-brand-amber/20" data-reveal>
-                <p class="text-brand-amber font-heading text-fluid-lg mb-3">The Harley & The Katana</p>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    I ride a Harley and own a katana. Not for aesthetics. If it sharpens your edge or moves you forward, it's a tool.
-                </p>
-            </div>
-
-            {{-- 4:20 AM --}}
-            <div class="bento-card border-brand-amber/30 dark:border-brand-amber/20" data-reveal>
-                <p class="text-brand-amber font-heading text-fluid-lg mb-3">4:20 AM. Every Day.</p>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    The alarm hasn't failed yet. Structured routines are operational infrastructure. Discipline isn't motivation &mdash; it's architecture.
-                </p>
-            </div>
-
-            {{-- Two Brands --}}
-            <div class="bento-card border-brand-amber/30 dark:border-brand-amber/20 md:col-span-2" data-reveal>
-                <p class="text-brand-amber font-heading text-fluid-lg mb-3">Two Brands</p>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed mb-2">
-                    <span class="text-body dark:text-dark-body font-medium">El Arquitecto A.I.</span> &mdash; AI education for Spanish-speaking LATAM. Cyberpunk aesthetic. Teaching what I learned the hard way.
-                </p>
-                <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                    <span class="text-body dark:text-dark-body font-medium">Obsidian Ronin</span> &mdash; Philosophy, consciousness, mental flexibility. Writing about Mushin, The Three Cages, and why I stopped being an atheist.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    {{-- CTA --}}
-    <section class="mx-auto max-w-3xl px-6 text-center" data-reveal>
-        <div class="bento-card py-12">
-            <p class="font-heading text-fluid-lg text-muted dark:text-dark-muted italic mb-6">
-                "The delay is just processing time."
+            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
+                My boss asked if I knew someone who could build an internal system. I didn't know anyone. I didn't know anything about coding.
             </p>
+            <p class="text-sm text-body dark:text-dark-body leading-relaxed font-medium mb-3">
+                I said "I can do it."
+            </p>
+            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">
+                Zero knowledge. Complete commitment. I taught myself, built it, delivered it. Years later I found the word: <span class="font-heading text-amber-500 dark:text-amber-400 neon-text-amber">Mushin</span> &mdash; <span class="font-mono text-amber-500/80 dark:text-amber-400/80">&#28961;&#24515;</span> &mdash; No-Mind. Freeing yourself from every obstacle by refusing to acknowledge them.
+            </p>
+        </section>
+
+        {{-- The Obsidian Way --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8 text-center" data-reveal>The Obsidian Way</h2>
+            <div class="grid gap-4 md:grid-cols-2">
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">01</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Mushin <span class="font-mono text-xs text-amber-500/80 dark:text-amber-400/80">&#28961;&#24515;</span></h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Commit first. Learn in motion. The obstacle becomes terrain.</p>
+                </div>
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">02</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Future Self Extraction</h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Pull certainty from the version of you that already succeeded. Inspired by the film <em>Arrival</em>.</p>
+                </div>
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">03</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Consider vs. Believe</h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Probabilities, not fixed beliefs. Belief is a cage. Consideration is a tool.</p>
+                </div>
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">04</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">The Three Cages</h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Belief. Certainty. Identity. Identity is the final boss &mdash; the cage you defend because you think it's you.</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- Beyond the Code --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8 text-center" data-reveal>Beyond the Code</h2>
+            <div class="grid gap-4 md:grid-cols-3">
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="text-2xl mb-2">&#x1F3CD;&#xFE0F;</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Harley Davidson Forty-Eight 1200cc</p>
+                    <p class="text-xs text-muted dark:text-dark-muted">If it sharpens your edge or moves you forward, it's a tool.</p>
+                </div>
+                <div class="gradient-border gradient-border-amber" data-reveal>
+                    <p class="text-2xl mb-2">&#x1F5E1;&#xFE0F;</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Katana & Martial Arts</p>
+                    <p class="text-xs text-muted dark:text-dark-muted">Precision in every domain.</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-heading text-3xl text-cyan-500 dark:text-cyan-400 neon-text mb-2">4:20</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Every Morning</p>
+                    <p class="text-xs text-muted dark:text-dark-muted">Discipline is architecture, not motivation.</p>
+                </div>
+            </div>
+        </section>
+
+        {{-- Two Brands --}}
+        <section class="mx-auto max-w-5xl px-6 mb-16">
+            <div class="grid gap-4 md:grid-cols-2">
+                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="gradient-border gradient-border-cyber group" data-reveal>
+                    <p class="font-mono text-xs text-purple-500 dark:text-purple-400 mb-2">Brand</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">AI education for Spanish-speaking LATAM. Cyberpunk aesthetic. Teaching what I learned the hard way.</p>
+                    <span class="text-xs font-mono text-purple-500 dark:text-purple-400 mt-3 block opacity-0 group-hover:opacity-100 transition-opacity">elarquitecto.ai &rarr;</span>
+                </a>
+                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="gradient-border gradient-border-amber group" data-reveal>
+                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">Brand</p>
+                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Obsidian Ronin</h3>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Philosophy, consciousness, mental flexibility. Mushin, The Three Cages, and why I stopped being an atheist.</p>
+                    <span class="text-xs font-mono text-amber-500 dark:text-amber-400 mt-3 block opacity-0 group-hover:opacity-100 transition-opacity">Substack &rarr;</span>
+                </a>
+            </div>
+        </section>
+
+        {{-- CTA --}}
+        <section class="mx-auto max-w-3xl px-6 text-center" data-reveal>
+            <blockquote class="mb-8">
+                <p class="font-heading text-fluid-lg text-muted dark:text-dark-muted italic">
+                    "The delay is just processing time."
+                </p>
+            </blockquote>
             <a
                 href="/#contact"
-                class="inline-flex items-center gap-2 bg-brand-cyan text-white font-body font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-cyan/25"
+                class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25"
             >
                 Let's talk
                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                 </svg>
             </a>
-        </div>
-    </section>
+        </section>
+    </div>
 
 </article>
 @endsection

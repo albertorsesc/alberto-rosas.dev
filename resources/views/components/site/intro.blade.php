@@ -1,18 +1,21 @@
-{{-- Hero — cybernetic, not corporate --}}
+{{-- Hero -- cybernetic, not corporate --}}
 <section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
 
-    {{-- Animated gradient background --}}
+    {{-- Animated gradient background -- larger, more colorful, two orbs --}}
     <div class="absolute inset-0 -z-10">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface dark:to-dark-surface z-10"></div>
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-gradient-to-r from-cyan-500/10 via-purple-500/5 to-fuchsia-500/10 dark:from-cyan-500/20 dark:via-purple-500/10 dark:to-fuchsia-500/20 blur-[100px] animate-pulse-slow"></div>
+        {{-- Primary orb --}}
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1000px] md:h-[1000px] rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-500/10 to-fuchsia-500/15 dark:from-cyan-500/25 dark:via-purple-500/15 dark:to-fuchsia-500/25 blur-[120px] animate-pulse-slow"></div>
+        {{-- Secondary orb -- floats opposite --}}
+        <div class="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-l from-amber-500/10 via-pink-500/8 to-cyan-500/10 dark:from-amber-500/20 dark:via-pink-500/12 dark:to-cyan-500/20 blur-[100px] animate-pulse-slow" style="animation-delay: -2s; animation-direction: reverse;"></div>
     </div>
 
     <div class="mx-auto max-w-5xl w-full">
         <div class="flex flex-col items-center text-center">
 
-            {{-- Photo with glow ring --}}
-            <div class="hero-element relative mb-8">
-                <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-fuchsia-500 opacity-30 dark:opacity-50 blur-md animate-pulse-slow"></div>
+            {{-- Photo with glow ring + float animation --}}
+            <div class="hero-element relative mb-8 float">
+                <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-fuchsia-500 opacity-40 dark:opacity-60 blur-md animate-pulse-slow"></div>
                 <div class="relative scan-lines rounded-full">
                     <img
                         src="https://avatars.githubusercontent.com/u/22654040?v=4"
@@ -38,24 +41,24 @@
                 class="hero-element text-fluid-sm text-brand-cyan font-mono mb-6 tracking-wider uppercase"
             ><span class="text-brand-cyan/60">//</span> <span x-text="greeting"></span><span class="typing-cursor"></span></p>
 
-            {{-- Name --}}
-            <h1 class="hero-element font-heading text-fluid-hero text-body dark:text-dark-body tracking-tight leading-[1.05] mb-6 glitch-hover neon-glow" data-text="Alberto Rosas">
+            {{-- Name -- glitch + always-on neon glow --}}
+            <h1 class="hero-element font-heading text-fluid-hero text-body dark:text-dark-body tracking-tight leading-[1.05] mb-6 glitch-hover neon-text" data-text="Alberto Rosas">
                 Alberto Rosas
             </h1>
 
-            {{-- Tagline --}}
-            <p class="hero-element text-fluid-xl text-body dark:text-dark-body leading-snug max-w-2xl mb-4 font-medium">
-                Consider everything. Believe nothing. <span class="text-brand-cyan">Build anyway.</span>
-            </p>
-            <p class="hero-element text-fluid-base text-muted dark:text-dark-muted leading-relaxed max-w-lg mb-10">
-                AI Engineer &middot; Founder of TRIAGE Ops &middot; Obsidian Ronin
+            {{-- Identity line --}}
+            <p class="hero-element text-fluid-sm text-muted dark:text-dark-muted leading-relaxed max-w-2xl mb-10 font-mono">
+                <span class="text-cyan-500 dark:text-cyan-400">AI Engineer</span> &middot;
+                Father &middot;
+                <span class="text-amber-500 dark:text-amber-400">Philosophy</span> &middot;
+                Harley Rider
             </p>
 
-            {{-- CTAs --}}
+            {{-- CTAs -- more dramatic gradient --}}
             <div class="hero-element flex flex-col sm:flex-row items-center gap-4 mb-10">
                 <a
                     href="#contact"
-                    class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-cyan-600 text-white font-medium text-fluid-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                    class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-medium text-fluid-sm shadow-lg shadow-cyan-500/25 hover:shadow-purple-500/40 transition-all duration-300 hover:-translate-y-0.5"
                 >
                     Let's Build Something
                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -64,7 +67,7 @@
                 </a>
 
                 <a
-                    href="/resume_alberto_rosas.pdf"
+                    href="/alberto_rosas_ai_engineer.pdf"
                     download
                     class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/10 dark:border-white/10 text-body dark:text-dark-body font-medium text-fluid-sm hover:border-brand-cyan/50 hover:text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-sm"
                 >
