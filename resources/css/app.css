@@ -59,31 +59,7 @@ html, body {
     background-color: #0a0a0a;
 }
 
-/* ===========================
-   View Transitions (MPA)
-   =========================== */
-@view-transition {
-    navigation: auto;
-}
-
-/* Cross-fade: old and new overlap so no background bleed-through */
-::view-transition-old(root),
-::view-transition-new(root) {
-    animation-duration: 150ms;
-    animation-timing-function: ease-in-out;
-    mix-blend-mode: normal;
-}
-
-::view-transition-old(root) {
-    animation-name: fade-out;
-}
-
-::view-transition-new(root) {
-    animation-name: fade-in;
-}
-
-@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+/* View Transitions removed — caused dark flash in light mode */
 
 /* ===========================
    Scroll-Driven Reveal Animation

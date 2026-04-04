@@ -13,7 +13,12 @@
         </div>
     @endif
 
-    <form class="space-y-5" wire:submit.blur="save">
+    <form class="space-y-5" wire:submit.prevent="save">
+        {{-- Honeypot --}}
+        <div class="absolute opacity-0 -z-10" aria-hidden="true" tabindex="-1">
+            <input type="text" wire:model="website" autocomplete="off" tabindex="-1" />
+        </div>
+
         <div>
             <input
                 class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all duration-200 @error('name') ring-2 ring-red-500 border-red-500 @enderror"
@@ -51,9 +56,14 @@
 
         <button
             type="submit"
-            class="w-full h-14 rounded-xl bg-brand-cyan text-white font-medium text-fluid-sm shadow-lg shadow-brand-cyan/25 hover:shadow-brand-cyan/40 hover:opacity-90 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+            wire:loading.attr="disabled"
+            class="w-full h-14 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-medium text-fluid-sm shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-            Send Message
+            <span wire:loading.remove>Send Message</span>
+            <span wire:loading class="inline-flex items-center gap-2">
+                <svg class="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
+                Sending...
+            </span>
         </button>
     </form>
 </div>

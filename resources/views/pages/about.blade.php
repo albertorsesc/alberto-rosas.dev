@@ -317,11 +317,9 @@
 
         {{-- CTA --}}
         <section class="mx-auto max-w-3xl px-6 text-center" data-reveal>
-            <blockquote class="mb-8">
-                <p class="font-heading text-fluid-lg text-muted dark:text-dark-muted italic">
-                    "The delay is just processing time."
-                </p>
-            </blockquote>
+            <p class="font-heading text-fluid-lg text-muted dark:text-dark-muted mb-8">
+                Enough reading. Let's build.
+            </p>
             <a
                 href="/#contact"
                 class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25"
