@@ -1,7 +1,15 @@
 @extends('layouts.app')
 
+{{--
+    ▸ /now page — update this single variable each time you revise content below.
+    ▸ It feeds both the page header and the meta description automatically.
+--}}
+@php
+    $lastUpdated = 'May 2026';
+@endphp
+
 @section('title', 'Now — Alberto Rosas')
-@section('description', 'What Alberto Rosas is building, learning, reading, and thinking about right now. Updated April 2026.')
+@section('description', "What Alberto Rosas is building, learning, reading, and thinking about right now. Updated {$lastUpdated}.")
 
 @section('content')
 <article class="pt-32 pb-20">
@@ -10,7 +18,7 @@
     <header class="mx-auto max-w-2xl px-6 mb-16" data-reveal>
         <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3">Now</h1>
         <p class="text-fluid-base text-muted dark:text-dark-muted">
-            What I'd tell a friend I hadn't seen in a year. Last updated April 2026.
+            What I'd tell a friend I hadn't seen in a year. Last updated {{ $lastUpdated }}.
         </p>
     </header>
 
@@ -35,8 +43,9 @@
             <h2>Reading</h2>
             <ul>
                 <li><em>Building Applications with AI Agents</em> &mdash; Michael Albada</li>
-                <li><em>The Book of Five Rings</em> &mdash; Miyamoto Musashi</li>
-                <li><em>The Society of Mind</em> &mdash; Marvin Minsky</li>
+                <li><em>Architecting AI Software Systems</em> &mdash; Richard D. Avila &amp; Imran Ahmad</li>
+                <li><em>Meditations</em> &mdash; Marcus Aurelius</li>
+                <li><em>The Way of Zen</em> &mdash; Alan Watts</li>
             </ul>
         </section>
 

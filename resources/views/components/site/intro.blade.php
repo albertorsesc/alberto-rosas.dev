@@ -46,12 +46,16 @@
                 Alberto Rosas
             </h1>
 
+            {{-- Tagline --}}
+            <p class="hero-element font-heading text-fluid-lg text-body dark:text-dark-body leading-snug max-w-2xl mb-4">
+                I build agentic systems that hold up under real traffic.
+            </p>
+
             {{-- Identity line --}}
             <p class="hero-element text-fluid-sm text-muted dark:text-dark-muted leading-relaxed max-w-2xl mb-10 font-mono">
-                <span class="text-cyan-500 dark:text-cyan-400">AI Engineer</span> &middot;
-                Father &middot;
-                <span class="text-amber-500 dark:text-amber-400">Philosophy</span> &middot;
-                Harley Rider
+                <span class="text-cyan-500 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
+                &middot; 12+ yrs software / 5+ yrs production AI
+                &middot; <span class="text-cyan-500 dark:text-cyan-400">Mexico</span> &middot; EN/ES native
             </p>
 
             {{-- CTAs -- more dramatic gradient --}}

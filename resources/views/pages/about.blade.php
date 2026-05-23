@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
 @section('title', 'About — Alberto Rosas')
-@section('description', 'AI & Agentic Systems Engineer with 12+ years in software engineering. Multi-agent orchestration, RAG pipelines, NL2SQL engines.')
+@section('description', 'AI & Agentic Systems Engineer based in Mexico. Production agentic systems for products where being wrong has real consequences. Agent frameworks, retrieval pipelines, eval-first.')
 
 @section('content')
-<article class="pt-32 pb-20" x-data="{ tab: 'engineer' }">
+<article class="pt-32 pb-20">
 
     {{-- Hero --}}
     <header class="mx-auto max-w-5xl px-6 mb-12" data-reveal>
@@ -19,36 +19,51 @@
                 />
             </div>
             <div>
+                <p class="text-xs font-mono uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">// The Engineer</p>
                 <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3 neon-text">Alberto Rosas</h1>
-                <p class="text-fluid-base text-muted dark:text-dark-muted max-w-xl leading-relaxed">
-                    AI & Agentic Systems Engineer with 12+ years in software engineering and 5+ years building production AI systems.
+                <p class="font-mono text-sm text-muted dark:text-dark-muted leading-relaxed">
+                    <span class="text-cyan-500 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
+                    &middot; 12+ yrs software / 5+ yrs production AI
+                    &middot; <span class="text-cyan-500 dark:text-cyan-400">Mexico</span>
+                    &middot; EN/ES native
                 </p>
             </div>
         </div>
     </header>
 
-    {{-- Tab Navigation --}}
-    <div class="mx-auto max-w-5xl px-6 mb-12" data-reveal>
-        <div class="flex gap-1 p-1 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border w-fit">
-            <button
-                @click="tab = 'engineer'"
-                :class="tab === 'engineer' ? 'bg-white dark:bg-white/10 text-body dark:text-dark-body shadow-sm' : 'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body'"
-                class="px-5 py-2.5 rounded-lg text-sm font-mono transition-all duration-200"
-            >
-                <span class="text-cyan-500 dark:text-cyan-400">//</span> The Engineer
-            </button>
-            <button
-                @click="tab = 'person'"
-                :class="tab === 'person' ? 'bg-white dark:bg-white/10 text-body dark:text-dark-body shadow-sm' : 'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body'"
-                class="px-5 py-2.5 rounded-lg text-sm font-mono transition-all duration-200"
-            >
-                <span class="text-amber-500 dark:text-amber-400">//</span> The Person
-            </button>
+    {{-- Security-First AI Engineering --}}
+    <section class="mx-auto max-w-5xl px-6 mb-16">
+        <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8" data-reveal>Security-First AI Engineering</h2>
+        <div class="grid gap-4 md:grid-cols-2">
+            <div class="gradient-border" data-reveal>
+                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Threat Modeling</p>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">STRIDE applied to agent design</p>
+                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Tool-calling, MCP servers, and multi-step delegation modeled in the design doc. Attack surface mapped before code, aligned to OWASP Agentic Top 10 2026 and NIST&rsquo;s AI Agent Standards Initiative.</p>
+            </div>
+            <div class="gradient-border" data-reveal>
+                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">MCP Hardening</p>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Protocol-level defense</p>
+                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Gateway auth (OAuth 2.1), bidirectional JSON-RPC inspection, signed-server allowlists, structured audit logs. Aligned to OWASP MCP Top 10.</p>
+            </div>
+            <div class="gradient-border" data-reveal>
+                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">RAG Data Governance</p>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Vector stores are not a privacy boundary</p>
+                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Pre-embedding PII masking, document-level ACLs propagated into the index, lineage tracking for GDPR erasure. Embedding inversion (LLM08:2025) treated as a real attack.</p>
+            </div>
+            <div class="gradient-border" data-reveal>
+                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Guardrails &amp; Evals</p>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Trust by measurement</p>
+                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Llama Guard 3 and NeMo Guardrails at runtime. Garak and PyRIT in CI for adversarial regression. Sandboxed execution (e2b, Modal) for any tool that touches code.</p>
+            </div>
+            <div class="gradient-border md:col-span-2" data-reveal>
+                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Compliance Readiness</p>
+                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">EU AI Act &middot; NIST AI RMF &middot; ISO/IEC 42001</p>
+                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Conformity-ready logging, human-oversight hooks, automated evidence capture. EU AI Act obligations phasing in through 2026&ndash;2027; ISO/IEC 42001 increasingly required in enterprise AI procurement. SOAR-style automation applied to audit trails.</p>
+            </div>
         </div>
-    </div>
+    </section>
 
-    {{-- ===== THE ENGINEER TAB ===== --}}
-    <div x-show="tab === 'engineer'" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
+    <div>
 
         {{-- Key Projects --}}
         <section class="mx-auto max-w-5xl px-6 mb-16">
@@ -109,9 +124,12 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Unified Compliance</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Senior AI Engineer (Contract)</p>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Senior AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
                         </div>
-                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2025 &ndash; 2026</p>
+                        <div class="text-right shrink-0">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted">2025 &ndash; 2026</p>
+                            <p class="font-mono text-[10px] text-cyan-500/70 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
+                        </div>
                     </div>
                     <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Sole architect of the entire AI Engine for UCF's ControlSight compliance platform &mdash; 91K+ regulatory records.</p>
                     <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
@@ -129,9 +147,12 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Storage360</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Engineer (Contract)</p>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
                         </div>
-                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2024 &ndash; 2025</p>
+                        <div class="text-right shrink-0">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted">2024 &ndash; 2025</p>
+                            <p class="font-mono text-[10px] text-cyan-500/70 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
+                        </div>
                     </div>
                     <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Built SADIE &mdash; a production NL2SQL agentic platform for a property management SaaS.</p>
                     <ul class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
@@ -148,7 +169,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">IncFile (Bizee)</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Engineer / Software Engineer / Technical Project Lead</p>
+                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Systems Engineer / Software Engineer / Technical Project Lead</p>
                         </div>
                         <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2022 &ndash; Present</p>
                     </div>
@@ -205,7 +226,6 @@
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Universidad Polit&eacute;cnica de Baja California</p>
                 <p class="text-xs text-muted dark:text-dark-muted mb-4">Information Technology Engineering (2014&ndash;2016)</p>
                 <div class="flex flex-wrap gap-2">
-                    <span class="tag">Laravel Certified Developer (2020)</span>
                     <span class="tag">LangChain & LLMs Guide</span>
                     <span class="tag">Gen AI Foundational Models</span>
                     <span class="tag">Business Process Modeling with AI</span>
@@ -213,122 +233,51 @@
             </div>
         </section>
 
-        {{-- Download Resume --}}
-        <section class="mx-auto max-w-5xl px-6 text-center" data-reveal>
-            <a
-                href="/alberto_rosas_ai_engineer.pdf"
-                download
-                class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
-            >
-                Download Full Resume (PDF)
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                </svg>
-            </a>
-        </section>
-    </div>
-
-    {{-- ===== THE PERSON TAB ===== --}}
-    <div x-show="tab === 'person'" x-cloak x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0">
-
-        {{-- The Mushin Moment --}}
-        <section class="mx-auto max-w-3xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-6">The Mushin Moment</h2>
-            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
-                2014. Mexico. Working accounts receivable. Only skill: fluent English from growing up in the US.
-            </p>
-            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
-                My boss asked if I knew someone who could build an internal system. I didn't know anyone. I didn't know anything about coding.
-            </p>
-            <p class="text-sm text-body dark:text-dark-body leading-relaxed font-medium mb-3">
-                I said "I can do it."
-            </p>
-            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">
-                Zero knowledge. Complete commitment. I taught myself, built it, delivered it. Years later I found the word: <span class="font-heading text-amber-500 dark:text-amber-400 neon-text-amber">Mushin</span> &mdash; <span class="font-mono text-amber-500/80 dark:text-amber-400/80">&#28961;&#24515;</span> &mdash; No-Mind. Freeing yourself from every obstacle by refusing to acknowledge them.
-            </p>
-        </section>
-
-        {{-- The Obsidian Way --}}
+        {{-- What I'm available for --}}
         <section class="mx-auto max-w-5xl px-6 mb-16">
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8 text-center" data-reveal>The Obsidian Way</h2>
-            <div class="grid gap-4 md:grid-cols-2">
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">01</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Mushin <span class="font-mono text-xs text-amber-500/80 dark:text-amber-400/80">&#28961;&#24515;</span></h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Commit first. Learn in motion. The obstacle becomes terrain.</p>
-                </div>
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">02</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Future Self Extraction</h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Pull certainty from the version of you that already succeeded. Inspired by the film <em>Arrival</em>.</p>
-                </div>
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">03</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Consider vs. Believe</h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Probabilities, not fixed beliefs. Belief is a cage. Consideration is a tool.</p>
-                </div>
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">04</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">The Three Cages</h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Belief. Certainty. Identity. Identity is the final boss &mdash; the cage you defend because you think it's you.</p>
-                </div>
-            </div>
-        </section>
-
-        {{-- Beyond the Code --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16">
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8 text-center" data-reveal>Beyond the Code</h2>
+            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">What I&rsquo;m Available For</h2>
             <div class="grid gap-4 md:grid-cols-3">
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="text-2xl mb-2">&#x1F3CD;&#xFE0F;</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Harley Davidson Forty-Eight 1200cc</p>
-                    <p class="text-xs text-muted dark:text-dark-muted">If it sharpens your edge or moves you forward, it's a tool.</p>
-                </div>
-                <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="text-2xl mb-2">&#x1F5E1;&#xFE0F;</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Katana & Martial Arts</p>
-                    <p class="text-xs text-muted dark:text-dark-muted">Precision in every domain.</p>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Senior Roles</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI &amp; Agentic Systems Engineer &middot; AI Systems Architect</p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Full-time remote, contractor or EOR-employed.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-heading text-3xl text-cyan-500 dark:text-cyan-400 neon-text mb-2">4:20</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Every Morning</p>
-                    <p class="text-xs text-muted dark:text-dark-muted">Discipline is architecture, not motivation.</p>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Consulting</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI adoption via <a href="https://triageops.com" target="_blank" rel="noopener noreferrer" class="text-cyan-500 dark:text-cyan-400 hover:underline">TriageOps</a></p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints, scoped pilots, eval-gated rollouts for mid-market teams.</p>
+                </div>
+                <div class="gradient-border" data-reveal>
+                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Architecture Review</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Second-opinion on production agents</p>
+                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Context engineering, evals, MCP attack surface, agent security audits.</p>
                 </div>
             </div>
         </section>
 
-        {{-- Two Brands --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16">
-            <div class="grid gap-4 md:grid-cols-2">
-                <a href="https://elarquitecto.ai" target="_blank" rel="noopener noreferrer" class="gradient-border gradient-border-cyber group" data-reveal>
-                    <p class="font-mono text-xs text-purple-500 dark:text-purple-400 mb-2">Brand</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">El Arquitecto A.I.</h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">AI education for Spanish-speaking LATAM. Cyberpunk aesthetic. Teaching what I learned the hard way.</p>
-                    <span class="text-xs font-mono text-purple-500 dark:text-purple-400 mt-3 block opacity-0 group-hover:opacity-100 transition-opacity">elarquitecto.ai &rarr;</span>
+        {{-- Download Resume + CTA --}}
+        <section class="mx-auto max-w-5xl px-6 text-center" data-reveal>
+            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
+                <a
+                    href="/alberto_rosas_ai_engineer.pdf"
+                    download
+                    class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
+                >
+                    Download Full Resume (PDF)
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                    </svg>
                 </a>
-                <a href="https://obsidianronin.substack.com" target="_blank" rel="noopener noreferrer" class="gradient-border gradient-border-amber group" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">Brand</p>
-                    <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Obsidian Ronin</h3>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Philosophy, consciousness, mental flexibility. Mushin, The Three Cages, and why I stopped being an atheist.</p>
-                    <span class="text-xs font-mono text-amber-500 dark:text-amber-400 mt-3 block opacity-0 group-hover:opacity-100 transition-opacity">Substack &rarr;</span>
+                <a
+                    href="/#contact"
+                    class="inline-flex items-center gap-2 border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:bg-cyan-500/10"
+                >
+                    Let&rsquo;s talk
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                    </svg>
                 </a>
             </div>
-        </section>
-
-        {{-- CTA --}}
-        <section class="mx-auto max-w-3xl px-6 text-center" data-reveal>
-            <p class="font-heading text-fluid-lg text-muted dark:text-dark-muted mb-8">
-                Enough reading. Let's build.
-            </p>
-            <a
-                href="/#contact"
-                class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-amber-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/25"
-            >
-                Let's talk
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                </svg>
-            </a>
         </section>
     </div>
 

@@ -53,8 +53,8 @@
                                 <a
                                     href="#{{ $h2['id'] }}"
                                     :class="{
-                                        'text-brand-cyan border-brand-cyan': activeHeading === '#{{ $h2['title'] }}',
-                                        'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '#{{ $h2['title'] }}'
+                                        'text-brand-cyan border-brand-cyan': activeHeading === '{{ $h2['id'] }}',
+                                        'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '{{ $h2['id'] }}'
                                     }"
                                     x-on:click.prevent="scrollToHeading('{{ $h2['id'] }}')"
                                     class="block border-l-2 pl-3 transition-colors duration-200"
@@ -73,8 +73,8 @@
                                             <a
                                                 href="#{{ $h3['id'] }}"
                                                 :class="{
-                                                    'text-brand-cyan border-brand-cyan': activeHeading === '#{{ $h3['title'] }}',
-                                                    'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '#{{ $h3['title'] }}'
+                                                    'text-brand-cyan border-brand-cyan': activeHeading === '{{ $h3['id'] }}',
+                                                    'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '{{ $h3['id'] }}'
                                                 }"
                                                 x-on:click.prevent="scrollToHeading('{{ $h3['id'] }}')"
                                                 class="block border-l-2 pl-3 transition-colors duration-200"

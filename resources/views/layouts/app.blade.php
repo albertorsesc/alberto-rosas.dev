@@ -24,11 +24,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>@yield('title', config('app.name'))</title>
-        <meta name="description" content="@yield('description', 'Alberto Rosas — AI Engineer, Strategic Consultant, and builder of intelligent systems.')">
-
         @hasSection('meta')
             @yield('meta')
+        @else
+            <title>@yield('title', 'Alberto Rosas — AI & Agentic Systems Engineer')</title>
+            <meta name="description" content="@yield('description', 'AI & Agentic Systems Engineer. 12+ years in software, 5+ in production AI. LangGraph + MCP agents, hybrid retrieval, eval-first. Based in Mexico.')">
         @endif
 
         <!-- Fonts -->
@@ -57,11 +57,17 @@
         @livewireScripts
 
         <!-- GSAP + ScrollTrigger -->
-        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"
+                integrity="sha384-XmJ9SoHtVOHoQUcKvFAzVXwdkKo1Ie3bhmSoIAkcdsHGaIrVJIkmozyq0FJeb/Ly"
+                crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"
+                integrity="sha384-wl5TeDVvOWt30Pbf8aSo2ZrzsOjddu3avOBvHe+p+OhJt9gP6w9YXmDkN5DK2/dF"
+                crossorigin="anonymous"></script>
 
         <!-- Lenis Smooth Scroll -->
-        <script defer src="https://unpkg.com/lenis@1/dist/lenis.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js"
+                integrity="sha384-iiCtod6ZId6zT42Bar9EFXNKZh8X4VliWYWFOuY3/t1AxCvLejXExXcbluoc57CJ"
+                crossorigin="anonymous"></script>
 
         <script>
             document.addEventListener('DOMContentLoaded', () => {

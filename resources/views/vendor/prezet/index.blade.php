@@ -4,9 +4,9 @@
 
 <x-prezet::template>
     @seo([
-        'title' => 'Alberto Rosas: Software Engineer and AI Researcher',
+        'title' => 'Articles — Alberto Rosas',
         'description' =>
-            'AI Engineer and Researcher. I write about AI, software engineering, and more.',
+            'AI & Agentic Systems Engineer. Writing on production agents, hybrid retrieval, security and guardrails, evaluation pipelines, and the engineering behind real AI systems.',
         'url' => route('prezet.index'),
     ])
 

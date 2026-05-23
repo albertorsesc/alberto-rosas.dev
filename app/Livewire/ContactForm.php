@@ -21,16 +21,17 @@ class ContactForm extends Component
 
     public function save(): void
     {
-        // Honeypot check — bots fill this in, humans don't see it
+        $key = 'contact-form:' . request()->ip();
+
+        // Honeypot — bots fill this in, humans don't see it.
+        // Burn rate-limit budget so spammers can't pound the endpoint.
         if ($this->website !== '') {
-            // Silently pretend success
+            RateLimiter::hit($key, 3600);
             session()->flash('status', "Thanks! I'll get back to you soon.");
             $this->reset();
             return;
         }
 
-        // Rate limit — 3 submissions per hour per IP
-        $key = 'contact-form:' . request()->ip();
         if (RateLimiter::tooManyAttempts($key, 3)) {
             $this->addError('message', 'Too many messages. Please try again later.');
             return;

@@ -10,7 +10,7 @@
     <header class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
         <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3">What I Use</h1>
         <p class="text-fluid-base text-muted dark:text-dark-muted max-w-2xl">
-            If it moves me forward, it's a tool. Hardware, software, systems &mdash; and one motorcycle.
+            Hardware, software, systems &mdash; and one motorcycle.
         </p>
     </header>
 
@@ -18,7 +18,7 @@
     <div class="mx-auto max-w-5xl px-6 grid gap-8 md:gap-10 md:grid-cols-2">
 
         {{-- The Machine --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">The Machine</h2>
             <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed mb-3">
                 <span class="font-mono text-body dark:text-dark-body">M5 Max MacBook Pro</span>, 128GB unified memory.
@@ -29,7 +29,7 @@
         </div>
 
         {{-- AI / ML Stack --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">AI / ML Stack</h2>
             <ul class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
@@ -56,7 +56,7 @@
         </div>
 
         {{-- Vector Databases --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">Vector Databases</h2>
             <ul class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
@@ -73,13 +73,21 @@
                 </li>
                 <li class="flex items-start gap-2">
                     <span class="text-brand-cyan mt-1 flex-shrink-0">&bull;</span>
-                    <span class="font-mono text-body dark:text-dark-body">QdrantMD</span>
+                    <span class="font-mono text-body dark:text-dark-body">ChromaDB</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-brand-cyan mt-1 flex-shrink-0">&bull;</span>
+                    <span class="font-mono text-body dark:text-dark-body">Weaviate</span>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="text-brand-cyan mt-1 flex-shrink-0">&bull;</span>
+                    <span class="font-mono text-body dark:text-dark-body">pgvector</span>
                 </li>
             </ul>
         </div>
 
         {{-- Development --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">Development</h2>
             <ul class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
@@ -98,7 +106,7 @@
         </div>
 
         {{-- Languages & Frameworks --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">Languages & Frameworks</h2>
             <ul class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
@@ -121,7 +129,7 @@
         </div>
 
         {{-- Cloud & Infrastructure --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">Cloud & Infrastructure</h2>
             <ul class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
@@ -152,7 +160,7 @@
         </div>
 
         {{-- Knowledge System --}}
-        <div class="bento-card" data-reveal>
+        <div class="gradient-border" data-reveal>
             <h2 class="font-heading text-fluid-lg text-body dark:text-dark-body mb-4">Knowledge System</h2>
             <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed mb-2">
                 <span class="font-mono text-body dark:text-dark-body">Obsidian</span> with custom YAML frontmatter, wiki-link hubs, and epistemic belief-update framing.
@@ -163,12 +171,28 @@
         </div>
 
         {{-- The Harley --}}
-        <div class="bento-card border-brand-amber/30 dark:border-brand-amber/20 md:col-span-2" data-reveal>
-            <h2 class="font-heading text-fluid-lg text-brand-amber mb-4">The Harley</h2>
-            <p class="font-mono text-fluid-base text-body dark:text-dark-body mb-2">2017 Sportster Forty-Eight &middot; 1200cc</p>
-            <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                Yes, it's on the uses page. If it moves you forward, it's a tool.
-            </p>
+        <div class="gradient-border gradient-border-amber md:col-span-2 !p-0" data-reveal>
+            <div class="grid md:grid-cols-2 items-stretch min-h-[20rem]">
+                <div class="relative overflow-hidden">
+                    <img
+                        src="/img/harley-davidson-48-1600.jpg"
+                        alt="2017 Harley Davidson Sportster Forty-Eight"
+                        loading="lazy"
+                        class="w-full h-full object-cover min-h-[16rem] md:min-h-full"
+                        style="image-orientation: from-image;"
+                    />
+                    {{-- subtle amber overlay --}}
+                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface/40 dark:to-dark-surface/40 pointer-events-none"></div>
+                </div>
+                <div class="p-6 md:p-8 flex flex-col justify-center">
+                    <p class="font-mono text-xs uppercase tracking-widest text-brand-amber/70 mb-3">// the ride</p>
+                    <h2 class="font-heading text-fluid-lg text-brand-amber mb-3">The Harley</h2>
+                    <p class="font-mono text-fluid-base text-body dark:text-dark-body mb-3">2017 Sportster Forty-Eight &middot; 1200cc</p>
+                    <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
+                        Yes, it&rsquo;s on the uses page. If it moves you forward, it&rsquo;s a tool.
+                    </p>
+                </div>
+            </div>
         </div>
 
     </div>
