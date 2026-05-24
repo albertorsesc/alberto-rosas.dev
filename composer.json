@@ -8,6 +8,7 @@
         "php": "^8.2",
         "benbjurstrom/prezet": "^0.8.8",
         "laravel/framework": "^11.9",
+        "laravel/slack-notification-channel": "^3.8",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5"
     },
