@@ -27,7 +27,7 @@
                         href="{{ $link['href'] }}"
                         @class([
                             'relative px-4 py-2 text-sm font-body transition-all duration-200',
-                            'text-brand-cyan font-medium' => request()->is(ltrim($link['href'], '/')),
+                            'text-cyan-700 dark:text-brand-cyan font-medium' => request()->is(ltrim($link['href'], '/')),
                             'text-muted hover:text-body dark:text-dark-muted dark:hover:text-dark-body' => !request()->is(ltrim($link['href'], '/')),
                         ])
                         @if(request()->is(ltrim($link['href'], '/')))
@@ -92,7 +92,7 @@
             <a
                 href="{{ $href }}"
                 @click="menuOpen = false"
-                class="font-heading text-3xl tracking-tight transition-colors {{ request()->is(ltrim($href, '/') ?: '/') ? 'text-brand-cyan' : 'text-body dark:text-dark-body hover:text-brand-cyan' }}"
+                class="font-heading text-3xl tracking-tight transition-colors {{ request()->is(ltrim($href, '/') ?: '/') ? 'text-cyan-700 dark:text-brand-cyan' : 'text-body dark:text-dark-body hover:text-brand-cyan' }}"
             >
                 {{ $name }}
             </a>

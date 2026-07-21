@@ -1,7 +1,7 @@
 <footer class="border-t border-border dark:border-dark-border mt-24 py-12">
     <div class="mx-auto max-w-5xl px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
         <p class="text-sm text-muted dark:text-dark-muted">
-            AI &amp; Agentic Systems Engineer building <span class="text-body dark:text-dark-body">production AI</span> with <span class="text-cyan-500 dark:text-cyan-400">security and guardrails</span> baked in.
+            AI &amp; Agentic Systems Engineer building <span class="text-body dark:text-dark-body">production AI</span> with <span class="text-cyan-700 dark:text-cyan-400">security and guardrails</span> baked in.
         </p>
         <div class="flex items-center gap-5">
             <a href="https://www.linkedin.com/in/albertorsesc" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-body dark:text-dark-muted dark:hover:text-dark-body transition-colors" aria-label="LinkedIn">

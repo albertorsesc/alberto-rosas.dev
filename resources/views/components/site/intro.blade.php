@@ -38,7 +38,7 @@
                         this.greeting = h < 12 ? 'Buenos d\u00edas' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
                     }
                 }"
-                class="hero-element text-fluid-sm text-brand-cyan font-mono mb-6 tracking-wider uppercase"
+                class="hero-element text-fluid-sm text-cyan-700 dark:text-brand-cyan font-mono mb-6 tracking-wider uppercase"
             ><span class="text-brand-cyan/60">//</span> <span x-text="greeting"></span><span class="typing-cursor"></span></p>
 
             {{-- Name -- glitch + always-on neon glow --}}
@@ -48,21 +48,21 @@
 
             {{-- Tagline --}}
             <p class="hero-element font-heading text-fluid-lg text-body dark:text-dark-body leading-snug max-w-2xl mb-4">
-                I build agentic systems that hold up under real traffic.
+                Eval-first AI engineering.
             </p>
 
             {{-- Identity line --}}
             <p class="hero-element text-fluid-sm text-muted dark:text-dark-muted leading-relaxed max-w-2xl mb-10 font-mono">
-                <span class="text-cyan-500 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
+                <span class="text-cyan-700 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
                 &middot; 12+ yrs software / 5+ yrs production AI
-                &middot; <span class="text-cyan-500 dark:text-cyan-400">Mexico</span> &middot; EN/ES native
+                &middot; <span class="text-cyan-700 dark:text-cyan-400">Mexico</span> &middot; EN/ES native
             </p>
 
             {{-- CTAs -- more dramatic gradient --}}
             <div class="hero-element flex flex-col sm:flex-row items-center gap-4 mb-10">
                 <a
                     href="#contact"
-                    class="group inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-medium text-fluid-sm shadow-lg shadow-cyan-500/25 hover:shadow-purple-500/40 transition-all duration-300 hover:-translate-y-0.5"
+                    class="btn btn-primary group"
                 >
                     Let's Build Something
                     <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -73,7 +73,7 @@
                 <a
                     href="/alberto_rosas_ai_engineer.pdf"
                     download
-                    class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/10 dark:border-white/10 text-body dark:text-dark-body font-medium text-fluid-sm hover:border-brand-cyan/50 hover:text-brand-cyan transition-all duration-300 hover:-translate-y-0.5 backdrop-blur-sm"
+                    class="btn btn-ghost"
                 >
                     Grab My Resume
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

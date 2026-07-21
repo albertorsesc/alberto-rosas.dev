@@ -13,8 +13,8 @@
     <section class="mt-8 lg:mt-12">
         {{-- Page Header --}}
         <div class="mb-10 space-y-2">
-            <p class="font-mono text-sm text-brand-cyan">
-                Writing & Research
+            <p class="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400">
+                <span class="text-brand-cyan/50">//</span> Writing & Research
             </p>
             <h1 class="font-heading text-fluid-3xl tracking-tight text-body dark:text-dark-body">
                 Articles
@@ -54,7 +54,7 @@
                         <p class="mt-3 text-fluid-base leading-relaxed text-muted dark:text-dark-muted">
                             {{ $featured->excerpt }}
                         </p>
-                        <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-cyan">
+                        <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-brand-cyan">
                             Read article
                             <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -95,7 +95,7 @@
                                     <p class="mt-3 flex-1 text-sm leading-relaxed text-muted dark:text-dark-muted line-clamp-3">
                                         {{ $article->excerpt }}
                                     </p>
-                                    <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-cyan">
+                                    <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-brand-cyan">
                                         Read more
                                         <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

@@ -27,7 +27,7 @@
                 placeholder="Your name"
             />
             @error('name')
-                <p class="mt-1.5 text-sm text-red-500 font-medium">{{ $message }}</p>
+                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
 
@@ -39,7 +39,7 @@
                 placeholder="Your email"
             />
             @error('email')
-                <p class="mt-1.5 text-sm text-red-500 font-medium">{{ $message }}</p>
+                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
 
@@ -50,14 +50,14 @@
                 placeholder="What should we work on together?"
             ></textarea>
             @error('message')
-                <p class="mt-1.5 text-sm text-red-500 font-medium">{{ $message }}</p>
+                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
 
         <button
             type="submit"
             wire:loading.attr="disabled"
-            class="w-full h-14 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-medium text-fluid-sm shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 disabled:opacity-50 disabled:cursor-not-allowed"
+            class="btn btn-primary w-full h-14"
         >
             <span wire:loading.remove>Send Message</span>
             <span wire:loading class="inline-flex items-center gap-2">

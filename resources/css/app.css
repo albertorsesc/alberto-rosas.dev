@@ -122,15 +122,15 @@ html, body {
     border-color: var(--color-dark-border);
 }
 
+/* Hover physics matched to .gradient-border so content + media cards read as one family */
 .bento-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.08);
 }
 
 .dark .bento-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 245, 255, 0.08);
-    background: #161616;
-    border-color: rgba(0, 245, 255, 0.15);
+    box-shadow: 0 10px 50px rgba(0, 245, 255, 0.2);
+    border-color: rgba(0, 245, 255, 0.25);
 }
 
 /* Animated gradient border — always visible, intensifies on hover */
@@ -166,23 +166,27 @@ html, body {
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
-    opacity: 0.35;
+    opacity: 0.28;
     transition: opacity 0.4s ease, padding 0.4s ease;
-    animation: rotate-gradient 3s linear infinite;
+    /* Signature rainbow arc sits static at rest; comes to life on hover */
+    animation: rotate-gradient 4s linear infinite;
+    animation-play-state: paused;
 }
 
 .dark .gradient-border::before {
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
 .gradient-border:hover::before {
     opacity: 0.7;
     padding: 2.5px;
+    animation-play-state: running;
 }
 
 .dark .gradient-border:hover::before {
     opacity: 1;
     padding: 2.5px;
+    animation-play-state: running;
 }
 
 .gradient-border:hover {
@@ -212,7 +216,7 @@ html, body {
     filter: blur(20px);
     z-index: -1;
     transition: opacity 0.4s ease;
-    animation: rotate-gradient 3s linear infinite;
+    /* No at-rest animation: the halo is invisible until hover, so don't burn GPU spinning it */
 }
 
 .gradient-border:hover::after {
@@ -336,6 +340,78 @@ html, body {
 .dark .tag-purple:hover {
     background: rgba(139, 92, 246, 0.12);
     border-color: rgba(139, 92, 246, 0.6);
+}
+
+/* ===========================
+   Buttons — one primary + one ghost, shared by every CTA on the site
+   =========================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 0.75rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: clamp(0.875rem, 0.82rem + 0.29vw, 1rem);
+    line-height: 1;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: transform var(--duration-normal) var(--ease-out),
+                box-shadow var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out),
+                color var(--duration-normal) var(--ease-out),
+                background-color var(--duration-normal) var(--ease-out);
+}
+
+/* Focus ring shows instantly (never animated), ≥3:1 contrast */
+.btn:focus-visible {
+    outline: 2px solid oklch(65% 0.2 230);
+    outline-offset: 2px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Primary — the brand gradient CTA */
+.btn-primary {
+    background-image: linear-gradient(to right, #06b6d4, #3b82f6, #9333ea);
+    color: #fff;
+    box-shadow: 0 10px 20px -6px rgba(6, 182, 212, 0.35);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 34px -6px rgba(147, 51, 234, 0.45);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Ghost — outline secondary CTA */
+.btn-ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+
+.dark .btn-ghost {
+    color: var(--color-dark-text);
+    border-color: var(--color-dark-border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    transform: translateY(-2px);
+    border-color: oklch(65% 0.2 230);
+    color: oklch(55% 0.22 230);
+}
+
+.dark .btn-ghost:hover:not(:disabled) {
+    color: oklch(65% 0.2 230);
 }
 
 /* External link icon */

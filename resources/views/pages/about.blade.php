@@ -19,12 +19,12 @@
                 />
             </div>
             <div>
-                <p class="text-xs font-mono uppercase tracking-widest text-cyan-600 dark:text-cyan-400 mb-3">// The Engineer</p>
+                <p class="text-xs font-mono uppercase tracking-widest text-cyan-700 dark:text-cyan-400 mb-3"><span class="text-brand-cyan/50">//</span> The Engineer</p>
                 <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3 neon-text">Alberto Rosas</h1>
                 <p class="font-mono text-sm text-muted dark:text-dark-muted leading-relaxed">
-                    <span class="text-cyan-500 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
+                    <span class="text-cyan-700 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
                     &middot; 12+ yrs software / 5+ yrs production AI
-                    &middot; <span class="text-cyan-500 dark:text-cyan-400">Mexico</span>
+                    &middot; <span class="text-cyan-700 dark:text-cyan-400">Mexico</span>
                     &middot; EN/ES native
                 </p>
             </div>
@@ -36,27 +36,27 @@
         <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8" data-reveal>Security-First AI Engineering</h2>
         <div class="grid gap-4 md:grid-cols-2">
             <div class="gradient-border" data-reveal>
-                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Threat Modeling</p>
+                <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Threat Modeling</p>
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-2">STRIDE applied to agent design</p>
                 <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Tool-calling, MCP servers, and multi-step delegation modeled in the design doc. Attack surface mapped before code, aligned to OWASP Agentic Top 10 2026 and NIST&rsquo;s AI Agent Standards Initiative.</p>
             </div>
             <div class="gradient-border" data-reveal>
-                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">MCP Hardening</p>
+                <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">MCP Hardening</p>
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Protocol-level defense</p>
                 <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Gateway auth (OAuth 2.1), bidirectional JSON-RPC inspection, signed-server allowlists, structured audit logs. Aligned to OWASP MCP Top 10.</p>
             </div>
             <div class="gradient-border" data-reveal>
-                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">RAG Data Governance</p>
+                <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">RAG Data Governance</p>
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Vector stores are not a privacy boundary</p>
                 <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Pre-embedding PII masking, document-level ACLs propagated into the index, lineage tracking for GDPR erasure. Embedding inversion (LLM08:2025) treated as a real attack.</p>
             </div>
             <div class="gradient-border" data-reveal>
-                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Guardrails &amp; Evals</p>
+                <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Guardrails &amp; Evals</p>
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Trust by measurement</p>
                 <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Llama Guard 3 and NeMo Guardrails at runtime. Garak and PyRIT in CI for adversarial regression. Sandboxed execution (e2b, Modal) for any tool that touches code.</p>
             </div>
             <div class="gradient-border md:col-span-2" data-reveal>
-                <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Compliance Readiness</p>
+                <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Compliance Readiness</p>
                 <p class="text-sm text-body dark:text-dark-body font-medium mb-2">EU AI Act &middot; NIST AI RMF &middot; ISO/IEC 42001</p>
                 <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Conformity-ready logging, human-oversight hooks, automated evidence capture. EU AI Act obligations phasing in through 2026&ndash;2027; ISO/IEC 42001 increasingly required in enterprise AI procurement. SOAR-style automation applied to audit trails.</p>
             </div>
@@ -70,17 +70,17 @@
             <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Key Projects</h2>
             <div class="grid gap-4 md:grid-cols-3">
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">UCF AI Engine</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">UCF AI Engine</p>
                     <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Sole architect of the AI layer for a compliance SaaS</p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Hybrid retrieval (Qdrant + Neo4j) over 91K+ regulatory records, LangGraph agentic chat, CRAG hallucination verification. Docker/AWS.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">SADIE</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">SADIE</p>
                     <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Production NL2SQL agentic platform</p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">LangGraph + MCP tool-calling, MongoDB Atlas RAG pipeline, 93&ndash;97% query accuracy, Langfuse observability. FastAPI SSE.</p>
                 </div>
                 <div class="gradient-border gradient-border-amber" data-reveal>
-                    <p class="font-mono text-xs text-amber-500 dark:text-amber-400 mb-2">TriageOps Framework</p>
+                    <p class="font-mono text-xs text-amber-700 dark:text-amber-400 mb-2">TriageOps Framework</p>
                     <p class="text-sm text-body dark:text-dark-body font-medium mb-2">6-step AI adoption methodology</p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints recovered 70+ hrs/month ($42K annually) for one operations team.</p>
                 </div>
@@ -92,23 +92,23 @@
             <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Technical Skills</h2>
             <div class="grid gap-4 md:grid-cols-2">
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">LLMs & Models</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-3">LLMs & Models</p>
                     <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">GPT-4o, Claude, Gemini, Llama 3, Mistral, Qwen3, ModernBERT; fine-tuning (Unsloth, HuggingFace)</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Agentic Systems</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-3">Agentic Systems</p>
                     <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">LangGraph, LangChain, MCP/tool-calling, multi-agent orchestration, multi-step reasoning, intent classification, memory systems</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">RAG & Retrieval</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-3">RAG & Retrieval</p>
                     <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Qdrant, MongoDB Atlas, FAISS, Chroma, Neo4j, GraphRAG, hybrid retrieval (dense + sparse + graph), NL2SQL, context engineering</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Evaluation & LLMOps</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-3">Evaluation & LLMOps</p>
                     <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">RAGAS, hallucination detection, latency benchmarking, Langfuse, Opik, Langsmith, MLflow, prompt versioning, CI/CD eval pipelines</p>
                 </div>
                 <div class="gradient-border md:col-span-2" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-3">Engineering</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-3">Engineering</p>
                     <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Python, TypeScript, PHP/Laravel, FastAPI, Docker, Kubernetes, AWS (Bedrock, SageMaker, EC2, S3, Lambda), CI/CD, Clean Architecture, microservices, event-driven systems</p>
                 </div>
             </div>
@@ -124,11 +124,11 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Unified Compliance</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Senior AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
+                            <p class="text-sm text-cyan-700 dark:text-cyan-400">Senior AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
                         </div>
                         <div class="text-right shrink-0">
                             <p class="font-mono text-xs text-muted dark:text-dark-muted">2025 &ndash; 2026</p>
-                            <p class="font-mono text-[10px] text-cyan-500/70 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
+                            <p class="font-mono text-[10px] text-cyan-700/80 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
                         </div>
                     </div>
                     <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Sole architect of the entire AI Engine for UCF's ControlSight compliance platform &mdash; 91K+ regulatory records.</p>
@@ -147,11 +147,11 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Storage360</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
+                            <p class="text-sm text-cyan-700 dark:text-cyan-400">AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
                         </div>
                         <div class="text-right shrink-0">
                             <p class="font-mono text-xs text-muted dark:text-dark-muted">2024 &ndash; 2025</p>
-                            <p class="font-mono text-[10px] text-cyan-500/70 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
+                            <p class="font-mono text-[10px] text-cyan-700/80 dark:text-cyan-400/70 mt-0.5">via TriageOps</p>
                         </div>
                     </div>
                     <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Built SADIE &mdash; a production NL2SQL agentic platform for a property management SaaS.</p>
@@ -169,7 +169,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">IncFile (Bizee)</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">AI Systems Engineer / Software Engineer / Technical Project Lead</p>
+                            <p class="text-sm text-cyan-700 dark:text-cyan-400">AI Systems Engineer / Software Engineer / Technical Project Lead</p>
                         </div>
                         <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2022 &ndash; Present</p>
                     </div>
@@ -189,7 +189,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Global Cybersec</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Engineering Manager</p>
+                            <p class="text-sm text-cyan-700 dark:text-cyan-400">Engineering Manager</p>
                         </div>
                         <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2017 &ndash; 2021</p>
                     </div>
@@ -206,7 +206,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                         <div>
                             <h3 class="text-body dark:text-dark-body font-medium">Multiple Companies</h3>
-                            <p class="text-sm text-cyan-600 dark:text-cyan-400">Software Engineer</p>
+                            <p class="text-sm text-cyan-700 dark:text-cyan-400">Software Engineer</p>
                         </div>
                         <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2014 &ndash; 2017</p>
                     </div>
@@ -238,17 +238,17 @@
             <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">What I&rsquo;m Available For</h2>
             <div class="grid gap-4 md:grid-cols-3">
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Senior Roles</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Senior Roles</p>
                     <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI &amp; Agentic Systems Engineer &middot; AI Systems Architect</p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Full-time remote, contractor or EOR-employed.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Consulting</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI adoption via <a href="https://triageops.com" target="_blank" rel="noopener noreferrer" class="text-cyan-500 dark:text-cyan-400 hover:underline">TriageOps</a></p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Consulting</p>
+                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI adoption via <a href="https://triageops.com" target="_blank" rel="noopener noreferrer" class="text-cyan-700 dark:text-cyan-400 hover:underline">TriageOps</a></p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints, scoped pilots, eval-gated rollouts for mid-market teams.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Architecture Review</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Architecture Review</p>
                     <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Second-opinion on production agents</p>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Context engineering, evals, MCP attack surface, agent security audits.</p>
                 </div>
@@ -261,7 +261,7 @@
                 <a
                     href="/alberto_rosas_ai_engineer.pdf"
                     download
-                    class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-600 text-white font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-cyan-500/25"
+                    class="btn btn-primary"
                 >
                     Download Full Resume (PDF)
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
@@ -270,7 +270,7 @@
                 </a>
                 <a
                     href="/#contact"
-                    class="inline-flex items-center gap-2 border border-cyan-500/40 text-cyan-600 dark:text-cyan-400 font-mono text-sm px-8 py-3 rounded-xl transition-all duration-300 hover:bg-cyan-500/10"
+                    class="btn btn-ghost"
                 >
                     Let&rsquo;s talk
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">

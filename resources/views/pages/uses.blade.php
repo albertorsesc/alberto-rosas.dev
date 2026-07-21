@@ -185,8 +185,8 @@
                     <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-surface/40 dark:to-dark-surface/40 pointer-events-none"></div>
                 </div>
                 <div class="p-6 md:p-8 flex flex-col justify-center">
-                    <p class="font-mono text-xs uppercase tracking-widest text-brand-amber/70 mb-3">// the ride</p>
-                    <h2 class="font-heading text-fluid-lg text-brand-amber mb-3">The Harley</h2>
+                    <p class="font-mono text-xs uppercase tracking-widest text-amber-700/80 dark:text-brand-amber/70 mb-3"><span class="text-brand-amber/50">//</span> the ride</p>
+                    <h2 class="font-heading text-fluid-lg text-amber-700 dark:text-brand-amber mb-3">The Harley</h2>
                     <p class="font-mono text-fluid-base text-body dark:text-dark-body mb-3">2017 Sportster Forty-Eight &middot; 1200cc</p>
                     <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
                         Yes, it&rsquo;s on the uses page. If it moves you forward, it&rsquo;s a tool.

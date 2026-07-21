@@ -23,7 +23,7 @@
     </header>
 
     {{-- Content --}}
-    <div class="mx-auto max-w-2xl px-6 prose prose-stone dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline">
+    <div class="mx-auto max-w-2xl px-6 prose prose-stone dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline">
 
         <section data-reveal>
             <h2>Building</h2>

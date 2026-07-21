@@ -10,7 +10,7 @@
     </p>
     <a
         href="/"
-        class="inline-flex items-center gap-2 bg-brand-cyan text-white font-body font-medium px-8 py-3 rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-cyan/25"
+        class="btn btn-primary"
     >
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />

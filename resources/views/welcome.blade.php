@@ -10,7 +10,7 @@
     {{-- The Engineer --}}
     <section class="py-16 px-6">
         <div class="mx-auto max-w-5xl">
-            <p class="hero-element text-center text-sm font-mono uppercase tracking-[0.25em] text-brand-cyan/60 dark:text-brand-cyan/80 mb-12 neon-glow"><span class="text-brand-cyan">&gt;</span> what I do<span class="typing-cursor"></span></p>
+            <p class="hero-element text-center font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400 mb-12"><span class="text-brand-cyan/50">//</span> what I do</p>
 
             <div class="identity-card gradient-border group circuit-bg" data-reveal data-hermetic="eye">
                 <a href="/about" class="absolute inset-0 z-10 rounded-bento" aria-label="Read about The Engineer"></a>
@@ -18,9 +18,9 @@
 
                     {{-- Left: identity + headline --}}
                     <div class="flex-1 min-w-0">
-                        <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">The Engineer</p>
+                        <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">The Engineer</p>
                         <h2 class="font-heading text-fluid-2xl text-body dark:text-dark-body mb-4 leading-tight">
-                            I build agentic systems that hold up under real traffic.
+                            Agents for systems where being wrong has consequences.
                         </h2>
                         <p class="text-sm md:text-base text-muted dark:text-dark-muted leading-relaxed mb-3">
                             12+ years in software, 5+ in production AI. Agentic workflows, tool-calling, retrieval pipelines, NL2SQL engines. Judged on eval scores and uptime, not demos.
@@ -48,19 +48,19 @@
                     <div class="md:w-72 shrink-0">
                         <div class="grid grid-cols-2 gap-3">
                             <div class="rounded-xl border border-border dark:border-dark-border bg-surface-alt dark:bg-dark-surface-alt px-4 py-3">
-                                <p class="font-heading text-2xl text-cyan-500 dark:text-cyan-400 neon-text leading-none">12+</p>
+                                <p class="font-heading text-2xl text-cyan-700 dark:text-cyan-400 neon-text leading-none">12+</p>
                                 <p class="text-[10px] font-mono uppercase tracking-widest text-muted dark:text-dark-muted mt-2">Years in software</p>
                             </div>
                             <div class="rounded-xl border border-border dark:border-dark-border bg-surface-alt dark:bg-dark-surface-alt px-4 py-3">
-                                <p class="font-heading text-2xl text-cyan-500 dark:text-cyan-400 neon-text leading-none">5+</p>
+                                <p class="font-heading text-2xl text-cyan-700 dark:text-cyan-400 neon-text leading-none">5+</p>
                                 <p class="text-[10px] font-mono uppercase tracking-widest text-muted dark:text-dark-muted mt-2">Years in production AI</p>
                             </div>
                             <div class="rounded-xl border border-border dark:border-dark-border bg-surface-alt dark:bg-dark-surface-alt px-4 py-3">
-                                <p class="font-heading text-2xl text-cyan-500 dark:text-cyan-400 neon-text leading-none">500K+</p>
+                                <p class="font-heading text-2xl text-cyan-700 dark:text-cyan-400 neon-text leading-none">500K+</p>
                                 <p class="text-[10px] font-mono uppercase tracking-widest text-muted dark:text-dark-muted mt-2">Records across production systems</p>
                             </div>
                             <div class="rounded-xl border border-border dark:border-dark-border bg-surface-alt dark:bg-dark-surface-alt px-4 py-3">
-                                <p class="font-heading text-2xl text-cyan-500 dark:text-cyan-400 neon-text leading-none">97%</p>
+                                <p class="font-heading text-2xl text-cyan-700 dark:text-cyan-400 neon-text leading-none">97%</p>
                                 <p class="text-[10px] font-mono uppercase tracking-widest text-muted dark:text-dark-muted mt-2">NL2SQL accuracy (SADIE)</p>
                             </div>
                         </div>
@@ -73,17 +73,17 @@
             {{-- What I work on now --}}
             <div class="grid gap-4 md:grid-cols-3 mt-4">
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Agentic</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Agentic</p>
                     <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Production agentic systems</h3>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Tool-calling agents with intent routing, multi-turn context, and hallucination grading. Long-horizon harnesses with durable plans and checkpointing.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Retrieval</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Retrieval</p>
                     <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Hybrid retrieval</h3>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Dense + sparse + graph. Qdrant (ModernBERT 768d + BM25, RRF fusion) plus Neo4j graph traversal. Custom rerankers where it pays.</p>
                 </div>
                 <div class="gradient-border" data-reveal>
-                    <p class="font-mono text-xs text-cyan-500 dark:text-cyan-400 mb-2">Evals</p>
+                    <p class="font-mono text-xs text-cyan-700 dark:text-cyan-400 mb-2">Evals</p>
                     <h3 class="font-heading text-fluid-base text-body dark:text-dark-body mb-2">Evaluation as engineering</h3>
                     <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">RAGAS, LLM-as-judge calibrated to labeled data, CI-gated regression, Langfuse end-to-end. If it isn't measured, it isn't shipped.</p>
                 </div>
@@ -96,11 +96,11 @@
     {{-- Experiments --}}
     <section class="py-16 px-6">
         <div class="mx-auto max-w-5xl">
-            <p class="text-sm font-mono uppercase tracking-[0.25em] text-brand-cyan/60 dark:text-brand-cyan/80 mb-8 neon-glow"><span class="text-brand-cyan">&gt;</span> experiments<span class="typing-cursor"></span></p>
+            <p class="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400 mb-8"><span class="text-brand-cyan/50">//</span> experiments</p>
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <a href="https://github.com/albertorsesc/knowledge-curator-pipeline" target="_blank" rel="noopener noreferrer" class="gradient-border group" data-reveal>
                     <div class="flex items-start justify-between mb-3">
-                        <p class="text-xs font-mono text-cyan-600 dark:text-cyan-400">MCP Server</p>
+                        <p class="text-xs font-mono text-cyan-700 dark:text-cyan-400">MCP Server</p>
                         <svg class="w-4 h-4 text-muted dark:text-dark-muted opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
                     </div>
                     <h4 class="font-heading text-fluid-base text-body dark:text-dark-body mb-1">Knowledge Curator Pipeline</h4>
@@ -109,7 +109,7 @@
 
                 <a href="https://github.com/albertorsesc/soundmind" target="_blank" rel="noopener noreferrer" class="gradient-border group" data-reveal>
                     <div class="flex items-start justify-between mb-3">
-                        <p class="text-xs font-mono text-cyan-600 dark:text-cyan-400">Python</p>
+                        <p class="text-xs font-mono text-cyan-700 dark:text-cyan-400">Python</p>
                         <svg class="w-4 h-4 text-muted dark:text-dark-muted opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
                     </div>
                     <h4 class="font-heading text-fluid-base text-body dark:text-dark-body mb-1">SoundMind</h4>
@@ -118,7 +118,7 @@
 
                 <a href="https://github.com/albertorsesc/pain-discovery" target="_blank" rel="noopener noreferrer" class="gradient-border group" data-reveal>
                     <div class="flex items-start justify-between mb-3">
-                        <p class="text-xs font-mono text-cyan-600 dark:text-cyan-400">Python</p>
+                        <p class="text-xs font-mono text-cyan-700 dark:text-cyan-400">Python</p>
                         <svg class="w-4 h-4 text-muted dark:text-dark-muted opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
                     </div>
                     <h4 class="font-heading text-fluid-base text-body dark:text-dark-body mb-1">Pain Discovery</h4>
@@ -127,7 +127,7 @@
 
                 <a href="https://github.com/albertorsesc/ai-cli" target="_blank" rel="noopener noreferrer" class="gradient-border group" data-reveal>
                     <div class="flex items-start justify-between mb-3">
-                        <p class="text-xs font-mono text-cyan-600 dark:text-cyan-400">Python</p>
+                        <p class="text-xs font-mono text-cyan-700 dark:text-cyan-400">Python</p>
                         <svg class="w-4 h-4 text-muted dark:text-dark-muted opacity-0 group-hover:opacity-100 transition-opacity" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" /></svg>
                     </div>
                     <h4 class="font-heading text-fluid-base text-body dark:text-dark-body mb-1">AI CLI</h4>
@@ -158,28 +158,6 @@
                 stagger: 0.15,
                 ease: 'power3.out',
                 delay: 0.2,
-            });
-        }
-
-        // Identity cards entrance with ScrollTrigger
-        if (typeof ScrollTrigger !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-
-            const cards = document.querySelectorAll('.identity-card');
-            cards.forEach((card, i) => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 90%',
-                        once: true,
-                    },
-                    opacity: 0,
-                    y: 60,
-                    scale: 0.95,
-                    duration: 0.9,
-                    delay: (i % 3) * 0.15,
-                    ease: 'power3.out',
-                });
             });
         }
     });

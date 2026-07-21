@@ -15,39 +15,27 @@
         'info' => '<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a.75.75 0 000 1.5h.253a.25.25 0 01.244.304l-.459 2.066A1.75 1.75 0 0010.747 15H11a.75.75 0 000-1.5h-.253a.25.25 0 01-.244-.304l.459-2.066A1.75 1.75 0 009.253 9H9z" clip-rule="evenodd" />',
     ];
 
-    // safelist for tailwind parser
+    // safelist for tailwind parser (light + dark literals must appear here for the JIT scanner)
     $safelist = [
-        'bg-red-50',
-        'text-red-700',
-        'text-red-800',
-        'text-red-400',
-        'bg-green-50',
-        'text-green-700',
-        'text-green-800',
-        'text-green-400',
-        'bg-blue-50',
-        'text-blue-700',
-        'text-blue-800',
-        'text-blue-400',
-        'bg-yellow-50',
-        'text-yellow-700',
-        'text-yellow-800',
-        'text-yellow-400'
+        'bg-red-50', 'dark:bg-red-900/20', 'border-red-200', 'dark:border-red-800/40', 'text-red-500', 'text-red-700', 'text-red-800', 'text-red-400', 'dark:text-red-300', 'dark:text-red-400',
+        'bg-green-50', 'dark:bg-green-900/20', 'border-green-200', 'dark:border-green-800/40', 'text-green-500', 'text-green-700', 'text-green-800', 'text-green-400', 'dark:text-green-300', 'dark:text-green-400',
+        'bg-blue-50', 'dark:bg-blue-900/20', 'border-blue-200', 'dark:border-blue-800/40', 'text-blue-500', 'text-blue-700', 'text-blue-800', 'text-blue-400', 'dark:text-blue-300', 'dark:text-blue-400',
+        'bg-yellow-50', 'dark:bg-yellow-900/20', 'border-yellow-200', 'dark:border-yellow-800/40', 'text-yellow-500', 'text-yellow-700', 'text-yellow-800', 'text-yellow-400', 'dark:text-yellow-300', 'dark:text-yellow-400',
     ];
 @endphp
 
-<div class="rounded-lg bg-{{$color}}-50 p-4 not-prose">
+<div class="rounded-lg border bg-{{$color}}-50 dark:bg-{{$color}}-900/20 border-{{$color}}-200 dark:border-{{$color}}-800/40 p-4 not-prose">
     <div class="flex">
         <div class="flex-shrink-0">
-            <svg class="h-5 w-5 text-{{$color}}-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <svg class="h-5 w-5 text-{{$color}}-500 dark:text-{{$color}}-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 {!! $icons[$type] !!}
             </svg>
         </div>
         <div class="ml-3">
             @isset($title)
-                <h3 class="text-sm font-medium text-{{$color}}-800 mb-2">{{ $title }}</h3>
+                <h3 class="text-sm font-medium text-{{$color}}-800 dark:text-{{$color}}-300 mb-2">{{ $title }}</h3>
             @endisset
-            <div class="text-sm text-{{$color}}-700">
+            <div class="text-sm text-{{$color}}-700 dark:text-{{$color}}-400">
                 <p>{{ $body }}</p>
             </div>
         </div>

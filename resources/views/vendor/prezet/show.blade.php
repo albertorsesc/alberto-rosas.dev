@@ -28,7 +28,7 @@
             @endif
         </header>
         <div
-            class="prose prose-stone dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border dark:prose-pre:border-dark-border"
+            class="prose prose-stone dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border dark:prose-pre:border-dark-border"
         >
             {!! $body !!}
         </div>
@@ -53,7 +53,7 @@
                                 <a
                                     href="#{{ $h2['id'] }}"
                                     :class="{
-                                        'text-brand-cyan border-brand-cyan': activeHeading === '{{ $h2['id'] }}',
+                                        'text-cyan-700 dark:text-brand-cyan border-brand-cyan': activeHeading === '{{ $h2['id'] }}',
                                         'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '{{ $h2['id'] }}'
                                     }"
                                     x-on:click.prevent="scrollToHeading('{{ $h2['id'] }}')"
@@ -73,7 +73,7 @@
                                             <a
                                                 href="#{{ $h3['id'] }}"
                                                 :class="{
-                                                    'text-brand-cyan border-brand-cyan': activeHeading === '{{ $h3['id'] }}',
+                                                    'text-cyan-700 dark:text-brand-cyan border-brand-cyan': activeHeading === '{{ $h3['id'] }}',
                                                     'text-muted dark:text-dark-muted hover:text-body dark:hover:text-dark-body border-transparent': activeHeading !== '{{ $h3['id'] }}'
                                                 }"
                                                 x-on:click.prevent="scrollToHeading('{{ $h3['id'] }}')"
