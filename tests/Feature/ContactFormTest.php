@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Livewire\ContactForm;
-use App\Models\Site\Contact;
 use App\Notifications\NewContactSubmissionNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
@@ -88,7 +87,12 @@ class ContactFormTest extends TestCase
             ->set('email', 'not-an-email')
             ->set('message', 'too short')
             ->call('save')
-            ->assertHasErrors(['name', 'email', 'message']);
+            ->assertHasErrors(['name', 'email', 'message'])
+            // Errors must be programmatically associated for screen readers.
+            ->assertSeeHtml('aria-describedby="name-error"')
+            ->assertSeeHtml('id="name-error"')
+            ->assertSeeHtml('aria-describedby="email-error"')
+            ->assertSeeHtml('aria-describedby="message-error"');
 
         $this->assertDatabaseCount('contacts', 0);
         // Failed validation never reaches the RateLimiter::hit() call
@@ -152,6 +156,22 @@ class ContactFormTest extends TestCase
         $logSpy->shouldHaveReceived('warning')
             ->withArgs(fn ($message) => str_contains($message, 'Slack notification dispatch failed'))
             ->once();
+    }
+
+    public function test_persistence_failure_shows_friendly_error_and_does_not_burn_rate_limit(): void
+    {
+        \Illuminate\Support\Facades\Schema::drop('contacts');
+
+        Livewire::test(ContactForm::class)
+            ->set('name', 'Real User')
+            ->set('email', 'real@gmail.com')
+            ->set('message', 'A perfectly valid message that meets all length requirements.')
+            ->call('save')
+            ->assertHasErrors(['form'])
+            ->assertSee('Email me directly')
+            ->assertSet('name', 'Real User'); // input preserved for retry
+
+        $this->assertEquals(0, RateLimiter::attempts('contact-form:127.0.0.1'));
     }
 
     public function test_rejects_email_without_at_sign(): void

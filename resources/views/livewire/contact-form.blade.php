@@ -1,4 +1,7 @@
 <div>
+    {{-- The live region exists on first render: a region injected together with
+         its content is not announced by some screen reader / browser pairs. --}}
+    <div role="status" aria-live="polite">
     @if (session()->has('status'))
         <div class="rounded-2xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800/40 p-5 mb-6">
             <div class="flex items-start gap-3">
@@ -12,6 +15,7 @@
             </div>
         </div>
     @endif
+    </div>
 
     <form class="space-y-5" wire:submit.prevent="save">
         {{-- Honeypot --}}
@@ -21,38 +25,53 @@
 
         <div>
             <input
-                class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all duration-200 @error('name') ring-2 ring-red-500 border-red-500 @enderror"
+                class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 @error('name') ring-2 ring-red-500 border-red-500 @enderror"
                 type="text"
                 wire:model="name"
                 placeholder="Your name"
+                aria-label="Your name"
+                aria-required="true"
+                @error('name') aria-invalid="true" aria-describedby="name-error" @enderror
             />
             @error('name')
-                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
+                <p id="name-error" class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
 
         <div>
             <input
-                class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all duration-200 @error('email') ring-2 ring-red-500 border-red-500 @enderror"
+                class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 @error('email') ring-2 ring-red-500 border-red-500 @enderror"
                 type="email"
                 wire:model="email"
                 placeholder="Your email"
+                aria-label="Your email"
+                aria-required="true"
+                @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
             />
             @error('email')
-                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
+                <p id="email-error" class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
 
         <div>
             <textarea
-                class="w-full h-48 p-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-muted focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-all duration-200 resize-none @error('message') ring-2 ring-red-500 border-red-500 @enderror"
+                class="w-full h-48 p-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 resize-none @error('message') ring-2 ring-red-500 border-red-500 @enderror"
                 wire:model="message"
                 placeholder="What should we work on together?"
+                aria-label="Your message"
+                aria-required="true"
+                @error('message') aria-invalid="true" aria-describedby="message-error" @enderror
             ></textarea>
             @error('message')
-                <p class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
+                <p id="message-error" class="mt-1.5 text-sm text-red-600 dark:text-red-400 font-medium">{{ $message }}</p>
             @enderror
         </div>
+
+        @error('form')
+            <div class="rounded-2xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 p-4" role="alert">
+                <p class="text-sm text-red-700 dark:text-red-400">{{ $message }}</p>
+            </div>
+        @enderror
 
         <button
             type="submit"
