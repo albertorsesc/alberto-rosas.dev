@@ -88,11 +88,15 @@ class ContactFormTest extends TestCase
             ->set('message', 'too short')
             ->call('save')
             ->assertHasErrors(['name', 'email', 'message'])
-            // Errors must be programmatically associated for screen readers.
+            // Errors must be programmatically associated for screen readers,
+            // and every field carries a visible, wired label.
             ->assertSeeHtml('aria-describedby="name-error"')
             ->assertSeeHtml('id="name-error"')
             ->assertSeeHtml('aria-describedby="email-error"')
-            ->assertSeeHtml('aria-describedby="message-error"');
+            ->assertSeeHtml('aria-describedby="message-error"')
+            ->assertSeeHtml('for="contact-name"')
+            ->assertSeeHtml('for="contact-email"')
+            ->assertSeeHtml('for="contact-message"');
 
         $this->assertDatabaseCount('contacts', 0);
         // Failed validation never reaches the RateLimiter::hit() call

@@ -23,13 +23,16 @@
             <input type="text" wire:model="website" autocomplete="off" tabindex="-1" />
         </div>
 
+        <p class="font-mono text-[10px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">All fields required</p>
+
         <div>
+            <label for="contact-name" class="block mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">Name</label>
             <input
+                id="contact-name"
                 class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 @error('name') ring-2 ring-red-500 border-red-500 @enderror"
                 type="text"
                 wire:model="name"
-                placeholder="Your name"
-                aria-label="Your name"
+                autocomplete="name"
                 aria-required="true"
                 @error('name') aria-invalid="true" aria-describedby="name-error" @enderror
             />
@@ -39,12 +42,13 @@
         </div>
 
         <div>
+            <label for="contact-email" class="block mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">Email</label>
             <input
+                id="contact-email"
                 class="w-full h-14 px-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 @error('email') ring-2 ring-red-500 border-red-500 @enderror"
                 type="email"
                 wire:model="email"
-                placeholder="Your email"
-                aria-label="Your email"
+                autocomplete="email"
                 aria-required="true"
                 @error('email') aria-invalid="true" aria-describedby="email-error" @enderror
             />
@@ -54,11 +58,12 @@
         </div>
 
         <div>
+            <label for="contact-message" class="block mb-2 font-mono text-[10px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">Message</label>
             <textarea
+                id="contact-message"
                 class="w-full h-48 p-5 rounded-xl bg-surface-alt dark:bg-dark-surface-alt border border-border dark:border-dark-border text-body dark:text-dark-body placeholder:text-subtle dark:placeholder:text-dark-subtle focus:outline-none focus:ring-2 focus:ring-brand-cyan/50 focus:border-brand-cyan transition-colors duration-200 resize-none @error('message') ring-2 ring-red-500 border-red-500 @enderror"
                 wire:model="message"
                 placeholder="What should we work on together?"
-                aria-label="Your message"
                 aria-required="true"
                 @error('message') aria-invalid="true" aria-describedby="message-error" @enderror
             ></textarea>
