@@ -25,13 +25,19 @@ export default {
             },
             colors: {
                 primary: colors.cyan,
+                // The `/ <alpha-value>` placeholder is required for opacity
+                // modifiers (text-brand-cyan/50, focus:ring-brand-cyan/50) to
+                // compile. Without it Tailwind cannot inject an alpha channel
+                // into a bare colour string and silently drops those classes —
+                // the utility just never exists and the element inherits.
+                // At full opacity the output is equivalent: oklch(… / 1) === oklch(…).
                 brand: {
-                    cyan: 'oklch(65% 0.2 230)',
-                    'cyan-light': 'oklch(75% 0.15 230)',
-                    'cyan-dark': 'oklch(55% 0.22 230)',
-                    amber: 'oklch(75% 0.15 70)',
-                    'amber-light': 'oklch(82% 0.12 70)',
-                    'amber-dark': 'oklch(65% 0.18 70)',
+                    cyan: 'oklch(65% 0.2 230 / <alpha-value>)',
+                    'cyan-light': 'oklch(75% 0.15 230 / <alpha-value>)',
+                    'cyan-dark': 'oklch(55% 0.22 230 / <alpha-value>)',
+                    amber: 'oklch(75% 0.15 70 / <alpha-value>)',
+                    'amber-light': 'oklch(82% 0.12 70 / <alpha-value>)',
+                    'amber-dark': 'oklch(65% 0.18 70 / <alpha-value>)',
                 },
                 surface: {
                     DEFAULT: 'var(--color-surface)',
