@@ -50,7 +50,7 @@ I build agentic systems that hold up under real traffic.
 
 12+ years in software, 5+ in production AI. LangGraph workflows, MCP tool-calling, hybrid retrieval, NL2SQL engines. Judged on eval scores and uptime, not demos. Earlier years in cybersecurity automation (SIEM, IDS/IPS, SOAR) shape how I design for safety in everything I ship now.
 
-Currently sole architect of an AI compliance engine over 91K+ regulatory records and the engineer behind a production NL-to-SQL platform for property management. Also running TriageOps, an AI adoption consultancy for mid-market teams.
+Currently sole architect of an AI compliance engine over 500K+ regulatory records and the engineer behind a production NL-to-SQL platform for property management. Also running TriageOps, an AI adoption consultancy for mid-market teams.
 
 Based in Mexico. English and Spanish native. US-timezone friendly.
 
@@ -60,7 +60,7 @@ Based in Mexico. English and Spanish native. US-timezone friendly.
 
 I'm an AI & Agentic Systems Engineer based in Mexico, with 12+ years in software engineering and 5+ years building production AI systems. I work on agentic platforms where the LLM is one component of a system that has to be reliable, evaluable, and safe — not a chatbot bolted onto a frontend.
 
-Right now I'm sole architect of the AI Engine for Unified Compliance Framework's ControlSight platform, a multi-tenant compliance SaaS over 91K+ regulatory records. Hybrid retrieval on Qdrant (ModernBERT 768d + BM25, fused via RRF) plus Neo4j graph traversal across compliance hierarchies, LangGraph agentic chat with intent routing across six intents, CRAG-style hallucination grading, and multi-signal confidence tiering surfaced to the user. Custom RAGAS-integrated eval harness with an LLM-as-judge over PM-authored must/should criteria, code-fingerprinted reports, Langfuse traces end-to-end. Customers are compliance professionals — GRC managers, auditors, consultants — who feed the system's answers into audit documentation. A confident-wrong answer doesn't stay inside the product, which shapes every design call.
+Right now I'm sole architect of the AI Engine for Unified Compliance Framework's ControlSight platform, a multi-tenant compliance SaaS over 500K+ regulatory records. Hybrid retrieval on Qdrant (ModernBERT 768d + BM25, fused via RRF) plus Neo4j graph traversal across compliance hierarchies, LangGraph agentic chat with intent routing across six intents, CRAG-style hallucination grading, and multi-signal confidence tiering surfaced to the user. Custom RAGAS-integrated eval harness with an LLM-as-judge over PM-authored must/should criteria, code-fingerprinted reports, Langfuse traces end-to-end. Customers are compliance professionals — GRC managers, auditors, consultants — who feed the system's answers into audit documentation. A confident-wrong answer doesn't stay inside the product, which shapes every design call.
 
 Before that I built SADIE, a production NL-to-SQL agentic platform for a property-management SaaS. LangGraph plus a custom MCP server exposing read-only database access with schema caching and FK detection. 93–97% accuracy under RAGAS with CI-gated regression. The read-only MCP boundary is enforced at the policy layer, not by trusting the model to behave.
 
@@ -100,7 +100,7 @@ I also co-founded TriageOps, an AI adoption consultancy for mid-market companies
 ## Selected work — for project cards and case studies
 
 ### UCF AI Engine — Unified Compliance Framework (2025–2026)
-Sole architect of the AI layer for ControlSight, a multi-tenant compliance SaaS over 91K+ regulatory records. Customers are compliance professionals using answers to map controls to regulations, draft audit-grade language, and decide whether a control covers a requirement.
+Sole architect of the AI layer for ControlSight, a multi-tenant compliance SaaS over 500K+ regulatory records. Customers are compliance professionals using answers to map controls to regulations, draft audit-grade language, and decide whether a control covers a requirement.
 
 Stack: Qdrant (ModernBERT 768d + BM25, RRF fusion) + Neo4j (8 entity types, 10+ relationships, Cypher cross-store validation), LangGraph chat with intent classification across six intents, CRAG grading, multi-signal confidence tiering, custom RAGAS-integrated eval harness, Langfuse v4 scoring, FastAPI, Docker, AWS. Multi-tenant subscription scoping resolved at query time with no per-tenant data duplication.
 
@@ -132,7 +132,7 @@ Cross-engagement numbers, for stat tiles and summary lines. Per-engagement
 figures stay in "Selected work" above.
 
 - **500K+ records across production systems** — aggregate across engagements. Confirmed by Alberto 2026-07-22.
-- 91K+ regulatory records — ControlSight / UCF specifically.
+- 500K+ regulatory records — ControlSight / UCF specifically. Corrected from 91K+ by Alberto 2026-07-22.
 - 1000+ daily requests — Incfile / Bizee multi-agent system.
 - Millions of daily security events — Global Cybersec event-driven architecture.
 
