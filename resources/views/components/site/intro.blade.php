@@ -38,7 +38,7 @@
                         this.greeting = h < 12 ? 'Buenos d\u00edas' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
                     }
                 }"
-                class="hero-element text-fluid-sm text-cyan-700 dark:text-brand-cyan font-mono mb-6 tracking-wider uppercase"
+                class="hero-element text-fluid-sm text-cyan-700 dark:text-cyan-400 font-mono mb-6 tracking-wider uppercase"
             ><span class="text-brand-cyan/60">//</span> <span x-text="greeting"></span><span class="typing-cursor"></span></p>
 
             {{-- Name -- glitch + always-on neon glow --}}
