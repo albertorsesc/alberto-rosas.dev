@@ -1,5 +1,21 @@
 import './bootstrap';
 
+// After a failed submit, Livewire's DOM morph replaces the focused element and
+// focus falls to <body>; a screen reader user hears nothing. Restore focus to
+// the first invalid field so the error is announced via its aria-describedby.
+document.addEventListener('livewire:init', () => {
+    window.Livewire.hook('commit', ({ component, succeed }) => {
+        succeed(() => {
+            queueMicrotask(() => {
+                const invalid = component.el.querySelector('[aria-invalid="true"]');
+                if (invalid && document.activeElement === document.body) {
+                    invalid.focus();
+                }
+            });
+        });
+    });
+});
+
 // Console Easter Egg — The Hermetic Greeting
 console.log(
     '%c \u7121\u5FC3 \u2625',
@@ -20,15 +36,24 @@ console.log(
 
 // Konami Code — Synthwave Mode
 let konamiIndex = 0;
-const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+let wasLight = false;
+// e.keyCode is deprecated; e.key is the current standard.
+const konamiCode = [
+    'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
+    'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a',
+];
 
 document.addEventListener('keydown', (e) => {
-    if (e.keyCode === konamiCode[konamiIndex]) {
+    if (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase()) {
         konamiIndex++;
         if (konamiIndex === konamiCode.length) {
             // Activate synthwave mode
+            // Remember whether the visitor was in light mode so we can put it
+            // back. Previously this forced dark and never reverted, stranding
+            // light-mode visitors and desyncing the Alpine toggle.
+            wasLight = !document.documentElement.classList.contains('dark');
             document.body.classList.add('synthwave-mode');
-            document.documentElement.classList.add('dark'); // Force dark for full effect
+            document.documentElement.classList.add('dark');
 
             // Flash the dividers
             document.querySelectorAll('.synthwave-divider').forEach(el => {
@@ -39,6 +64,7 @@ document.addEventListener('keydown', (e) => {
             // Revert after 5 seconds
             setTimeout(() => {
                 document.body.classList.remove('synthwave-mode');
+                if (wasLight) document.documentElement.classList.remove('dark');
                 document.querySelectorAll('.synthwave-divider').forEach(el => {
                     el.style.opacity = '';
                     el.style.height = '';

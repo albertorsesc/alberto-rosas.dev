@@ -1,99 +1,160 @@
-{{-- Hero -- cybernetic, not corporate --}}
-<section id="home" class="relative min-h-[90vh] flex items-center justify-center pt-24 pb-16 px-6 overflow-hidden">
+{{-- Hallmark · macrostructure: Marquee Hero · genre: atmospheric
+   · enrichment: Tier-A CSS art (agent-trace console)
+   · polish: HP3 Cursor-spotlight (hero-scoped, reduced-motion pinned)
+   · design-system: design.md · designed-as-app
+   The right half used to be dead canvas. It now carries a live trace panel:
+   on-brand for agentic work, and it gives the fold something that moves.
+   Every figure in the trace is one Alberto already publishes — nothing invented. --}}
+<section
+    id="home"
+    x-data="heroFold()"
+    x-init="init()"
+    @mousemove.window="track($event)"
+    class="relative min-h-[92svh] flex flex-col justify-between gap-10 overflow-hidden pt-28 pb-10"
+>
+    {{-- Layer 1 · circuit texture --}}
+    <div class="circuit-bg pointer-events-none absolute inset-0 -z-20 opacity-70 dark:opacity-100" aria-hidden="true"></div>
 
-    {{-- Animated gradient background -- larger, more colorful, two orbs --}}
-    <div class="absolute inset-0 -z-10">
-        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface dark:to-dark-surface z-10"></div>
-        {{-- Primary orb --}}
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] md:w-[1000px] md:h-[1000px] rounded-full bg-gradient-to-r from-cyan-500/15 via-purple-500/10 to-fuchsia-500/15 dark:from-cyan-500/25 dark:via-purple-500/15 dark:to-fuchsia-500/25 blur-[120px] animate-pulse-slow"></div>
-        {{-- Secondary orb -- floats opposite --}}
-        <div class="absolute top-1/3 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-l from-amber-500/10 via-pink-500/8 to-cyan-500/10 dark:from-amber-500/20 dark:via-pink-500/12 dark:to-cyan-500/20 blur-[100px] animate-pulse-slow" style="animation-delay: -2s; animation-direction: reverse;"></div>
+    {{-- Layer 2 · HP3 cursor-spotlight. Pinned centre-left when reduced-motion. --}}
+    <div
+        class="pointer-events-none absolute inset-0 -z-10 transition-opacity duration-700 motion-reduce:!opacity-40"
+        :style="`background: radial-gradient(38rem 38rem at ${mx}% ${my}%, rgb(var(--neon-cyan-rgb) / 0.10), transparent 70%)`"
+        aria-hidden="true"
+    ></div>
+
+    <div class="w-full px-6 md:px-12">
+        <p class="font-mono text-xs sm:text-sm uppercase tracking-[0.3em] text-cyan-700 dark:text-cyan-400 opacity-0" data-fold="1">
+            <span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> <span x-text="greeting" lang="es"></span><span class="typing-cursor"></span>
+        </p>
     </div>
 
-    <div class="mx-auto max-w-5xl w-full">
-        <div class="flex flex-col items-center text-center">
+    {{-- Marquee + console share the fold. Console fills what was empty canvas. --}}
+    <div class="w-full px-6 md:px-12 grid lg:grid-cols-12 lg:gap-10 items-center min-w-0">
 
-            {{-- Photo with glow ring + float animation --}}
-            <div class="hero-element relative mb-8 float">
-                <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-fuchsia-500 opacity-40 dark:opacity-60 blur-md animate-pulse-slow"></div>
-                <div class="relative scan-lines rounded-full">
-                    <img
-                        src="https://avatars.githubusercontent.com/u/22654040?v=4"
-                        alt="Alberto Rosas"
-                        width="160"
-                        height="160"
-                        class="w-32 h-32 md:w-40 md:h-40 rounded-full object-cover ring-2 ring-white/20 dark:ring-white/10"
-                        loading="eager"
-                        fetchpriority="high"
-                    />
-                </div>
-            </div>
-
-            {{-- Greeting --}}
-            <p
-                x-data="{
-                    greeting: '',
-                    init() {
-                        const h = new Date().getHours();
-                        this.greeting = h < 12 ? 'Buenos d\u00edas' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
-                    }
-                }"
-                class="hero-element text-fluid-sm text-cyan-700 dark:text-cyan-400 font-mono mb-6 tracking-wider uppercase"
-            ><span class="text-brand-cyan/60">//</span> <span x-text="greeting"></span><span class="typing-cursor"></span></p>
-
-            {{-- Name -- glitch + always-on neon glow --}}
-            <h1 class="hero-element font-heading text-fluid-hero text-body dark:text-dark-body tracking-tight leading-[1.05] mb-6 glitch-hover neon-text" data-text="Alberto Rosas">
-                Alberto Rosas
+        <div class="lg:col-span-7 min-w-0">
+            {{-- Each line is masked and rises into view: the cinematic move for big type --}}
+            <h1 class="font-heading text-body dark:text-dark-body neon-text glitch-hover
+                       leading-[0.86] tracking-[-0.03em] [overflow-wrap:anywhere] min-w-0
+                       text-[clamp(3.25rem,12vw,10rem)]">
+                <span class="block overflow-hidden"><span class="block translate-y-full" data-fold-line data-text="Alberto">Alberto</span></span>
+                <span class="block overflow-hidden"><span class="block translate-y-full" data-fold-line data-text="Rosas">Rosas</span></span>
             </h1>
 
-            {{-- Tagline --}}
-            <p class="hero-element font-heading text-fluid-lg text-body dark:text-dark-body leading-snug max-w-2xl mb-4">
+            <p class="mt-6 md:mt-8 font-heading text-fluid-xl text-body dark:text-dark-body leading-snug max-w-xl opacity-0" data-fold="2">
                 Eval-first AI engineering.
             </p>
+        </div>
 
-            {{-- Identity line --}}
-            <p class="hero-element text-fluid-sm text-muted dark:text-dark-muted leading-relaxed max-w-2xl mb-10 font-mono">
-                <span class="text-cyan-700 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
-                &middot; 12+ yrs software / 5+ yrs production AI
-                &middot; <span class="text-cyan-700 dark:text-cyan-400">Mexico</span> &middot; EN/ES native
-            </p>
-
-            {{-- CTAs -- more dramatic gradient --}}
-            <div class="hero-element flex flex-col sm:flex-row items-center gap-4 mb-10">
-                <a
-                    href="#contact"
-                    class="btn btn-primary group"
-                >
-                    Let's Build Something
-                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
-                    </svg>
-                </a>
-
-                <a
-                    href="/alberto_rosas_ai_engineer.pdf"
-                    download
-                    class="btn btn-ghost"
-                >
-                    Grab My Resume
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                    </svg>
-                </a>
-            </div>
-
-            {{-- Social Links --}}
-            <div class="hero-element flex items-center gap-5">
-                <a href="https://www.linkedin.com/in/albertorsesc" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl text-muted hover:text-brand-cyan dark:text-dark-muted dark:hover:text-brand-cyan transition-all duration-300 hover:-translate-y-1" aria-label="LinkedIn">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                </a>
-                <a href="https://github.com/albertorsesc" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl text-muted hover:text-brand-cyan dark:text-dark-muted dark:hover:text-brand-cyan transition-all duration-300 hover:-translate-y-1" aria-label="GitHub">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-                </a>
-                <a href="https://x.com/bcryp7" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-xl text-muted hover:text-brand-cyan dark:text-dark-muted dark:hover:text-brand-cyan transition-all duration-300 hover:-translate-y-1" aria-label="X (Twitter)">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-                </a>
+        {{-- Tier-A CSS art: an agent trace. Hidden from AT — it is decorative proof, not content. --}}
+        <div class="lg:col-span-5 mt-10 lg:mt-0 min-w-0 opacity-0" data-fold="3" aria-hidden="true">
+            <div class="scan-lines relative rounded-xl border border-border dark:border-dark-border bg-surface-alt/70 dark:bg-dark-surface-alt/70 backdrop-blur-sm overflow-hidden">
+                <div class="flex items-center gap-2 border-b border-border dark:border-dark-border px-4 py-2.5">
+                    {{-- Live pulse. animate-pulse-slow is already reduced-motion guarded in app.css. --}}
+                    <span class="relative flex h-2 w-2 shrink-0">
+                        <span class="absolute inline-flex h-full w-full rounded-full bg-brand-cyan/40 animate-pulse-slow"></span>
+                        <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-cyan/70"></span>
+                    </span>
+                    <p class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted dark:text-dark-muted">agent trace</p>
+                </div>
+                <div class="p-4 font-mono text-[11px] sm:text-xs leading-relaxed">
+                    <p class="text-cyan-700 dark:text-cyan-400 mb-2.5">$ agent run --task nl2sql --eval ragas</p>
+                    {{-- Stage names and identifiers are the real ones, checked against
+                         current docs: Qdrant's query_points/prefetch + FusionQuery(RRF),
+                         Qdrant/bm25 as the sparse model, and Ragas' faithfulness /
+                         answer_relevancy metric identifiers. The stack mirrors what the
+                         Retrieval and Evals entries below already describe. --}}
+                    <ul class="space-y-1.5 text-muted dark:text-dark-muted">
+                        @foreach ([
+                            ['router',   'intent → analytical_query'],
+                            ['retrieve', 'query_points · prefetch ×2'],
+                            ['fuse',     'RRF · bm25 + modernbert-768d'],
+                            ['rerank',   'cross-encoder · 24 → 6'],
+                            ['graph',    'neo4j · 2-hop traversal'],
+                            ['generate', 'sql · 7 joins · 2 CTEs'],
+                            ['grade',    'faithfulness ✓ answer_relevancy ✓'],
+                            ['trace',    'langfuse'],
+                        ] as $i => $row)
+                            <li class="flex gap-3 opacity-0 min-w-0" data-trace="{{ $i }}">
+                                <span class="text-cyan-700 dark:text-cyan-400/70 shrink-0 w-[4.5rem]">{{ $row[0] }}</span>
+                                <span class="min-w-0 [overflow-wrap:anywhere]">{{ $row[1] }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                    <div class="mt-3 pt-3 border-t border-border dark:border-dark-border flex items-baseline justify-between gap-3 opacity-0" data-trace="8">
+                        <span class="text-[10px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">SADIE · NL2SQL accuracy</span>
+                        <span class="font-heading text-xl text-cyan-700 dark:text-cyan-400 neon-text tabular-nums">93&ndash;97%</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="w-full px-6 md:px-12">
+        <div class="flex flex-col-reverse gap-8 md:flex-row md:items-end md:justify-between opacity-0" data-fold="4">
+            <dl class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.18em] text-muted dark:text-dark-muted space-y-1.5 min-w-0 max-w-full">
+                <div class="flex gap-3 min-w-0">
+                    <dt class="text-cyan-700 dark:text-cyan-400/70 shrink-0">role</dt>
+                    <dd class="text-cyan-700 dark:text-cyan-400 min-w-0 [overflow-wrap:anywhere]">AI &amp; Agentic Systems Engineer</dd>
+                </div>
+                <div class="flex gap-3 min-w-0">
+                    <dt class="text-cyan-700 dark:text-cyan-400/70 shrink-0">exp</dt>
+                    <dd class="min-w-0 [overflow-wrap:anywhere]">12+ yrs software / 5+ yrs production AI</dd>
+                </div>
+                <div class="flex gap-3 min-w-0">
+                    <dt class="text-cyan-700 dark:text-cyan-400/70 shrink-0">base</dt>
+                    <dd class="min-w-0 [overflow-wrap:anywhere]"><span class="text-cyan-700 dark:text-cyan-400">Mexico</span> &middot; EN/ES native</dd>
+                </div>
+            </dl>
+
+            <figure class="shrink-0">
+                <div class="scan-lines relative w-20 h-20 md:w-28 md:h-28 overflow-hidden rounded-lg border border-border dark:border-dark-border">
+                    <img src="https://avatars.githubusercontent.com/u/22654040?v=4" alt="Alberto Rosas"
+                         width="160" height="160" loading="eager" fetchpriority="high"
+                         class="w-full h-full object-cover grayscale-[35%] contrast-[1.05]" />
+                </div>
+            </figure>
+        </div>
+    </div>
 </section>
+
+<div class="synthwave-divider h-[3px] w-full" role="presentation"></div>
+
+@push('scripts')
+<script>
+    function heroFold() {
+        return {
+            greeting: '',
+            mx: 30, my: 40,
+            reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+            track(e) {
+                if (this.reduced) return;
+                this.mx = (e.clientX / window.innerWidth) * 100;
+                this.my = (e.clientY / window.innerHeight) * 100;
+            },
+            init() {
+                const h = new Date().getHours();
+                this.greeting = h < 12 ? 'Buenos días' : h < 18 ? 'Buenas tardes' : 'Buenas noches';
+
+                const lines  = document.querySelectorAll('[data-fold-line]');
+                const steps  = document.querySelectorAll('[data-fold]');
+                const trace  = document.querySelectorAll('[data-trace]');
+
+                // Reduced motion: land everything immediately, no movement.
+                if (this.reduced || typeof gsap === 'undefined') {
+                    lines.forEach(el => el.classList.remove('translate-y-full'));
+                    [...steps, ...trace].forEach(el => { el.style.opacity = 1; });
+                    return;
+                }
+
+                const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+                tl.to('[data-fold="1"]', { opacity: 1, duration: 0.5 }, 0.15)
+                  .to(lines, { yPercent: -100, duration: 1.05, stagger: 0.09 }, 0.25)
+                  .to('[data-fold="2"]', { opacity: 1, y: 0, duration: 0.7 }, 0.85)
+                  .to('[data-fold="3"]', { opacity: 1, duration: 0.7 }, 0.95)
+                  .to(trace, { opacity: 1, duration: 0.28, stagger: 0.11 }, 1.15)
+                  .to('[data-fold="4"]', { opacity: 1, duration: 0.7 }, 1.35);
+            },
+        };
+    }
+</script>
+@endpush

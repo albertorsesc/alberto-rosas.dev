@@ -14,7 +14,7 @@
         {{-- Page Header --}}
         <div class="mb-10 space-y-2">
             <p class="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400">
-                <span class="text-brand-cyan/50">//</span> Writing & Research
+                <span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> Writing & Research
             </p>
             <h1 class="font-heading text-fluid-3xl tracking-tight text-body dark:text-dark-body">
                 Articles
@@ -32,9 +32,9 @@
                     @if ($featured->image)
                         <div class="overflow-hidden">
                             <img
-                                class="h-64 w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 sm:h-80"
+                                class="h-64 w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02] sm:h-80"
                                 src="{{ $featured->image }}"
-                                alt="{{ $featured->title }}"
+                                alt=""
                             />
                         </div>
                     @endif
@@ -42,7 +42,7 @@
                         @if ($featured->category)
                             <span class="tag">{{ $featured->category }}</span>
                         @endif
-                        <h2 class="mt-3 font-heading text-fluid-xl tracking-tight text-body dark:text-dark-body group-hover:text-brand-cyan transition-colors">
+                        <h2 class="mt-3 font-heading text-fluid-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                             {{ $featured->title }}
                         </h2>
                         <time
@@ -73,9 +73,9 @@
                                 @if ($article->image)
                                     <div class="overflow-hidden">
                                         <img
-                                            class="h-48 w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                                            class="h-48 w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                                             src="{{ $article->image }}"
-                                            alt="{{ $article->title }}"
+                                            alt=""
                                         />
                                     </div>
                                 @endif
@@ -83,7 +83,7 @@
                                     @if ($article->category)
                                         <span class="tag self-start">{{ $article->category }}</span>
                                     @endif
-                                    <h2 class="mt-3 font-heading text-xl tracking-tight text-body dark:text-dark-body group-hover:text-brand-cyan transition-colors">
+                                    <h2 class="mt-3 font-heading text-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                                         {{ $article->title }}
                                     </h2>
                                     <time

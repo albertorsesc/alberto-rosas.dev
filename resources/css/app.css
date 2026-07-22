@@ -1,3 +1,8 @@
+/* Hallmark · macrostructure: Marquee Hero (home) · genre: atmospheric
+ * theme: custom (synthwave neon over warm stone · dark-only outside /blog)
+ * system: design.md · nav: N5 floating pill · footer: Ft2 inline-rule
+ * contrast: pass (40-41) · mobile: pass (34, 49) · honest: pass (46)
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,9 +26,11 @@
     --color-dark-surface-alt: #111111;
     --color-dark-border:      #1e1e1e;
 
-    /* Dark mode text */
+    /* Dark mode text. Subtle is the third tier, mirroring light: measured
+       5.01:1 on the page canvas and 4.78:1 on the inset surface. */
     --color-dark-text:        #f0f0f0;
     --color-dark-text-muted:  #a0a0a0;
+    --color-dark-text-subtle: #808080;
 
     /* Synthwave neon triad — emission colours.
        These are NOT text colours: at these chromas they fail contrast on both
@@ -71,8 +78,10 @@ html {
     overflow-y: scroll;
 }
 
+/* clip, not hidden: hidden makes body a scroll container and silently kills
+   position: sticky on descendants (the blog sidebar and TOC stopped sticking). */
 html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 *, *::before, *::after {
@@ -126,6 +135,85 @@ html, body {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
 }
+
+/* ===========================
+   Selection
+   =========================== */
+/* Was undefined, so dragging over any text painted OS-default blue across a
+   warm-stone canvas. Emission triad as a low-alpha fill, per design.md. */
+::selection {
+    background: rgb(var(--neon-cyan-rgb) / 0.18);
+    color: var(--color-text);
+}
+
+.dark ::selection {
+    background: rgb(var(--neon-cyan-rgb) / 0.28);
+    color: var(--color-dark-text);
+}
+
+/* Focus parity: app.css previously defined :focus-visible for .btn only, so
+   every card link on the site was invisible to the keyboard. Same ring token. */
+.gradient-border:focus-visible,
+.bento-card:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 3px;
+    border-radius: 0.35rem;
+}
+
+/* Skip link: first tab stop, invisible until keyboard focus, appears instantly. */
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-dark-surface-alt);
+    color: var(--color-dark-text);
+    border: 1px solid rgb(var(--neon-cyan-rgb) / 0.4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
+}
+
+.gradient-border:focus-within::before {
+    opacity: 0.7;
+    padding: 2.5px;
+    animation-play-state: running;
+}
+
+.dark .gradient-border:focus-within::before { opacity: 1; }
+
+/* ===========================
+   Practice / systems rail
+   =========================== */
+/* The section's only structure was a default 1px rule, which at #1e1e1e on
+   #0a0a0a is effectively invisible. Emission carries dark mode; the hairline
+   falls off before the right edge so the rows read as a sequence, not a table. */
+.rail-row { position: relative; }
+
+.rail-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(var(--neon-cyan-rgb) / 0.05) 0%, transparent 52%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    pointer-events: none;
+}
+
+.dark .rail-row::before {
+    background: linear-gradient(90deg, rgb(var(--neon-cyan-rgb) / 0.09) 0%, transparent 52%);
+}
+
+.rail-row:hover::before,
+.rail-row:focus-within::before { opacity: 1; }
 
 /* ===========================
    Component Styles
@@ -192,7 +280,7 @@ html, body {
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0.28;
-    transition: opacity 0.4s ease, padding 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
     /* Signature rainbow arc sits static at rest; comes to life on hover */
     animation: rotate-gradient 4s linear infinite;
     animation-play-state: paused;
@@ -240,7 +328,7 @@ html, body {
     opacity: 0;
     filter: blur(20px);
     z-index: -1;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
     /* No at-rest animation: the halo is invisible until hover, so don't burn GPU spinning it */
 }
 
@@ -328,7 +416,9 @@ html, body {
     background: var(--color-surface-alt);
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
-    transition: all 0.3s ease;
+    transition: color var(--duration-normal) var(--ease-out),
+                background-color var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out);
 }
 
 .dark .tag {
@@ -402,15 +492,19 @@ html, body {
 }
 
 /* Primary — the brand gradient CTA */
+/* Slop-test gate 2: the atmospheric genre allows radial gradients on
+   background only, never on pill buttons. The old cyan->blue->purple fill was
+   also three raw Tailwind hexes that appear in no design token. Solid accent
+   ink on the paper, with the glow carrying the emission instead. */
 .btn-primary {
-    background-image: linear-gradient(to right, #06b6d4, #3b82f6, #9333ea);
-    color: #fff;
-    box-shadow: 0 10px 20px -6px rgba(6, 182, 212, 0.35);
+    background-color: var(--brand-cyan);
+    color: var(--color-dark-surface);
+    box-shadow: 0 10px 24px -8px rgb(var(--neon-cyan-rgb) / 0.45);
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 14px 34px -6px rgba(147, 51, 234, 0.45);
+    box-shadow: 0 14px 34px -6px rgb(var(--neon-cyan-rgb) / 0.55);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -521,16 +615,6 @@ html.transitioning-colors * {
     text-shadow: 0 0 20px rgb(var(--neon-violet-rgb) / 0.6), 0 0 60px rgb(var(--neon-violet-rgb) / 0.3), 0 0 100px rgb(var(--neon-violet-rgb) / 0.15);
 }
 
-/* Float animation — gentle up/down bob */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-8px); }
-}
-
-.float {
-    animation: float 4s ease-in-out infinite alternate;
-}
-
 /* Scan-line overlay — VISIBLE */
 .scan-lines::after {
     content: '';
@@ -567,34 +651,56 @@ html.transitioning-colors * {
     100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
 }
 
-.glitch-hover {
+/* The ghost copies live on each line, not the block: a multi-line heading's
+   single attr(data-text) overlay breaks lines differently than the real text
+   and shows the name twice on hover. Each line carries its own data-text. */
+.glitch-hover [data-text] {
     position: relative;
 }
 
-.glitch-hover::before,
-.glitch-hover::after {
+.glitch-hover [data-text]::before,
+.glitch-hover [data-text]::after {
     content: attr(data-text);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     opacity: 0;
     pointer-events: none;
 }
 
-.glitch-hover:hover::before {
+.glitch-hover:hover [data-text]::before {
     opacity: 0.8;
     color: var(--neon-cyan);
     animation: glitch 300ms linear;
     text-shadow: -2px 0 var(--neon-magenta);
 }
 
-.glitch-hover:hover::after {
+.glitch-hover:hover [data-text]::after {
     opacity: 0.8;
     color: var(--neon-magenta);
     animation: glitch 300ms linear reverse;
     text-shadow: 2px 0 var(--neon-cyan);
+}
+
+/* Hermetic seal — the engineer card rewards a patient hover: the ankh from
+   the console signature (無心 ☥) fades in only after the cursor has rested
+   on the card. Casual passes never see it. Emission, not text. A real child
+   element, not a pseudo: .gradient-border owns both ::before and ::after. */
+.hermetic-eye {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--neon-violet);
+    text-shadow: 0 0 12px rgb(var(--neon-violet-rgb) / 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 600ms var(--ease-out);
+}
+
+[data-hermetic="eye"]:hover .hermetic-eye {
+    opacity: 0.6;
+    transition-delay: 1.6s;
 }
 
 /* Typing cursor blink */
@@ -643,7 +749,7 @@ html.transitioning-colors * {
         rgb(var(--neon-magenta-rgb) / 0.03) 100%
     );
     opacity: 0.5;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
 }
 
 .dark .cyber-gradient-bg::before {
@@ -705,10 +811,6 @@ html.transitioning-colors * {
     .reading-progress {
         animation: none;
         transform: scaleX(1);
-    }
-
-    .float {
-        animation: none;
     }
 
     *, *::before, *::after {

@@ -38,7 +38,12 @@
         scrollToHeading(headingId) {
             const heading = document.getElementById(headingId)
             if (heading) {
-                heading.scrollIntoView({ behavior: 'smooth' })
+                const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+                heading.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto' })
+                // Move keyboard/SR focus with the scroll and make the position linkable.
+                heading.setAttribute('tabindex', '-1')
+                heading.focus({ preventScroll: true })
+                history.pushState(null, '', '#' + headingId)
             }
         },
     }"

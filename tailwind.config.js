@@ -53,6 +53,7 @@ export default {
                 },
                 'dark-body': 'var(--color-dark-text)',
                 'dark-muted': 'var(--color-dark-text-muted)',
+                'dark-subtle': 'var(--color-dark-text-subtle)',
                 'dark-border': 'var(--color-dark-border)',
             },
             borderRadius: {

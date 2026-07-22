@@ -45,6 +45,7 @@ colors:
   dark-border:         "#1e1e1e"
   dark-text:           "#f0f0f0"
   dark-text-muted:     "#a0a0a0"
+  dark-text-subtle:    "#808080"
 
 typography:
   display:
@@ -74,7 +75,7 @@ spacing:
 
 components:
   accent-usage: "rationed"
-  dark-mode: "class"
+  dark-mode: "class; dark-only everywhere except /blog, which keeps the toggle"
   elevation: "neon glow on hover, hairline border at rest"
 ---
 
@@ -101,7 +102,8 @@ labels, eyebrows, metadata, `//` markers. Serif display carries headings. Body
 sans stays out of the way.
 
 **Key characteristics:**
-- Warm stone light mode, near-black dark mode, class-toggled
+- Dark-only site (near-black canvas). `/blog` is the one surface that keeps a
+  class-toggled warm-stone light mode, for long-form reading
 - Monospace-forward chrome with `//` comment markers as a recurring motif
 - DM Serif Display headings, weight 400 only
 - Cyan accent rationed; neon triad reserved for glow and gradient
@@ -115,9 +117,20 @@ break this system, so they're named explicitly.
 
 | Role | Value | Use | Never |
 | --- | --- | --- | --- |
-| **Accent (mode-adaptive)** | `cyan-700` light · `cyan-400` dark | Ordinary accent text, links, labels. 44 uses. | Not for "you are here" |
-| **Brand mark (mode-invariant)** | `oklch(65% 0.2 230)` both modes | `//` glyphs, typing cursor, reading-progress bar, `.text-link` underline. 27 uses. | Not for body text |
-| **Active state** | `text-cyan-700 dark:text-brand-cyan` | Current nav item, current TOC heading. Pairs with `border-brand-cyan` / `before:bg-brand-cyan`. 5 uses. | Not for ordinary accents |
+| **Accent (mode-adaptive)** | `cyan-700` light · `cyan-400` dark | All accent **text**: links, labels, eyebrows, `//` glyphs. | — |
+| **Brand mark (decorative only)** | `oklch(65% 0.2 230)` | `.text-link` underline, reading-progress bar, `before:bg-*` indicator bars, borders. | **Never as text.** See below. |
+| **Active state** | `text-cyan-700 dark:text-brand-cyan` | Current nav item, current TOC heading. Pairs with `border-brand-cyan` / `before:bg-brand-cyan`. Dark-only, measured 6.87:1. | Not for ordinary accents |
+
+> **`brand-cyan` is not a text colour.** Measured against the light canvas
+> (`#fafaf9`) it reaches only **2.76:1 at full opacity** — below the 4.5:1 AA
+> floor at *any* alpha, because its OKLCH lightness (65%) is too close to the
+> paper. It reads fine on the dark canvas (6.87:1), which is why the problem
+> stayed hidden. Use the mode-adaptive accent for anything readable.
+>
+> Verified ratios (canvas-composited, both modes, 2026-07-22):
+> `cyan-700` on light **5.13** · `cyan-400` on dark **10.96** ·
+> `cyan-400/70` on dark panel **5.59** · `cyan-700` on light panel **5.13**.
+> Dimming is only safe in dark mode; in light mode the accent needs full opacity.
 
 The active-state role is why two cyans coexist in the same class string. That is
 deliberate, not drift.
@@ -187,7 +200,8 @@ contrast, or scale, never with a grey shadow.
 - Let mono carry the chrome.
 - Ration the accent. Three accent moments on a page means remove one.
 - Use the neon triad for emission only.
-- Ship both light and dark for anything new.
+- Optimise dark. Light-mode pairings are only required on `/blog` surfaces;
+  keeping `dark:` variants elsewhere is harmless but not load-bearing.
 - Reference `--neon-*`, `--brand-cyan`, `--amber-*` tokens. Never re-hardcode those hex values.
 
 **Don't**
@@ -200,7 +214,8 @@ contrast, or scale, never with a grey shadow.
 ## 8. Responsive Behavior
 
 The fluid type scale removes most breakpoint work. Layout collapses to single
-column on small screens. Dark mode is orthogonal to breakpoint; verify both.
+column on small screens. Outside `/blog` only dark needs visual verification;
+blog pages must be verified in both modes.
 
 ## 9. Agent Prompt Guide
 
@@ -245,14 +260,37 @@ Verified against the implementation 2026-07-22.
   opacity is equivalent to the old output, so the 27 plain uses did not shift.
   **Any new colour added to `theme.extend.colors` as a raw string must carry the
   placeholder, or its opacity modifiers will vanish without an error.**
-- **The 3-column feature grid** appears on the homepage and twice on `/about`.
-  Named AI-template tell; break the symmetry.
+- ~~**The 3-column feature grid** appears on the homepage and twice on
+  `/about`.~~ **FIXED 2026-07-22.** Key Projects is one asymmetric 12-col row
+  (5/4/3, width encodes weight); Available For is stacked label-left rows.
 - **Six eyebrows on the homepage.** One or two is the working ceiling.
-- **`data-reveal` on 25 elements in `/about`.** Reveal sections, not every card.
+- ~~**`data-reveal` on 25 elements in `/about`.**~~ **FIXED 2026-07-22.**
+  Nine section-level reveals; cards no longer animate individually.
 - **`rounded-card` and `max-w-8xl` are dead tokens.** `rounded-card` duplicates
   Tailwind's built-in `rounded-xl` at the same `0.75rem`.
-- **`text-subtle` has no dark-mode counterpart.** Three tiers light, two dark.
+- ~~**`text-subtle` has no dark-mode counterpart.**~~ **FIXED 2026-07-22.**
+  `dark-subtle` (`#808080`) added: 5.01:1 on the page canvas, 4.78:1 on the
+  inset surface. All four former `dark:text-dark-muted` fallbacks now use it.
+- **Light-mode `text-subtle` fails AA.** `#a8a29e` on `#fafaf9` measures
+  **2.41:1** (floor is 4.5:1). Now only reachable on `/blog` light mode (the
+  rest of the site is dark-only); fix only matters if a blog surface uses
+  `text-subtle`.
 - **Four synthwave classes are defined but unused**: `neon-text-purple`,
   `neon-text-amber`, `sacred-geo-bg`, `cyber-gradient-bg`. Kept deliberately as
   a palette to draw on; wire them up or retire them.
-- **No Hallmark stamp** on any page, and no `.hallmark/log.json`.
+- ~~**No Hallmark stamp** on any page, and no `.hallmark/log.json`.~~ **FIXED
+  2026-07-22.** Stamp at the top of `app.css`; log at `.hallmark/log.json`.
+
+## Accepted deviations
+
+Reviewed 2026-07-22 against the 58-gate slop test; these are deliberate.
+
+- **Hero CTA sits 4px below the 1280×800 fold.** The fold composition is
+  name + lede + agent console + role block; the CTA band peeking is the scroll
+  cue. Do not "fix" by shrinking the hero.
+- **Dark neutrals are zero-chroma** (`#0a0a0a` / `#111111` / `#1e1e1e`).
+  "Near-black, not navy" is the system; the warmth lives in the light-mode
+  stone ramp and the neon emission layer.
+- **Neon hex values are duplicated inside SVG data URIs** (`circuit-bg`,
+  `sacred-geo-bg`): `var()` cannot reach into a data URI. Keep them in sync
+  with the `--neon-*` tokens by hand when the triad changes.

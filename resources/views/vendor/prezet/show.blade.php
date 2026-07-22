@@ -28,7 +28,7 @@
             @endif
         </header>
         <div
-            class="prose prose-stone dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border dark:prose-pre:border-dark-border"
+            class="prose prose-stone dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border dark:prose-pre:border-dark-border"
         >
             {!! $body !!}
         </div>

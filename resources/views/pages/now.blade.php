@@ -23,7 +23,7 @@
     </header>
 
     {{-- Content --}}
-    <div class="mx-auto max-w-2xl px-6 prose prose-stone dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-brand-cyan prose-a:no-underline hover:prose-a:underline">
+    <div class="mx-auto max-w-2xl px-6 prose prose-stone dark:prose-invert prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline">
 
         <section data-reveal>
             <h2>Building</h2>
@@ -67,7 +67,7 @@
 
     {{-- Inspired by --}}
     <div class="mx-auto max-w-2xl px-6 mt-16 pt-8 border-t border-border dark:border-dark-border" data-reveal>
-        <p class="text-fluid-sm text-subtle dark:text-dark-muted">
+        <p class="text-fluid-sm text-subtle dark:text-dark-subtle">
             This is a <a href="https://nownownow.com/about" target="_blank" rel="noopener noreferrer" class="text-link text-muted dark:text-dark-muted">/now page</a>, inspired by Derek Sivers.
         </p>
     </div>
