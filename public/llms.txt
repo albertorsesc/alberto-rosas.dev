@@ -1,0 +1,16 @@
+# Alberto Rosas
+
+> AI & Agentic Systems Engineer with 12+ years in software and 5+ in production AI. Builds agentic systems, hybrid retrieval, and eval-first delivery for products where being wrong has consequences. Based in Mexico, English/Spanish native, US-timezone friendly. Consults for mid-market teams via TriageOps.
+
+## Pages
+
+- [Work](https://alberto-rosas.dev/work): Selected production AI systems, in depth: a compliance engine over 500K+ regulated records, an NL-to-SQL platform at 93–97% accuracy, and a multi-agent document platform, plus a security-automation and full-stack background.
+- [About](https://alberto-rosas.dev/about): How he works, agentic systems, hybrid retrieval, evaluation, and agent security, and the security-to-AI background behind it.
+- [Blog](https://alberto-rosas.dev/blog): Writing on production AI engineering, evaluation, and agent design.
+- [Contact](https://alberto-rosas.dev/#contact): Consulting engagements, advisory (where AI pays off), build (production agentic systems), and architecture review.
+
+## Also
+
+- LinkedIn: https://www.linkedin.com/in/albertorsesc
+- GitHub: https://github.com/albertorsesc
+- TriageOps: https://triageops.com

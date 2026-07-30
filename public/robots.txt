@@ -1,2 +1,7 @@
+# Everything is open, including AI answer-engine crawlers (GPTBot, OAI-SearchBot,
+# ClaudeBot, Claude-User, PerplexityBot, Google-Extended, etc.). This site markets
+# consulting, so being crawled, indexed, and cited is the goal.
 User-agent: *
-Disallow:
+Allow: /
+
+Sitemap: https://alberto-rosas.dev/sitemap.xml

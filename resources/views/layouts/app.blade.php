@@ -30,12 +30,16 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        @hasSection('meta')
-            @yield('meta')
-        @else
-            <title>@yield('title', 'Alberto Rosas — AI & Agentic Systems Engineer')</title>
-            <meta name="description" content="@yield('description', 'AI & Agentic Systems Engineer. 12+ years in software, 5+ in production AI. LangGraph + MCP agents, hybrid retrieval, eval-first. Based in Mexico.')">
-        @endif
+        <x-seo::meta />
+
+        {{-- Favicons --}}
+        <link rel="icon" href="/favicon.ico" sizes="any">
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <meta name="theme-color" content="#0a0a0a">
+
+        {{-- Structured data (Person / WebSite / ProfilePage / Organization) --}}
+        @include('components.site.jsonld')
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,7 +59,7 @@
         @include('components.site.header')
 
         {{-- Main Content --}}
-        <main id="main">
+        <main id="main" tabindex="-1">
             @yield('content')
         </main>
 
