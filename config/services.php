@@ -35,4 +35,15 @@ return [
         ],
     ],
 
+    'github' => [
+        // A token (any scope, even none) is only needed to authenticate the
+        // GraphQL call that reads pinned repos. Absent in local dev, the service
+        // falls back to the `gh` CLI. Set GITHUB_TOKEN in production.
+        'token' => env('GITHUB_TOKEN'),
+        'user' => env('GITHUB_USER', 'albertorsesc'),
+        // A week, matching the scheduled refresh. The lazy fetch serves stale
+        // data past this and only refetches when the weekly refresh has lapsed.
+        'pins_ttl_hours' => (int) env('GITHUB_PINS_TTL_HOURS', 168),
+    ],
+
 ];
