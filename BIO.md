@@ -66,7 +66,7 @@ Before that I built SADIE, a production NL-to-SQL agentic platform for a propert
 
 At Incfile (now Bizee) I led the migration of the company's core platform from a legacy monolith to a service-oriented stack, set the development standards the team adopted across other initiatives, and built the AI layer on top: multi-agent system for document processing handling 1000+ daily requests, RAG over business documentation, fine-tuning experiments with Unsloth and HuggingFace Transformers. Cut manual data entry by 65%. Mentored 8 engineers along the way.
 
-Earlier in my career I was Engineering Manager at Global Cybersec, where I designed an event-driven architecture processing millions of daily security events and integrated SIEM, IDS/IPS, firewalls, and SOAR platforms into a single automated response pipeline (60% reduction in incident response time, team of 5). That work — and the years of security automation it required — is why I treat agent safety, MCP attack surfaces, and policy-as-code as default concerns instead of nice-to-haves.
+Earlier in my career I was Engineering Manager at Global Cybersec, where I designed an event-driven architecture processing millions of daily security events and integrated SIEM, IDS/IPS, firewalls, and SOAR platforms into a single automated response pipeline (60% reduction in incident response time, team of 8). That work — and the years of security automation it required — is why I treat agent safety, MCP attack surfaces, and policy-as-code as default concerns instead of nice-to-haves.
 
 I also co-founded TriageOps, an AI adoption consultancy for mid-market companies. We use a 6-step methodology that starts with a Discovery Sprint; one operations team recovered 70+ hours/month (about $42K annually) from the first engagement.
 
@@ -109,14 +109,14 @@ Production NL-to-SQL agentic platform for a property-management SaaS.
 
 Stack: LangGraph + custom MCP server (read-only DB access with schema caching and FK detection), MongoDB Atlas vector search, Qwen3 embeddings, structured business-rule context library, RAGAS + golden datasets + CI-gated regression (93–97% accuracy), FastAPI SSE streaming, Langfuse, Docker Compose.
 
-### Incfile / Bizee — AI Engineer / Tech Lead (2022–present)
+### Incfile / Bizee — AI Engineer / Tech Lead (2022–2026)
 Led the platform migration from a legacy monolith to a service-oriented stack. Designed a multi-agent system for document processing and decision support that handles 1000+ daily requests across multiple data sources. Built the RAG pipeline over business documentation; experimented with GraphRAG/KAG for retrieval precision; ran fine-tuning experiments with Unsloth and HuggingFace Transformers. Multi-layer memory (short/long-term, procedural) for cross-session context. Cut manual data entry by 65%. Mentored 8 engineers on AI/ML practices and production deployment.
 
 ### TriageOps — co-founder
 AI adoption consultancy for mid-market companies. 6-step methodology starting with a Discovery Sprint. First engagement recovered 70+ hours/month (about $42K annually) for an operations team.
 
 ### Global Cybersec — Engineering Manager (2017–2021)
-Led engineering for a cybersecurity firm. Designed an event-driven architecture processing millions of daily security events for automated pattern recognition. Integrated SIEM, IDS/IPS, firewalls, and SOAR for automated threat response (60% reduction in incident response time). Built 4 microservice applications. Managed a team of 5.
+Led engineering for a cybersecurity firm. Designed an event-driven architecture processing millions of daily security events for automated pattern recognition. Integrated SIEM, IDS/IPS, firewalls, and SOAR for automated threat response (60% reduction in incident response time). Built 4 microservice applications. Managed a team of 8.
 
 ### Earlier (2014–2022)
 - **HQ Rental Software** — Senior Software Engineer. Built an automated email parsing pipeline that eliminated a recurring manual workflow. Initiated and built the test suite.
@@ -142,13 +142,13 @@ figures stay in "Selected work" above.
 
 Information Technology Engineering, Universidad Politécnica de Baja California (2014–2016).
 
-Certifications: Laravel Certified Developer (2020), The Complete LangChain & LLMs Guide, Generative AI & LLMs: Architecture and Data Preparation, Gen AI Foundational Models for NLP & Language Understanding, Business Process Modeling with AI.
+Certifications: The Complete LangChain & LLMs Guide, Generative AI & LLMs: Architecture and Data Preparation, Gen AI Foundational Models for NLP & Language Understanding, Business Process Modeling with AI.
 
 ---
 
 ## What I'm available for
 
-- **Senior IC / tech-lead roles** at AI-native companies (full-time remote, contractor or EOR-employed — no US W2).
+- **AI & Agentic Systems Engineer / Architect roles** at AI-native companies (full-time remote, contractor or EOR-employed, no US W2).
 - **Selective consulting via TriageOps** for mid-market teams adopting AI. Discovery Sprints, scoped pilots, eval-gated rollouts.
 - **Architecture review and second-opinion engagements** on production agentic systems — context engineering, evals, MCP, agent security.
 

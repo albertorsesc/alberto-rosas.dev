@@ -16,25 +16,27 @@ document.addEventListener('livewire:init', () => {
     });
 });
 
-// Console Easter Egg — The Hermetic Greeting
-console.log(
-    '%c \u7121\u5FC3 \u2625',
-    'font-size: 32px; color: #00f5ff;'
-);
-console.log(
-    '%c "Consider everything. Believe nothing. Build anyway."',
-    'color: #00f5ff; font-size: 13px; font-style: italic;'
-);
-console.log(
-    '%c \u2609 As above, so below. As within, so without. \u263D',
-    'color: #8b5cf6; font-size: 11px;'
-);
-console.log(
-    '%c The mind is the interface. The code is the output. \u2192 alberto.rsesc@protonmail.com',
-    'color: #666; font-size: 11px;'
-);
+// A note in the console for anyone who opens DevTools, framed as one of my own
+// eval runs. The audience that opens the console is the audience I want to reach.
+{
+    const head = 'color:#00f5ff;font-weight:700;font-family:monospace;font-size:12px';
+    const run = 'color:#c9d1d9;font-family:monospace;font-size:12px;line-height:1.6';
+    const sig = 'color:#00f5ff;font-weight:600;font-size:12px';
+    const dim = 'color:#7a8590;font-size:11px';
 
-// Konami Code — Synthwave Mode
+    console.log('%c$ eval --target visitor', head);
+    console.log(
+        '%c  intent ........... curious_engineer\n'
+        + '  opened_console ... ✓\n'
+        + '  faithfulness ..... high\n'
+        + '  verdict .......... we should talk',
+        run,
+    );
+    console.log('%cAlberto Rosas · AI & Agentic Systems Engineer', sig);
+    console.log('%c/work · github.com/albertorsesc · alberto.rsesc@protonmail.com', dim);
+}
+
+// Konami code: a five-second synthwave flourish for anyone who knows it.
 let konamiIndex = 0;
 let wasLight = false;
 // e.keyCode is deprecated; e.key is the current standard.
@@ -47,10 +49,8 @@ document.addEventListener('keydown', (e) => {
     if (e.key.toLowerCase() === konamiCode[konamiIndex].toLowerCase()) {
         konamiIndex++;
         if (konamiIndex === konamiCode.length) {
-            // Activate synthwave mode
-            // Remember whether the visitor was in light mode so we can put it
-            // back. Previously this forced dark and never reverted, stranding
-            // light-mode visitors and desyncing the Alpine toggle.
+            // Activate synthwave mode. Remember whether the visitor was in light
+            // mode so we can put it back instead of stranding them in dark.
             wasLight = !document.documentElement.classList.contains('dark');
             document.body.classList.add('synthwave-mode');
             document.documentElement.classList.add('dark');

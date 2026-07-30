@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Uses — Alberto Rosas')
-@section('description', 'The tools, hardware, and systems Alberto Rosas uses daily for AI engineering and life.')
+@php
+    seo()
+        ->title('Uses · Alberto Rosas')
+        ->description('The tools, hardware, and systems Alberto Rosas uses daily for AI engineering and life.')
+        ->url(route('uses'));
+@endphp
 
 @section('content')
 <article class="pt-32 pb-20">
@@ -10,7 +14,7 @@
     <header class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
         <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3">What I Use</h1>
         <p class="text-fluid-base text-muted dark:text-dark-muted max-w-2xl">
-            Hardware, software, systems &mdash; and one motorcycle.
+            Hardware, software, systems, and one motorcycle.
         </p>
     </header>
 
@@ -24,7 +28,7 @@
                 <span class="font-mono text-body dark:text-dark-body">M5 Max MacBook Pro</span>, 128GB unified memory.
             </p>
             <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                Configured for running local AI stacks and large context models. This is not a laptop &mdash; it's a workstation.
+                Configured for running local AI stacks and large-context models.
             </p>
         </div>
 
@@ -111,11 +115,11 @@
             <ul role="list" class="space-y-2.5 text-muted dark:text-dark-muted text-fluid-sm">
                 <li class="flex items-start gap-2">
                     <span class="text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mt-1 flex-shrink-0" aria-hidden="true">&bull;</span>
-                    <span><span class="font-mono text-body dark:text-dark-body">Python</span> &mdash; primary language now</span>
+                    <span><span class="font-mono text-body dark:text-dark-body">Python</span>, primary language now</span>
                 </li>
                 <li class="flex items-start gap-2">
                     <span class="text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mt-1 flex-shrink-0" aria-hidden="true">&bull;</span>
-                    <span><span class="font-mono text-body dark:text-dark-body">PHP / Laravel</span> &mdash; the roots</span>
+                    <span><span class="font-mono text-body dark:text-dark-body">PHP / Laravel</span>, the roots</span>
                 </li>
                 <li class="flex items-start gap-2">
                     <span class="text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mt-1 flex-shrink-0" aria-hidden="true">&bull;</span>
@@ -166,7 +170,7 @@
                 <span class="font-mono text-body dark:text-dark-body">Obsidian</span> with custom YAML frontmatter, wiki-link hubs, and epistemic belief-update framing.
             </p>
             <p class="text-fluid-sm text-muted dark:text-dark-muted leading-relaxed">
-                Every note has a confidence level. Knowledge isn't static &mdash; it updates like a Bayesian prior.
+                Every note has a confidence level and updates as evidence changes, like a Bayesian prior.
             </p>
         </div>
 

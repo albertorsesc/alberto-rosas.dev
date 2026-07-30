@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'About — Alberto Rosas')
-@section('description', 'AI & Agentic Systems Engineer based in Mexico. Production agentic systems for products where being wrong has real consequences. Agent frameworks, retrieval pipelines, eval-first.')
+@php
+    seo()
+        ->title('About · Alberto Rosas')
+        ->description('AI & Agentic Systems Engineer in Mexico. How I work: production agentic systems, hybrid retrieval, and eval-first delivery, from a security-automation background.')
+        ->url(route('about'));
+@endphp
 
 @section('content')
 <article class="pt-32 pb-20">
@@ -31,264 +35,147 @@
         </div>
     </header>
 
-    {{-- Security-First AI Engineering --}}
-    <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-        <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Security-First AI Engineering</h2>
-        <div class="grid gap-4 md:grid-cols-2">
-            <div class="gradient-border group">
-                <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Threat Modeling</p>
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">STRIDE applied to agent design</p>
-                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Tool-calling, MCP servers, and multi-step delegation modeled in the design doc. Attack surface mapped before code, aligned to OWASP Agentic Top 10 2026 and NIST&rsquo;s AI Agent Standards Initiative.</p>
-            </div>
-            <div class="gradient-border group">
-                <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">MCP Hardening</p>
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Protocol-level defense</p>
-                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Gateway auth (OAuth 2.1), bidirectional JSON-RPC inspection, signed-server allowlists, structured audit logs. Aligned to OWASP MCP Top 10.</p>
-            </div>
-            <div class="gradient-border group">
-                <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">RAG Data Governance</p>
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Vector stores are not a privacy boundary</p>
-                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Pre-embedding PII masking, document-level ACLs propagated into the index, lineage tracking for GDPR erasure. Embedding inversion (LLM08:2025) treated as a real attack.</p>
-            </div>
-            <div class="gradient-border group">
-                <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Guardrails &amp; Evals</p>
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Trust by measurement</p>
-                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Llama Guard 3 and NeMo Guardrails at runtime. Garak and PyRIT in CI for adversarial regression. Sandboxed execution (e2b, Modal) for any tool that touches code.</p>
-            </div>
-            <div class="gradient-border group md:col-span-2">
-                <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Compliance Readiness</p>
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-2">EU AI Act &middot; NIST AI RMF &middot; ISO/IEC 42001</p>
-                <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Conformity-ready logging, human-oversight hooks, automated evidence capture. EU AI Act obligations phasing in through 2026&ndash;2027; ISO/IEC 42001 increasingly required in enterprise AI procurement. SOAR-style automation applied to audit trails.</p>
-            </div>
+    {{-- Tabs: Story (who I am) and Approach (how I work). Career and case studies
+         live on /work; this page is the person and the method. --}}
+    <div class="mx-auto max-w-5xl px-6" x-data="{ tab: 'approach' }" data-reveal>
+
+        <div role="tablist" aria-label="About" class="flex gap-1 border-b border-border dark:border-dark-border mb-10">
+            <button
+                id="tab-approach" role="tab" x-ref="approachBtn"
+                aria-controls="panel-approach"
+                :aria-selected="tab === 'approach' ? 'true' : 'false'"
+                :tabindex="tab === 'approach' ? 0 : -1"
+                @click="tab = 'approach'"
+                @keydown.right.prevent="tab = 'story'; $nextTick(() => $refs.storyBtn.focus())"
+                @keydown.left.prevent="tab = 'story'; $nextTick(() => $refs.storyBtn.focus())"
+                :class="tab === 'approach'
+                    ? 'text-cyan-700 dark:text-brand-cyan border-brand-cyan'
+                    : 'text-muted dark:text-dark-muted border-transparent hover:text-body dark:hover:text-dark-body'"
+                class="px-4 py-3 -mb-px font-mono text-xs uppercase tracking-[0.2em] border-b-2 transition-colors duration-200"
+            >Approach</button>
+            <button
+                id="tab-story" role="tab" x-ref="storyBtn"
+                aria-controls="panel-story"
+                :aria-selected="tab === 'story' ? 'true' : 'false'"
+                :tabindex="tab === 'story' ? 0 : -1"
+                @click="tab = 'story'"
+                @keydown.left.prevent="tab = 'approach'; $nextTick(() => $refs.approachBtn.focus())"
+                @keydown.right.prevent="tab = 'approach'; $nextTick(() => $refs.approachBtn.focus())"
+                :class="tab === 'story'
+                    ? 'text-cyan-700 dark:text-brand-cyan border-brand-cyan'
+                    : 'text-muted dark:text-dark-muted border-transparent hover:text-body dark:hover:text-dark-body'"
+                class="px-4 py-3 -mb-px font-mono text-xs uppercase tracking-[0.2em] border-b-2 transition-colors duration-200"
+            >Story</button>
         </div>
-    </section>
 
-    <div>
-
-        {{-- Key Projects --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Key Projects</h2>
-            {{-- One row, unequal spans: width encodes weight (flagship > platform
-                 > methodology) instead of a symmetric three-up. --}}
-            <div class="grid gap-4 lg:grid-cols-12">
-                <div class="gradient-border group lg:col-span-5">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">UCF AI Engine</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Sole architect of the AI layer for a compliance SaaS</p>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Hybrid retrieval (Qdrant + Neo4j) over 500K+ regulatory records, LangGraph agentic chat, CRAG hallucination verification. Docker/AWS.</p>
-                </div>
-                <div class="gradient-border group lg:col-span-4">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">SADIE</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Production NL2SQL agentic platform</p>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">LangGraph + MCP tool-calling, MongoDB Atlas RAG pipeline, 93&ndash;97% query accuracy, Langfuse observability. FastAPI SSE.</p>
-                </div>
-                <div class="gradient-border gradient-border-amber group lg:col-span-3">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-amber-700 dark:group-hover:text-amber-400 mb-2">TriageOps Framework</p>
-                    <p class="text-sm text-body dark:text-dark-body font-medium mb-2">6-step AI adoption methodology</p>
-                    <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints recovered 70+ hrs/month ($42K annually) for one operations team.</p>
-                </div>
+        {{-- Story --}}
+        <div id="panel-story" role="tabpanel" aria-labelledby="tab-story" x-show="tab === 'story'" x-cloak tabindex="0" class="focus:outline-none">
+            <div class="max-w-2xl space-y-5 text-fluid-base text-muted dark:text-dark-muted leading-relaxed">
+                <p>
+                    I'm an AI and agentic systems engineer based in Mexico, with 12+ years in software and the last five on production AI. I build systems where the model is one component of something that has to be reliable, evaluable, and safe.
+                </p>
+                <p>
+                    I didn't start in AI. I spent years in cybersecurity automation, running SIEM, IDS/IPS, and SOAR pipelines over millions of events a day. That background is why I design for agent safety, MCP attack surfaces, and policy-as-code from the start.
+                </p>
+                <p>
+                    The other habit that carried over is measurement. Most &ldquo;RAG works&rdquo; claims fall apart under a real eval, so I build the evals first: custom harnesses, LLM-as-judge with measured agreement, CI-gated regression. Below the relevance bar, the system says it doesn't have sourced material rather than guessing.
+                </p>
+                <p class="text-body dark:text-dark-body">
+                    Today I architect production agentic systems for customer-facing products, and I help mid-market teams find where AI actually pays off through <a href="https://triageops.com" target="_blank" rel="noopener noreferrer" class="text-cyan-700 dark:text-cyan-400 hover:underline">TriageOps</a>. Bilingual EN/ES, US-timezone friendly.
+                </p>
             </div>
-        </section>
 
-        {{-- Technical Skills --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Technical Skills</h2>
-            <div class="grid gap-4 md:grid-cols-2">
-                <div class="gradient-border group">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">LLMs & Models</p>
-                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">GPT-4o, Claude, Gemini, Llama 3, Mistral, Qwen3, ModernBERT; fine-tuning (Unsloth, HuggingFace)</p>
-                </div>
-                <div class="gradient-border group">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Agentic Systems</p>
-                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">LangGraph, LangChain, MCP/tool-calling, multi-agent orchestration, multi-step reasoning, intent classification, memory systems</p>
-                </div>
-                <div class="gradient-border group">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">RAG & Retrieval</p>
-                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Qdrant, MongoDB Atlas, FAISS, Chroma, Neo4j, GraphRAG, hybrid retrieval (dense + sparse + graph), NL2SQL, context engineering</p>
-                </div>
-                <div class="gradient-border group">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Evaluation & LLMOps</p>
-                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">RAGAS, hallucination detection, latency benchmarking, Langfuse, Opik, Langsmith, MLflow, prompt versioning, CI/CD eval pipelines</p>
-                </div>
-                <div class="gradient-border group md:col-span-2">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Engineering</p>
-                    <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Python, TypeScript, PHP/Laravel, FastAPI, Docker, Kubernetes, AWS (Bedrock, SageMaker, EC2, S3, Lambda), CI/CD, Clean Architecture, microservices, event-driven systems</p>
-                </div>
-            </div>
-        </section>
-
-        {{-- Experience Timeline --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Experience</h2>
-
-            <div class="space-y-6">
-                {{-- Unified Compliance --}}
-                <div class="gradient-border group">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="text-body dark:text-dark-body font-medium">Unified Compliance</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400">Senior AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="font-mono text-xs text-muted dark:text-dark-muted">2025 &ndash; 2026</p>
-                            <p class="font-mono text-[10px] text-muted dark:text-dark-muted mt-0.5">via TriageOps</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Sole architect of the entire AI Engine for UCF's ControlSight compliance platform &mdash; 500K+ regulatory records.</p>
-                    <ul role="list" class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
-                        <li><span aria-hidden="true">&bull;</span> Built EEL pipeline: PostgreSQL &rarr; dense (ModernBERT) + sparse (BM25) embeddings &rarr; dual-load into Qdrant and Neo4j</li>
-                        <li><span aria-hidden="true">&bull;</span> Designed hybrid retrieval: Qdrant vector+BM25 with Neo4j graph traversal, plus CRAG grading</li>
-                        <li><span aria-hidden="true">&bull;</span> Built LangGraph agentic chat with intent classification, multi-turn context, query rewriting</li>
-                        <li><span aria-hidden="true">&bull;</span> Modeled 8 entity types and 10+ relationships in Neo4j with Cypher queries and cross-store validation</li>
-                        <li><span aria-hidden="true">&bull;</span> Evaluated using RAGAS (context recall/precision, faithfulness, answer relevancy)</li>
-                        <li><span aria-hidden="true">&bull;</span> Directed company AI strategy, aligning AI capabilities with product, GTM, and data privacy</li>
-                    </ul>
-                </div>
-
-                {{-- Storage360 --}}
-                <div class="gradient-border group">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="text-body dark:text-dark-body font-medium">Storage360</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400">AI &amp; Agentic Systems Engineer / Architect (Contract)</p>
-                        </div>
-                        <div class="text-right shrink-0">
-                            <p class="font-mono text-xs text-muted dark:text-dark-muted">2024 &ndash; 2025</p>
-                            <p class="font-mono text-[10px] text-muted dark:text-dark-muted mt-0.5">via TriageOps</p>
-                        </div>
-                    </div>
-                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Built SADIE &mdash; a production NL2SQL agentic platform for a property management SaaS.</p>
-                    <ul role="list" class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
-                        <li><span aria-hidden="true">&bull;</span> Built agentic workflow using LangGraph with MCP tool-calling and multi-step reasoning</li>
-                        <li><span aria-hidden="true">&bull;</span> Implemented RAG pipeline with MongoDB Atlas vector search, Qwen3 embeddings</li>
-                        <li><span aria-hidden="true">&bull;</span> Achieved 93&ndash;97% accuracy via RAGAS evaluation and CI/CD regression testing</li>
-                        <li><span aria-hidden="true">&bull;</span> Built MCP server for secure read-only database access with schema caching</li>
-                        <li><span aria-hidden="true">&bull;</span> Deployed via Docker Compose with Langfuse observability and FastAPI SSE streaming</li>
-                    </ul>
-                </div>
-
-                {{-- IncFile --}}
-                <div class="gradient-border group">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="text-body dark:text-dark-body font-medium">IncFile (Bizee)</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400">AI Systems Engineer / Software Engineer / Technical Project Lead</p>
-                        </div>
-                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2022 &ndash; Present</p>
-                    </div>
-                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Leading AI strategy and platform architecture at a business formation SaaS.</p>
-                    <ul role="list" class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
-                        <li><span aria-hidden="true">&bull;</span> Designed multi-agent system for document processing, handling 1,000+ daily requests</li>
-                        <li><span aria-hidden="true">&bull;</span> Built RAG pipeline with vector search; experimented with GraphRAG/KAG</li>
-                        <li><span aria-hidden="true">&bull;</span> Implemented multi-layer memory systems for cross-session context retention</li>
-                        <li><span aria-hidden="true">&bull;</span> Reduced manual data entry by 65% through intelligent form processing</li>
-                        <li><span aria-hidden="true">&bull;</span> Led platform migration from legacy monolith to service-oriented stack with CI/CD</li>
-                        <li><span aria-hidden="true">&bull;</span> Mentored 8 engineers on AI/ML development practices</li>
-                    </ul>
-                </div>
-
-                {{-- Global Cybersec --}}
-                <div class="gradient-border group">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="text-body dark:text-dark-body font-medium">Global Cybersec</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400">Engineering Manager</p>
-                        </div>
-                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2017 &ndash; 2021</p>
-                    </div>
-                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Led engineering for a cybersecurity firm building security automation and incident response.</p>
-                    <ul role="list" class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
-                        <li><span aria-hidden="true">&bull;</span> Event-driven architecture processing millions of daily security events</li>
-                        <li><span aria-hidden="true">&bull;</span> Integrated SIEM, IDS/IPS, firewalls, and SOAR &mdash; 60% reduction in incident response time</li>
-                        <li><span aria-hidden="true">&bull;</span> Built 4 microservice applications, managed team of 5 engineers</li>
-                    </ul>
-                </div>
-
-                {{-- Early Career --}}
-                <div class="gradient-border group">
-                    <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
-                        <div>
-                            <h3 class="text-body dark:text-dark-body font-medium">Multiple Companies</h3>
-                            <p class="text-sm text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400">Software Engineer</p>
-                        </div>
-                        <p class="font-mono text-xs text-muted dark:text-dark-muted shrink-0">2014 &ndash; 2017</p>
-                    </div>
-                    <p class="text-xs text-muted dark:text-dark-muted italic mb-3">Full-stack roles across logistics, healthcare, and proptech.</p>
-                    <ul role="list" class="text-xs text-muted dark:text-dark-muted space-y-1.5 list-none">
-                        <li><span aria-hidden="true">&bull;</span> Built logistics platform (GT Transport) handling AP/AR, routing, payroll, HR</li>
-                        <li><span aria-hidden="true">&bull;</span> Healthcare and proptech platforms with API design, testing, security</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        {{-- Education --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">Education & Certifications</h2>
-            <div class="gradient-border group">
-                <p class="text-sm text-body dark:text-dark-body font-medium mb-1">Universidad Polit&eacute;cnica de Baja California</p>
-                <p class="text-xs text-muted dark:text-dark-muted mb-4">Information Technology Engineering (2014&ndash;2016)</p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="tag">LangChain & LLMs Guide</span>
-                    <span class="tag">Gen AI Foundational Models</span>
-                    <span class="tag">Business Process Modeling with AI</span>
-                </div>
-            </div>
-        </section>
-
-        {{-- What I'm available for --}}
-        <section class="mx-auto max-w-5xl px-6 mb-16" data-reveal>
-            <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">What I&rsquo;m Available For</h2>
-            {{-- Stacked label-left rows, not a third card grid: the homepage
-                 contact triage already presents these tracks as cards. --}}
-            <div class="space-y-4">
-                <div class="gradient-border group sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-8 sm:items-baseline">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2 sm:mb-0">Senior Roles</p>
-                    <div>
-                        <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI &amp; Agentic Systems Engineer &middot; AI Systems Architect</p>
-                        <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Full-time remote, contractor or EOR-employed.</p>
-                    </div>
-                </div>
-                <div class="gradient-border group sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-8 sm:items-baseline">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2 sm:mb-0">Consulting</p>
-                    <div>
-                        <p class="text-sm text-body dark:text-dark-body font-medium mb-2">AI adoption via <a href="https://triageops.com" target="_blank" rel="noopener noreferrer" class="text-cyan-700 dark:text-cyan-400 hover:underline">TriageOps</a></p>
-                        <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Discovery Sprints, scoped pilots, eval-gated rollouts for mid-market teams.</p>
-                    </div>
-                </div>
-                <div class="gradient-border group sm:grid sm:grid-cols-[11rem_1fr] sm:gap-x-8 sm:items-baseline">
-                    <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2 sm:mb-0">Architecture Review</p>
-                    <div>
-                        <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Second-opinion on production agents</p>
-                        <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Context engineering, evals, MCP attack surface, agent security audits.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        {{-- Download Resume + CTA --}}
-        <section class="mx-auto max-w-5xl px-6 text-center" data-reveal>
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <a
-                    href="/alberto_rosas_ai_engineer.pdf"
-                    download
-                    class="btn btn-primary"
-                >
-                    Download Full Resume (PDF)
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                    </svg>
-                </a>
-                <a
-                    href="/#contact"
-                    class="btn btn-ghost"
-                >
+            <div class="mt-10">
+                <a href="/#contact" class="btn btn-primary group">
                     Let&rsquo;s talk
-                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
                     </svg>
                 </a>
             </div>
-        </section>
+        </div>
+
+        {{-- Approach --}}
+        <div id="panel-approach" role="tabpanel" aria-labelledby="tab-approach" x-show="tab === 'approach'" tabindex="0" class="focus:outline-none">
+
+            {{-- Frame first: the rigor is what makes fast shipping safe, not a gate
+                 that slows it down. Capabilities (what I deliver) lead; security and
+                 evals follow as the safety net. --}}
+            <p class="max-w-2xl text-fluid-base text-muted dark:text-dark-muted leading-relaxed mb-12">
+                The evals run in CI, the threat model is a design-doc pass, and the guardrails are code. The discipline is automated and light, so problems surface in a build rather than in production.
+            </p>
+
+            <div class="space-y-16">
+
+                {{-- Capabilities --}}
+                <section>
+                    <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-8">What I build</h2>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Agentic Systems</p>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Production agent systems end to end: orchestration, tool-calling, multi-step reasoning, intent routing, and memory that persists across sessions.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Retrieval</p>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Hybrid retrieval that holds up on real corpora: dense, sparse, and graph combined with reranking, plus NL-to-SQL when the answer is a query rather than a paragraph.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Evaluation &amp; Observability</p>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Custom eval harnesses with LLM-as-judge and hallucination grading, gated in CI, with end-to-end tracing so regressions surface before users do.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Models</p>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Frontier and open-weight models, including self-hosted deployment and fine-tuning for domain-specific tasks.</p>
+                        </div>
+                        <div class="gradient-border group md:col-span-2">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-3">Production Engineering</p>
+                            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed">Clean-architecture backends, async APIs, and containerized deployment, plus the platform migration and scaling work that keeps systems reliable under load.</p>
+                        </div>
+                    </div>
+                </section>
+
+                {{-- Security & evals: the safety net that keeps speed from turning fragile --}}
+                <section>
+                    <h2 class="font-heading text-fluid-xl text-body dark:text-dark-body mb-2">Security and evals, built in</h2>
+                    <p class="text-sm text-muted dark:text-dark-muted mb-8 max-w-2xl">Carried over from years in security operations.</p>
+                    <div class="grid gap-4 md:grid-cols-2">
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Threat Modeling</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Threat modeling before a tool is granted</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Attack surface mapped in the design doc before code, STRIDE-style, drawn from years of SIEM and SOAR operations. Tracked against the OWASP LLM and Agentic Top 10 and MITRE ATLAS.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Tool-Calling &amp; MCP</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Read-only enforced in the policy layer</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">On SADIE's MCP server, database access is read-only and enforced in policy code, not model behavior. Default-deny allowlist, with tool output treated as untrusted input.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Regulated Data</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Governance for regulated data</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">500K+ regulated records under GDPR and HIPAA. Sensitive data routed to self-hosted models, PII masked before embedding, embeddings access-controlled like their source, tenant scope resolved at query time (OWASP LLM08).</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Red-Teaming</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Adversarial testing gated in CI</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Systems red-teamed with garak and PyRIT, with findings gated in CI so a regression that reopens a known jailbreak fails the build. Tracked against the OWASP LLM Top 10 and MITRE ATLAS.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Runtime Guardrails</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Layered runtime guardrails</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Custom guardrails layered with Llama Guard and NeMo Guardrails, validating input and output on both sides of the model call. Code-executing tools run sandboxed in e2b behind an egress allowlist.</p>
+                        </div>
+                        <div class="gradient-border group">
+                            <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Governance</p>
+                            <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Governance and compliance readiness</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Built the AI layer for a platform used by compliance auditors, with systems classified against the EU AI Act, NIST AI RMF, and ISO/IEC 42001. Refusal and confidence tiering surfaced to users when certainty is low.</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
     </div>
 
 </article>

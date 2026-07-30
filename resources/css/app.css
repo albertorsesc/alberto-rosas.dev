@@ -491,20 +491,21 @@ button:focus-visible {
     cursor: not-allowed;
 }
 
-/* Primary — the brand gradient CTA */
-/* Slop-test gate 2: the atmospheric genre allows radial gradients on
-   background only, never on pill buttons. The old cyan->blue->purple fill was
-   also three raw Tailwind hexes that appear in no design token. Solid accent
-   ink on the paper, with the glow carrying the emission instead. */
+/* Primary — emission CTA. A glowing cyan outline over the paper rather than a
+   solid block of accent: it matches the neon-emission language used everywhere
+   else (bright neon-cyan, not the bluer brand-cyan) and rations the fill. */
 .btn-primary {
-    background-color: var(--brand-cyan);
-    color: var(--color-dark-surface);
-    box-shadow: 0 10px 24px -8px rgb(var(--neon-cyan-rgb) / 0.45);
+    background-color: rgb(var(--neon-cyan-rgb) / 0.08);
+    color: var(--neon-cyan);
+    border: 1px solid rgb(var(--neon-cyan-rgb) / 0.55);
+    box-shadow: 0 0 22px -8px rgb(var(--neon-cyan-rgb) / 0.45);
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 14px 34px -6px rgb(var(--neon-cyan-rgb) / 0.55);
+    background-color: rgb(var(--neon-cyan-rgb) / 0.14);
+    border-color: rgb(var(--neon-cyan-rgb) / 0.9);
+    box-shadow: 0 0 30px -6px rgb(var(--neon-cyan-rgb) / 0.6);
 }
 
 .btn-primary:active:not(:disabled) {

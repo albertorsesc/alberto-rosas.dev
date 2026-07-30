@@ -11,7 +11,14 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-    safelist: ['mr-2', 'scroll-mt-12'],
+    safelist: [
+        'mr-2',
+        'scroll-mt-12',
+        // The experiments bento spans are generated in App\Services\Github\Pins
+        // (a PHP file Tailwind's content scanner never reads), so their col-span
+        // classes must be safelisted or the cards collapse to a single column.
+        { pattern: /col-span-[1-6]/, variants: ['sm', 'lg'] },
+    ],
     theme: {
         extend: {
             fontFamily: {

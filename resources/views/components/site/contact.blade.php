@@ -11,10 +11,10 @@
     <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
 
         <div class="lg:col-span-4"
-             x-data="{ track: 'role', tracks: [
-                { id: 'role',       label: 'role',       detail: 'Senior IC / tech-lead at AI-native companies',      terms: 'Full-time remote · contractor or EOR · no US W2' },
+             x-data="{ track: 'consulting', tracks: [
                 { id: 'consulting', label: 'consulting', detail: 'AI adoption for mid-market teams, via TriageOps',   terms: 'Discovery Sprint · scoped pilot · eval-gated rollout' },
                 { id: 'review',     label: 'review',     detail: 'Architecture review on production agentic systems', terms: 'Context engineering · evals · MCP · agent security' },
+                { id: 'role',       label: 'role',       detail: 'AI &amp; Agentic Systems Engineer / Architect at AI-native companies', terms: 'Full-time remote · contractor or EOR · no US W2' },
              ] }">
 
             <p class="font-mono text-xs uppercase tracking-[0.3em] text-cyan-700 dark:text-cyan-400 mb-6">
@@ -22,7 +22,7 @@
             </p>
 
             <h2 class="font-heading text-fluid-3xl text-body dark:text-dark-body leading-[0.95] tracking-[-0.02em] mb-8">
-                Three ways<br />this usually starts.
+                Ways to work together.
             </h2>
 
             <div class="border-t border-border dark:border-dark-border">

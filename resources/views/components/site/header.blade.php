@@ -15,10 +15,10 @@
             <div class="hidden sm:flex items-center gap-1">
                 @php
                     $navLinks = [
+                        ['name' => 'Work', 'href' => '/work'],
                         ['name' => 'About', 'href' => '/about'],
                         ['name' => 'Blog', 'href' => '/blog'],
-                        ['name' => 'Now', 'href' => '/now'],
-                        ['name' => 'Uses', 'href' => '/uses'],
+                        ['name' => 'Contact', 'href' => '/#contact'],
                     ];
                 @endphp
 
@@ -96,7 +96,7 @@
         id="mobile-menu"
         class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-surface/95 backdrop-blur-xl dark:bg-dark-surface/95 sm:hidden"
     >
-        @foreach ([['/', 'Home'], ['/about', 'About'], ['/blog', 'Blog'], ['/now', 'Now'], ['/uses', 'Uses']] as [$href, $name])
+        @foreach ([['/', 'Home'], ['/work', 'Work'], ['/about', 'About'], ['/blog', 'Blog'], ['/now', 'Now'], ['/uses', 'Uses'], ['/#contact', 'Contact']] as [$href, $name])
             <a
                 href="{{ $href }}"
                 @click="menuOpen = false"

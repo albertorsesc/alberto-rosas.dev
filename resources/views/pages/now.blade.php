@@ -8,8 +8,12 @@
     $lastUpdated = 'May 2026';
 @endphp
 
-@section('title', 'Now — Alberto Rosas')
-@section('description', "What Alberto Rosas is building, learning, reading, and thinking about right now. Updated {$lastUpdated}.")
+@php
+    seo()
+        ->title('Now · Alberto Rosas')
+        ->description("What Alberto Rosas is building, learning, reading, and thinking about right now. Updated {$lastUpdated}.")
+        ->url(route('now'));
+@endphp
 
 @section('content')
 <article class="pt-32 pb-20">
@@ -28,38 +32,39 @@
         <section data-reveal>
             <h2>Building</h2>
             <p>
-                Production AI chat pipelines. Multi-agent orchestration with LangGraph, hybrid retrieval with Qdrant + Neo4j, evaluation with Langfuse. Running <a href="https://triageops.com" target="_blank" rel="noopener noreferrer">TRIAGE Ops</a> on the consulting side.
+                Production AI chat pipelines. Multi-agent orchestration with LangGraph, hybrid retrieval with Qdrant + Neo4j, evaluation with Langfuse. Running <a href="https://triageops.com" target="_blank" rel="noopener noreferrer">TriageOps</a> on the consulting side.
             </p>
         </section>
 
         <section data-reveal>
             <h2>Learning</h2>
             <p>
-                Deep in agent runtimes and harness architectures. Researching open-source compliant patterns for enterprise. Unified agentic-ops in local-first environments that can eventually scale to enterprise. Also: psychocybernetics &mdash; hacking the mind's self-image for self-improvement. The wetware is part of the stack.
+                Deep in agent runtimes and harness architectures. Researching open-source, compliant patterns for enterprise. Unified agentic-ops in local-first environments that can scale to enterprise.
             </p>
         </section>
 
         <section data-reveal>
             <h2>Reading</h2>
             <ul>
-                <li><em>Building Applications with AI Agents</em> &mdash; Michael Albada</li>
-                <li><em>Architecting AI Software Systems</em> &mdash; Richard D. Avila &amp; Imran Ahmad</li>
-                <li><em>Meditations</em> &mdash; Marcus Aurelius</li>
-                <li><em>The Way of Zen</em> &mdash; Alan Watts</li>
+                <li><em>AI Systems Performance Engineering</em> by Chris Fregly</li>
+                <li><em>Building Applications with AI Agents</em> by Michael Albada</li>
+                <li><em>Architecting AI Software Systems</em> by Richard D. Avila &amp; Imran Ahmad</li>
+                <li><em>Meditations</em> by Marcus Aurelius</li>
+                <li><em>The Way of Zen</em> by Alan Watts</li>
             </ul>
         </section>
 
         <section data-reveal>
             <h2>Thinking About</h2>
             <p>
-                How to make AI agents truly reliable in production. The gap between demo and deployment is where the real engineering lives. Whether the concept of identity is the final cage. And what a unified agentic-ops layer looks like when you start local-first and design for enterprise from day one.
+                How to make AI agents reliable in production, and how to close the gap between a demo and a deployment. What a unified agentic-ops layer looks like when you start local-first and design for enterprise from day one.
             </p>
         </section>
 
         <section data-reveal>
             <h2>Life</h2>
             <p>
-                Riding season. 4:20 AM alarm hasn't failed yet. Coffee remains non-negotiable.
+                Riding season. Early alarms, black coffee, and the Harley when the roads are clear.
             </p>
         </section>
 
