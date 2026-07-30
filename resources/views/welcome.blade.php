@@ -203,12 +203,8 @@
             <div class="border-t border-border dark:border-dark-border">
                 @foreach ($posts as $post)
                     <a href="{{ route('prezet.show', $post->slug) }}"
-                       class="group grid grid-cols-1 md:grid-cols-[10rem_1fr_auto] gap-1 md:gap-8 items-baseline
+                       class="group grid grid-cols-1 md:grid-cols-[1fr_auto] gap-1 md:gap-8 items-baseline
                               py-6 border-b border-border dark:border-dark-border">
-                        <time datetime="{{ $post->createdAt->toIso8601String() }}"
-                              class="font-mono text-xs text-muted dark:text-dark-muted tabular-nums">
-                            {{ $post->createdAt->format('M Y') }}
-                        </time>
                         <h3 class="font-heading text-fluid-lg text-body dark:text-dark-body leading-snug
                                    transition-colors duration-300
                                    group-hover:text-cyan-700 dark:group-hover:text-cyan-400">
@@ -223,10 +219,27 @@
                class="inline-flex items-baseline gap-2 mt-6 font-mono text-xs uppercase tracking-[0.2em]
                       text-muted dark:text-dark-muted transition-colors duration-300
                       hover:text-cyan-700 dark:hover:text-cyan-400">
-                All {{ $postCount }} posts <span aria-hidden="true">&rarr;</span>
+                All {{ $postCount }} {{ \Illuminate\Support\Str::plural('post', $postCount) }} <span aria-hidden="true">&rarr;</span>
             </a>
         </section>
     @endif
+
+    {{-- ── Block 5 · newsletter. One quiet capture after the writing, where intent
+           peaks. Source-tagged so placements can be compared later. ── --}}
+    <section class="px-6 md:px-12 pb-24">
+        <div class="max-w-2xl">
+            <h2 class="font-mono text-xs uppercase tracking-[0.3em] text-cyan-700 dark:text-cyan-400 mb-5 font-normal">
+                <span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> newsletter
+            </h2>
+            <p class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">
+                Notes from building production AI.
+            </p>
+            <p class="text-sm text-muted dark:text-dark-muted leading-relaxed mb-6">
+                Evals, retrieval, agent security, and what actually holds up in production.
+            </p>
+            <x-site.subscribe-form source="home" cta="Subscribe" />
+        </div>
+    </section>
 
     {{-- Contact --}}
     @include('components.site.contact')

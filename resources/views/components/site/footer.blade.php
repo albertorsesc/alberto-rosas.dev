@@ -1,5 +1,9 @@
 <footer class="border-t border-border dark:border-dark-border mt-24 py-12">
     <div class="mx-auto max-w-5xl px-6 flex flex-col gap-8">
+        <div class="max-w-md">
+            <p class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted mb-3">Newsletter</p>
+            <x-site.subscribe-form source="footer" cta="Subscribe" />
+        </div>
         <nav aria-label="Footer" class="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted dark:text-dark-muted">
             <a href="/work" class="transition-colors hover:text-cyan-700 dark:hover:text-brand-cyan">Work</a>
             <a href="/about" class="transition-colors hover:text-cyan-700 dark:hover:text-brand-cyan">About</a>

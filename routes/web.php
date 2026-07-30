@@ -39,4 +39,30 @@ Route::view('/about', 'pages.about')->name('about');
 Route::view('/now', 'pages.now')->name('now');
 Route::view('/uses', 'pages.uses')->name('uses');
 
+// Newsletter capture. Rate-limited and CSRF-exempt (see bootstrap/app.php) so it
+// works from cached blog pages; double opt-in makes forged posts inert.
+Route::post('/newsletter/subscribe', \App\Http\Controllers\SubscribeController::class)
+    ->middleware('throttle:6,1')
+    ->name('newsletter.subscribe');
+
+// Double opt-in confirm marks the subscriber, mirrors to the Resend audience,
+// sends the welcome, and pings Slack. Unsubscribe flips the status.
+Route::get('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'confirm'])
+    ->name('newsletter.confirm');
+Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])
+    ->name('newsletter.unsubscribe');
+
+// Blog RSS feed. Registered before Prezet's blog/{slug} catch-all so "feed" isn't
+// matched as a slug. Prezet 0.8.8 ships no feed of its own.
+Route::get('/blog/feed', function () {
+    $docs = \BenBjurstrom\Prezet\Models\Document::where('draft', false)
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->map(fn ($doc) => $doc->frontmatter);
+
+    return response()
+        ->view('feed', ['docs' => $docs])
+        ->header('Content-Type', 'application/rss+xml; charset=utf-8');
+})->name('blog.feed');
+
 require __DIR__.'/prezet.php';

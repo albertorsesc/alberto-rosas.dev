@@ -113,4 +113,20 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Global "Reply-To" Address
+    |--------------------------------------------------------------------------
+    |
+    | The "From" address (newsletter@alberto-rosas.dev) is send-only, so replies
+    | are routed to a real inbox here instead of bouncing. Applied globally in
+    | AppServiceProvider; no-ops when the address is empty.
+    |
+    */
+
+    'reply_to' => [
+        'address' => env('MAIL_REPLY_TO_ADDRESS'),
+        'name' => env('MAIL_REPLY_TO_NAME', env('MAIL_FROM_NAME')),
+    ],
+
 ];

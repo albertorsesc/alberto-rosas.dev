@@ -26,6 +26,9 @@ return [
 
     'resend' => [
         'key' => env('RESEND_KEY'),
+        // Newsletter list. Confirmed subscribers sync here for broadcasts; the
+        // sync no-ops when the key or audience id are absent (e.g. local dev).
+        'audience_id' => env('RESEND_AUDIENCE_ID'),
     ],
 
     'slack' => [

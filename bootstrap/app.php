@@ -11,7 +11,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // The newsletter form lives on cached, cookie-stripped blog pages where a
+        // per-session CSRF token can't be issued. The endpoint is rate-limited and
+        // uses double opt-in, so a forged post can at most email a confirmation the
+        // recipient must still click.
+        $middleware->validateCsrfTokens(except: [
+            'newsletter/subscribe',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

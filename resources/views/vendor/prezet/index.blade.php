@@ -4,7 +4,7 @@
 
 <x-prezet::template>
     @seo([
-        'title' => 'Articles — Alberto Rosas',
+        'title' => 'Articles · Alberto Rosas',
         'description' =>
             'AI & Agentic Systems Engineer. Writing on production agents, hybrid retrieval, security and guardrails, evaluation pipelines, and the engineering behind real AI systems.',
         'url' => route('prezet.index'),
@@ -45,12 +45,6 @@
                         <h2 class="mt-3 font-heading text-fluid-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                             {{ $featured->title }}
                         </h2>
-                        <time
-                            datetime="{{ $featured->createdAt->toIso8601String() }}"
-                            class="mt-2 block font-mono text-sm text-muted dark:text-dark-muted"
-                        >
-                            {{ $featured->createdAt->format('F j, Y') }}
-                        </time>
                         <p class="mt-3 text-fluid-base leading-relaxed text-muted dark:text-dark-muted">
                             {{ $featured->excerpt }}
                         </p>
@@ -86,12 +80,6 @@
                                     <h2 class="mt-3 font-heading text-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                                         {{ $article->title }}
                                     </h2>
-                                    <time
-                                        datetime="{{ $article->createdAt->toIso8601String() }}"
-                                        class="mt-2 block font-mono text-sm text-muted dark:text-dark-muted"
-                                    >
-                                        {{ $article->createdAt->format('F j, Y') }}
-                                    </time>
                                     <p class="mt-3 flex-1 text-sm leading-relaxed text-muted dark:text-dark-muted line-clamp-3">
                                         {{ $article->excerpt }}
                                     </p>

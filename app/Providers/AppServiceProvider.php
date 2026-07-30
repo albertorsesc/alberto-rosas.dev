@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\Github\Client;
 use App\Services\Github\Pins;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -22,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
             $app->make(Client::class),
             config('services.github.pins_ttl_hours'),
         ));
+
+        $this->app->singleton(\App\Services\Resend\Audience::class, fn () => new \App\Services\Resend\Audience(
+            config('services.resend.key'),
+            config('services.resend.audience_id'),
+        ));
     }
 
     /**
@@ -29,6 +35,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // The newsletter's from address is send-only; route replies to a real
+        // inbox instead of letting them bounce. No-ops until a reply-to is set.
+        if ($replyTo = config('mail.reply_to.address')) {
+            Mail::alwaysReplyTo($replyTo, config('mail.reply_to.name'));
+        }
+
         // Site-wide SEO defaults. Per-page calls (in each view / the blog's
         // SetSeo action) override these; anything not overridden falls back here.
         seo()

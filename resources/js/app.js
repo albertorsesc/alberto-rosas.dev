@@ -16,6 +16,66 @@ document.addEventListener('livewire:init', () => {
     });
 });
 
+// Newsletter subscribe: progressive enhancement over a plain POST form. Sends the
+// form (including the honeypot) via fetch and swaps in inline feedback, so it works
+// on cached blog pages where a full-page redirect can't show a session flash.
+function initSubscribeForms() {
+    document.querySelectorAll('form[data-subscribe]').forEach((form) => {
+        if (form.dataset.enhanced) return;
+        form.dataset.enhanced = '1';
+
+        const wrap = form.closest('[data-subscribe-wrap]');
+        const btn = form.querySelector('[data-subscribe-btn]');
+        const label = btn?.querySelector('[data-label]');
+        const loading = btn?.querySelector('[data-loading]');
+        const success = wrap?.querySelector('[data-subscribe-success]');
+        const error = wrap?.querySelector('[data-subscribe-error]');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (error) error.hidden = true;
+            if (btn) btn.disabled = true;
+            if (label) label.hidden = true;
+            if (loading) loading.hidden = false;
+
+            try {
+                const res = await fetch(form.action, {
+                    method: 'POST',
+                    headers: { Accept: 'application/json' },
+                    body: new FormData(form),
+                });
+
+                if (res.ok) {
+                    form.hidden = true;
+                    if (success) success.hidden = false;
+                    return;
+                }
+
+                const data = await res.json().catch(() => ({}));
+                if (error) {
+                    error.textContent = data?.errors?.email?.[0] ?? 'Something went wrong. Please try again.';
+                    error.hidden = false;
+                }
+            } catch {
+                if (error) {
+                    error.textContent = 'Network error. Please try again.';
+                    error.hidden = false;
+                }
+            } finally {
+                if (btn) btn.disabled = false;
+                if (label) label.hidden = false;
+                if (loading) loading.hidden = true;
+            }
+        });
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSubscribeForms);
+} else {
+    initSubscribeForms();
+}
+
 // A note in the console for anyone who opens DevTools, framed as one of my own
 // eval runs. The audience that opens the console is the audience I want to reach.
 {

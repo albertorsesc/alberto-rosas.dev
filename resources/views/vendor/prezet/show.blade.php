@@ -36,14 +36,6 @@
                 <h1 class="font-heading text-fluid-3xl tracking-tight text-body dark:text-dark-body">
                     {{ $frontmatter->title }}
                 </h1>
-                @if (isset($frontmatter->createdAt))
-                    <time
-                        datetime="{{ $frontmatter->createdAt->toIso8601String() }}"
-                        class="block font-mono text-sm text-muted dark:text-dark-muted"
-                    >
-                        {{ $frontmatter->createdAt->format('F j, Y') }}
-                    </time>
-                @endif
                 <p class="font-mono text-sm text-muted dark:text-dark-muted">
                     By <a href="/about" rel="author" class="text-cyan-700 dark:text-cyan-400 hover:underline">Alberto Rosas</a>
                 </p>
@@ -52,6 +44,21 @@
                 class="prose prose-lg prose-stone dark:prose-invert max-w-none prose-headings:font-heading prose-headings:tracking-tight prose-a:text-cyan-700 dark:prose-a:text-cyan-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-code:font-mono prose-pre:rounded-xl prose-pre:border prose-pre:border-border dark:prose-pre:border-dark-border"
             >
                 {!! $body !!}
+            </div>
+
+            {{-- End-of-post capture, where reading intent peaks. Inside the article
+                 column so it aligns with the measure; tagged by slug to compare. --}}
+            <div class="mt-16 border-t border-border dark:border-dark-border pt-10">
+                <p class="font-mono text-xs uppercase tracking-[0.3em] text-cyan-700 dark:text-cyan-400 mb-4 font-normal">
+                    <span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> newsletter
+                </p>
+                <p class="font-heading text-fluid-lg text-body dark:text-dark-body mb-3">
+                    Get the next one in your inbox.
+                </p>
+                <p class="mb-6 max-w-xl text-sm leading-relaxed text-muted dark:text-dark-muted">
+                    Notes on building production AI: evals, retrieval, agent security, and what holds up.
+                </p>
+                <x-site.subscribe-form :source="'post:'.($frontmatter->slug ?? 'blog')" cta="Subscribe" />
             </div>
         </article>
 
