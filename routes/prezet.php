@@ -3,7 +3,7 @@
 use App\Http\Controllers\Blog\ImageController;
 use App\Http\Controllers\Blog\IndexController;
 use App\Http\Controllers\Blog\ShowController;
-use Illuminate\Foundation\Http\Middleware\ValidateCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -16,7 +16,7 @@ Route::middleware('cache.headers:public;max_age=0;etag')
     ->withoutMiddleware([
         ShareErrorsFromSession::class,
         StartSession::class,
-        ValidateCsrfToken::class,
+        PreventRequestForgery::class,
     ])
     ->group(function () {
         Route::get('blog/img/{path}', ImageController::class)
