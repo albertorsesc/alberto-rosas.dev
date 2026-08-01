@@ -5,6 +5,8 @@ namespace App\Providers;
 use App\Listeners\ReportErrorToSlack;
 use App\Services\Github\Client;
 use App\Services\Github\Pins;
+use App\Services\Resend\Audience;
+use ArchTech\SEO\SEOManager;
 use Illuminate\Log\Events\MessageLogged;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
@@ -21,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         // hijack the archtechx/laravel-seo manager the whole site uses (seo()->title,
         // <x-seo::meta>). This provider loads after both packages, so re-assert
         // archtechx as the authoritative `seo` binding.
-        $this->app->scoped('seo', \ArchTech\SEO\SEOManager::class);
+        $this->app->scoped('seo', SEOManager::class);
 
         $this->app->singleton(Client::class, fn () => new Client(
             config('services.github.token'),
@@ -32,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
             $app->make(Client::class),
         ));
 
-        $this->app->singleton(\App\Services\Resend\Audience::class, fn () => new \App\Services\Resend\Audience(
+        $this->app->singleton(Audience::class, fn () => new Audience(
             config('services.resend.key'),
             config('services.resend.audience_id'),
         ));

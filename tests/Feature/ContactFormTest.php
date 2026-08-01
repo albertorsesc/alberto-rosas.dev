@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Schema;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -164,7 +165,7 @@ class ContactFormTest extends TestCase
 
     public function test_persistence_failure_shows_friendly_error_and_does_not_burn_rate_limit(): void
     {
-        \Illuminate\Support\Facades\Schema::drop('contacts');
+        Schema::drop('contacts');
 
         Livewire::test(ContactForm::class)
             ->set('name', 'Real User')

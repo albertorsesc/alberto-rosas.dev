@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use Prezet\Prezet\Models\Document;
 use Illuminate\Console\Command;
+use Prezet\Prezet\Models\Document;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;
 

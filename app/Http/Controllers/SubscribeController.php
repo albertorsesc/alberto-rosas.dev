@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Symfony\Component\HttpFoundation\Response;
 
 class SubscribeController extends Controller
 {
@@ -80,7 +81,7 @@ class SubscribeController extends Controller
         return $this->done($request, $source);
     }
 
-    private function done(Request $request, string $source): \Symfony\Component\HttpFoundation\Response
+    private function done(Request $request, string $source): Response
     {
         return $request->expectsJson()
             ? response()->json(['ok' => true])

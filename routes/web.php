@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SubscribeController;
 use App\Services\Github\Pins;
-use Prezet\Prezet\Models\Document;
 use Illuminate\Support\Facades\Route;
+use Prezet\Prezet\Models\Document;
 
 Route::get('/', function (Pins $pins) {
     // The homepage stays up even if the Prezet index is missing or broken;
@@ -14,7 +16,7 @@ Route::get('/', function (Pins $pins) {
             ->take(3)
             ->get()
             ->map(fn ($doc) => $doc->frontmatter);
-    } catch (\Throwable) {
+    } catch (Throwable) {
         $posts = collect();
         $postCount = 0;
     }
@@ -23,7 +25,7 @@ Route::get('/', function (Pins $pins) {
     // failure the service returns [] and the section hides.
     try {
         $experiments = $pins->cards();
-    } catch (\Throwable) {
+    } catch (Throwable) {
         $experiments = [];
     }
 
@@ -41,7 +43,7 @@ Route::view('/uses', 'pages.uses')->name('uses');
 
 // Newsletter capture. Rate-limited and CSRF-exempt (see bootstrap/app.php) so it
 // works from cached blog pages; double opt-in makes forged posts inert.
-Route::post('/newsletter/subscribe', \App\Http\Controllers\SubscribeController::class)
+Route::post('/newsletter/subscribe', SubscribeController::class)
     ->middleware('throttle:6,1')
     ->name('newsletter.subscribe');
 
@@ -50,19 +52,19 @@ Route::post('/newsletter/subscribe', \App\Http\Controllers\SubscribeController::
 // stops mail scanners that prefetch links from auto-confirming a forged signup or
 // silently unsubscribing a real subscriber. CSRF applies normally (these pages are
 // session-backed, unlike the cached-page subscribe endpoint).
-Route::get('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'showConfirm'])
+Route::get('/newsletter/confirm/{token}', [NewsletterController::class, 'showConfirm'])
     ->name('newsletter.confirm');
-Route::post('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'confirm'])
+Route::post('/newsletter/confirm/{token}', [NewsletterController::class, 'confirm'])
     ->name('newsletter.confirm.submit');
-Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'showUnsubscribe'])
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'showUnsubscribe'])
     ->name('newsletter.unsubscribe');
-Route::post('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])
+Route::post('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])
     ->name('newsletter.unsubscribe.submit');
 
 // Blog RSS feed. Registered before Prezet's blog/{slug} catch-all so "feed" isn't
 // matched as a slug. Prezet 0.8.8 ships no feed of its own.
 Route::get('/blog/feed', function () {
-    $docs = \Prezet\Prezet\Models\Document::where('draft', false)
+    $docs = Document::where('draft', false)
         ->orderBy('created_at', 'desc')
         ->get()
         ->map(fn ($doc) => $doc->frontmatter);

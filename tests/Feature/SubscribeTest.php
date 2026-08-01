@@ -31,7 +31,7 @@ class SubscribeTest extends TestCase
         config()->set('services.slack.notifications.channel', null);
         // Never let the suite reach the real Resend audience, even when the
         // developer's .env holds a live key + audience id. Bind a disabled Audience.
-        $this->app->singleton(\App\Services\Resend\Audience::class, fn () => new \App\Services\Resend\Audience(null, null));
+        $this->app->singleton(Audience::class, fn () => new Audience(null, null));
     }
 
     public function test_subscribing_creates_a_pending_record_and_sends_confirmation(): void
