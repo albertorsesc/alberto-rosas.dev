@@ -17,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Prezet v1 ships its own SEO and binds `seo` to its service, which would
+        // hijack the archtechx/laravel-seo manager the whole site uses (seo()->title,
+        // <x-seo::meta>). This provider loads after both packages, so re-assert
+        // archtechx as the authoritative `seo` binding.
+        $this->app->scoped('seo', \ArchTech\SEO\SEOManager::class);
+
         $this->app->singleton(Client::class, fn () => new Client(
             config('services.github.token'),
             config('services.github.user'),
