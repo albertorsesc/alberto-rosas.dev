@@ -46,22 +46,25 @@ export default {
                     'amber-light': 'oklch(82% 0.12 70 / <alpha-value>)',
                     'amber-dark': 'oklch(65% 0.18 70 / <alpha-value>)',
                 },
+                // rgb(var(--x-rgb) / <alpha-value>) so opacity modifiers compile
+                // (bg-surface/80, border-border/50). At full opacity the output is
+                // identical to the bare hex var.
                 surface: {
-                    DEFAULT: 'var(--color-surface)',
-                    alt: 'var(--color-surface-alt)',
+                    DEFAULT: 'rgb(var(--color-surface-rgb) / <alpha-value>)',
+                    alt: 'rgb(var(--color-surface-alt-rgb) / <alpha-value>)',
                 },
-                body: 'var(--color-text)',
-                muted: 'var(--color-text-muted)',
-                subtle: 'var(--color-text-subtle)',
-                border: 'var(--color-border)',
+                body: 'rgb(var(--color-text-rgb) / <alpha-value>)',
+                muted: 'rgb(var(--color-text-muted-rgb) / <alpha-value>)',
+                subtle: 'rgb(var(--color-text-subtle-rgb) / <alpha-value>)',
+                border: 'rgb(var(--color-border-rgb) / <alpha-value>)',
                 'dark-surface': {
-                    DEFAULT: 'var(--color-dark-surface)',
-                    alt: 'var(--color-dark-surface-alt)',
+                    DEFAULT: 'rgb(var(--color-dark-surface-rgb) / <alpha-value>)',
+                    alt: 'rgb(var(--color-dark-surface-alt-rgb) / <alpha-value>)',
                 },
-                'dark-body': 'var(--color-dark-text)',
-                'dark-muted': 'var(--color-dark-text-muted)',
-                'dark-subtle': 'var(--color-dark-text-subtle)',
-                'dark-border': 'var(--color-dark-border)',
+                'dark-body': 'rgb(var(--color-dark-text-rgb) / <alpha-value>)',
+                'dark-muted': 'rgb(var(--color-dark-text-muted-rgb) / <alpha-value>)',
+                'dark-subtle': 'rgb(var(--color-dark-text-subtle-rgb) / <alpha-value>)',
+                'dark-border': 'rgb(var(--color-dark-border-rgb) / <alpha-value>)',
             },
             borderRadius: {
                 card: '0.75rem',

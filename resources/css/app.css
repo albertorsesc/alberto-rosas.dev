@@ -11,26 +11,40 @@
    Design Tokens (CSS Custom Properties)
    =========================== */
 :root {
-    /* Surfaces */
-    --color-surface:       #fafaf9;
-    --color-surface-alt:   #f5f5f4;
-    --color-border:        #e7e5e4;
+    /* Surfaces. The -rgb triplets let Tailwind apply opacity modifiers
+       (bg-surface/80, border-border/50, to-surface/40); the hex vars stay for
+       direct CSS use. bg-surface with no modifier is rgb(… / 1), identical output. */
+    --color-surface:         #fafaf9;
+    --color-surface-rgb:     250 250 249;
+    --color-surface-alt:     #f5f5f4;
+    --color-surface-alt-rgb: 245 245 244;
+    --color-border:          #e7e5e4;
+    --color-border-rgb:      231 229 228;
 
     /* Text */
-    --color-text:          #1c1917;
-    --color-text-muted:    #78716c;
-    --color-text-subtle:   #a8a29e;
+    --color-text:            #1c1917;
+    --color-text-rgb:        28 25 23;
+    --color-text-muted:      #78716c;
+    --color-text-muted-rgb:  120 113 108;
+    --color-text-subtle:     #a8a29e;
+    --color-text-subtle-rgb: 168 162 158;
 
     /* Dark mode surfaces */
-    --color-dark-surface:     #0a0a0a;
-    --color-dark-surface-alt: #111111;
-    --color-dark-border:      #1e1e1e;
+    --color-dark-surface:         #0a0a0a;
+    --color-dark-surface-rgb:     10 10 10;
+    --color-dark-surface-alt:     #111111;
+    --color-dark-surface-alt-rgb: 17 17 17;
+    --color-dark-border:          #1e1e1e;
+    --color-dark-border-rgb:      30 30 30;
 
     /* Dark mode text. Subtle is the third tier, mirroring light: measured
        5.01:1 on the page canvas and 4.78:1 on the inset surface. */
-    --color-dark-text:        #f0f0f0;
-    --color-dark-text-muted:  #a0a0a0;
-    --color-dark-text-subtle: #808080;
+    --color-dark-text:            #f0f0f0;
+    --color-dark-text-rgb:        240 240 240;
+    --color-dark-text-muted:      #a0a0a0;
+    --color-dark-text-muted-rgb:  160 160 160;
+    --color-dark-text-subtle:     #808080;
+    --color-dark-text-subtle-rgb: 128 128 128;
 
     /* Synthwave neon triad — emission colours.
        These are NOT text colours: at these chromas they fail contrast on both
@@ -125,10 +139,19 @@ html, body {
     height: 3px;
     width: 100%;
     background: var(--brand-cyan);
+    /* Collapsed by default: without scroll-timeline support the animation below
+       never applies, and a 0s-duration animation would otherwise paint the bar
+       stuck full-width. Degrade to invisible instead. */
+    transform: scaleX(0);
     transform-origin: left;
     z-index: 100;
-    animation: grow-progress linear;
-    animation-timeline: scroll(root block);
+}
+
+@supports (animation-timeline: scroll()) {
+    .reading-progress {
+        animation: grow-progress linear;
+        animation-timeline: scroll(root block);
+    }
 }
 
 @keyframes grow-progress {

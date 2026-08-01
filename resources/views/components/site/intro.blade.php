@@ -57,13 +57,21 @@
                         <span class="relative inline-flex h-2 w-2 rounded-full bg-brand-cyan/70"></span>
                     </span>
                     <button type="button" role="tab" id="tab-career" aria-controls="panel-career"
+                            x-ref="careerTab"
                             @click="panel = 'career'" :aria-selected="panel === 'career'"
+                            :tabindex="panel === 'career' ? 0 : -1"
+                            @keydown.right.prevent="showTrace(); $nextTick(() => $refs.traceTab.focus())"
+                            @keydown.left.prevent="showTrace(); $nextTick(() => $refs.traceTab.focus())"
                             :class="panel === 'career'
                                 ? 'text-cyan-700 dark:text-cyan-400 border-cyan-700/50 dark:border-cyan-400/50'
                                 : 'text-muted dark:text-dark-muted border-transparent hover:text-body dark:hover:text-dark-body'"
                             class="px-2.5 py-2 border-b font-mono text-[10px] uppercase tracking-[0.16em] transition-colors duration-200">career.log</button>
                     <button type="button" role="tab" id="tab-trace" aria-controls="panel-trace"
+                            x-ref="traceTab"
                             @click="showTrace()" :aria-selected="panel === 'trace'"
+                            :tabindex="panel === 'trace' ? 0 : -1"
+                            @keydown.left.prevent="panel = 'career'; $nextTick(() => $refs.careerTab.focus())"
+                            @keydown.right.prevent="panel = 'career'; $nextTick(() => $refs.careerTab.focus())"
                             :class="panel === 'trace'
                                 ? 'text-cyan-700 dark:text-cyan-400 border-cyan-700/50 dark:border-cyan-400/50'
                                 : 'text-muted dark:text-dark-muted border-transparent hover:text-body dark:hover:text-dark-body'"
