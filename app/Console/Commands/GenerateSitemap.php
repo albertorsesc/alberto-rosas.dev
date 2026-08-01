@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use BenBjurstrom\Prezet\Models\Document;
+use Prezet\Prezet\Models\Document;
 use Illuminate\Console\Command;
 use Spatie\Sitemap\Sitemap;
 use Spatie\Sitemap\Tags\Url;

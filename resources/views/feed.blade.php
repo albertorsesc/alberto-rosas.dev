@@ -7,14 +7,14 @@
         <description>Writing on production AI: agents, retrieval, security and guardrails, evaluation, and the engineering behind real systems.</description>
         <language>en-us</language>
 @if ($docs->isNotEmpty())
-        <lastBuildDate>{{ $docs->first()->createdAt->toRfc2822String() }}</lastBuildDate>
+        <lastBuildDate>{{ $docs->first()->date->toRfc2822String() }}</lastBuildDate>
 @endif
 @foreach ($docs as $doc)
         <item>
             <title>{{ $doc->title }}</title>
             <link>{{ route('prezet.show', $doc->slug) }}</link>
             <guid isPermaLink="true">{{ route('prezet.show', $doc->slug) }}</guid>
-            <pubDate>{{ $doc->createdAt->toRfc2822String() }}</pubDate>
+            <pubDate>{{ $doc->date->toRfc2822String() }}</pubDate>
 @if ($doc->category)
             <category>{{ $doc->category }}</category>
 @endif

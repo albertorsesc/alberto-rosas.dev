@@ -1,13 +1,17 @@
 @php
-    // Blog posts are articles; Prezet's SetSeo never sets the type. Also emit
-    // BlogPosting JSON-LD that references the site-level Person/Org by @id.
-    seo()->type('article');
+    // Prezet v1 ships no controllers, so the app sets per-post SEO here from the
+    // frontmatter (title/excerpt), then marks the type and emits BlogPosting
+    // JSON-LD referencing the site-level Person/Org by @id.
+    seo()
+        ->title($frontmatter->title.' · Alberto Rosas')
+        ->description($frontmatter->excerpt)
+        ->type('article');
     $ldBase = rtrim(url('/'), '/');
     $blogPosting = array_filter([
         '@context' => 'https://schema.org',
         '@type' => 'BlogPosting',
         'headline' => $frontmatter->title ?? null,
-        'datePublished' => isset($frontmatter->createdAt) ? $frontmatter->createdAt->toIso8601String() : null,
+        'datePublished' => isset($frontmatter->date) ? $frontmatter->date->toIso8601String() : null,
         'articleSection' => $frontmatter->category ?? null,
         'author' => ['@id' => $ldBase.'/#person'],
         'publisher' => ['@id' => $ldBase.'/#triageops'],

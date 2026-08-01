@@ -1,7 +1,7 @@
 <?php
 
 use App\Services\Github\Pins;
-use BenBjurstrom\Prezet\Models\Document;
+use Prezet\Prezet\Models\Document;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (Pins $pins) {
@@ -62,7 +62,7 @@ Route::post('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\Newsletter
 // Blog RSS feed. Registered before Prezet's blog/{slug} catch-all so "feed" isn't
 // matched as a slug. Prezet 0.8.8 ships no feed of its own.
 Route::get('/blog/feed', function () {
-    $docs = \BenBjurstrom\Prezet\Models\Document::where('draft', false)
+    $docs = \Prezet\Prezet\Models\Document::where('draft', false)
         ->orderBy('created_at', 'desc')
         ->get()
         ->map(fn ($doc) => $doc->frontmatter);

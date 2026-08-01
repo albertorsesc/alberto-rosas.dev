@@ -14,7 +14,7 @@ tags:
     - Cognitive Systems
     - Productivity
 ---
-![cognitive_lattice_engine.jpg](../images/cognitive_lattice_engine.jpg)
+![cognitive_lattice_engine.jpg](cognitive_lattice_engine.jpg)
 
 Five weeks ago I started building a system that changed how I relate to everything I read.
 
@@ -159,7 +159,7 @@ A collision means a concept from one domain and a framework from another domain 
 
 My vault spans six domains so far. The cross-domain surface area is massive.
 
-![cognitive_lattice_graph_radial.png](../images/cognitive_lattice_graph_radial.png)
+![cognitive_lattice_graph_radial.png](cognitive_lattice_graph_radial.png)
 
 One collision I keep coming back to: a content strategy framework about why certain posts go viral (every viral piece triggers one of four emotional responses: the reader feels UNDERSTOOD, SMART, WARNED, or given ACCESS to something exclusive) collided with a competitive intelligence framework (create from evidence of what already worked, not from imagination).
 
@@ -260,7 +260,7 @@ This is the key architectural insight: **the model is commodity. The compilation
 
 The whole thing is viewable in Obsidian. The graph view shows the lattice visually: framework hubs as high-connectivity nodes, notes clustered by topic, cross-domain connections as bridges between clusters. But Obsidian is just the viewer. The system is plain text files and a compilation spec. You could run it with any editor and any LLM.
 
-![cognitive_lattice_graph_density.png](../images/cognitive_lattice_graph_density.png)
+![cognitive_lattice_graph_density.png](cognitive_lattice_graph_density.png)
 
 ## Reproduce This
 

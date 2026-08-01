@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use BenBjurstrom\Prezet\Models\Document;
+use Prezet\Prezet\Models\Document;
 use Tests\TestCase;
 
 class HomepageWritingTest extends TestCase
