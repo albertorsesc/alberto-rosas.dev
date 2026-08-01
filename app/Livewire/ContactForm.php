@@ -4,11 +4,11 @@ namespace App\Livewire;
 
 use App\Models\Site\Contact;
 use App\Notifications\NewContactSubmissionNotification;
+use App\Services\Slack\SlackNotifier;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
 
@@ -60,40 +60,16 @@ class ContactForm extends Component
 
         RateLimiter::hit($key, 3600);
 
-        $this->notifySlack($contact);
+        // Slack is the notification layer; the DB row above is the source of truth.
+        // SlackNotifier no-ops without a token and swallows a Slack outage, so a
+        // failed ping never 500s the form.
+        app(SlackNotifier::class)->send(
+            new NewContactSubmissionNotification($contact, request()->ip())
+        );
 
         session()->flash('status', "Thanks, {$this->name}! I'll get back to you soon.");
 
         $this->reset();
-    }
-
-    /**
-     * Notify Slack of a new submission. No-ops if the bot token is not configured,
-     * so the form keeps working in environments where Slack isn't wired up yet.
-     *
-     * Catches \Throwable (broader than \Exception) intentionally: a Slack outage
-     * or transport-layer fatal must never 500 the form for the user. The contact
-     * row is already persisted by the time we get here — the DB is the source of
-     * truth, Slack is the notification layer.
-     */
-    protected function notifySlack(Contact $contact): void
-    {
-        $token = config('services.slack.notifications.bot_user_oauth_token');
-        $channel = config('services.slack.notifications.channel');
-
-        if (empty($token) || empty($channel)) {
-            return;
-        }
-
-        try {
-            Notification::route('slack', $channel)
-                ->notify(new NewContactSubmissionNotification($contact, request()->ip()));
-        } catch (\Throwable $e) {
-            Log::warning('Slack notification dispatch failed for contact form submission', [
-                'contact_id' => $contact->id,
-                'error' => $e->getMessage(),
-            ]);
-        }
     }
 
     public function render(): View|Factory|Application

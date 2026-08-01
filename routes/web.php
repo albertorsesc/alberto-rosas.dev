@@ -45,12 +45,19 @@ Route::post('/newsletter/subscribe', \App\Http\Controllers\SubscribeController::
     ->middleware('throttle:6,1')
     ->name('newsletter.subscribe');
 
-// Double opt-in confirm marks the subscriber, mirrors to the Resend audience,
-// sends the welcome, and pings Slack. Unsubscribe flips the status.
-Route::get('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'confirm'])
+// Double opt-in confirm / unsubscribe. The emailed link is the GET, which only
+// renders an interstitial with a button; the POST performs the mutation. This
+// stops mail scanners that prefetch links from auto-confirming a forged signup or
+// silently unsubscribing a real subscriber. CSRF applies normally (these pages are
+// session-backed, unlike the cached-page subscribe endpoint).
+Route::get('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'showConfirm'])
     ->name('newsletter.confirm');
-Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])
+Route::post('/newsletter/confirm/{token}', [\App\Http\Controllers\NewsletterController::class, 'confirm'])
+    ->name('newsletter.confirm.submit');
+Route::get('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'showUnsubscribe'])
     ->name('newsletter.unsubscribe');
+Route::post('/newsletter/unsubscribe/{token}', [\App\Http\Controllers\NewsletterController::class, 'unsubscribe'])
+    ->name('newsletter.unsubscribe.submit');
 
 // Blog RSS feed. Registered before Prezet's blog/{slug} catch-all so "feed" isn't
 // matched as a slug. Prezet 0.8.8 ships no feed of its own.

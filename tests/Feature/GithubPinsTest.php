@@ -98,6 +98,29 @@ class GithubPinsTest extends TestCase
         $this->assertSame('Kvault MCP', $cards[0]['name']);
     }
 
+    public function test_a_graphql_errors_body_at_http_200_is_treated_as_a_failure(): void
+    {
+        // Prime the cache with one good fetch.
+        $this->fakePins([$this->repoNode()]);
+        $this->assertNotEmpty(app(Pins::class)->cards());
+
+        // GitHub rate-limit shape: HTTP 200 with an `errors` body and null data.
+        // The empty result must not overwrite the good cache as "fresh"; the stale
+        // last-good pins must survive.
+        Cache::forget('github.pins.v1.fresh');
+        Http::fake([
+            'api.github.com/graphql' => Http::response([
+                'data' => ['user' => null],
+                'errors' => [['type' => 'RATE_LIMITED', 'message' => 'API rate limit exceeded']],
+            ], 200),
+        ]);
+
+        $cards = app(Pins::class)->cards();
+
+        $this->assertNotEmpty($cards);
+        $this->assertSame('Kvault MCP', $cards[0]['name']);
+    }
+
     public function test_refresh_command_populates_the_cache(): void
     {
         $this->fakePins([$this->repoNode()]);

@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 
 class SubscribeController extends Controller
 {
+    /** Minimum gap between confirmation-email resends to the same address. */
+    private const RESEND_COOLDOWN_MINUTES = 5;
+
     /**
      * Accepts a newsletter signup from any placement (home, footer, blog post).
      * Progressive enhancement: answers JSON to `fetch`, redirects back otherwise.
@@ -43,13 +46,28 @@ class SubscribeController extends Controller
         // Already confirmed: report success without a duplicate email, and without
         // revealing that the address is already on the list.
         if (! ($subscriber->exists && $subscriber->isConfirmed())) {
-            if (! $subscriber->exists) {
-                $subscriber->fill(['source' => $source, 'status' => 'pending'])->save();
-            }
+            // Per-email cooldown: skip the send if a confirmation went out within the
+            // window. Without it, a repeated (forged) submit to this CSRF-exempt
+            // endpoint could bomb a victim's inbox, since the per-IP throttle doesn't
+            // stop a proxy pool.
+            $recentlyEmailed = $subscriber->confirmation_sent_at
+                && $subscriber->confirmation_sent_at->gt(now()->subMinutes(self::RESEND_COOLDOWN_MINUTES));
 
-            Mail::to($subscriber->email)->send(
-                new ConfirmSubscription(route('newsletter.confirm', $subscriber->token))
-            );
+            if (! $recentlyEmailed) {
+                if (! $subscriber->exists) {
+                    $subscriber->fill(['source' => $source, 'status' => 'pending']);
+                }
+                $subscriber->forceFill(['confirmation_sent_at' => now()])->save();
+
+                // Queued (ConfirmSubscription is ShouldQueue): capturing the record
+                // above is the certain part. Delivery happens in the worker and
+                // retries on a transport hiccup, so a signup never fails for a mail
+                // blip; a job that exhausts retries surfaces via the error->Slack
+                // listener. The user just sees "check your inbox".
+                Mail::to($subscriber->email)->send(
+                    new ConfirmSubscription(route('newsletter.confirm', $subscriber->token))
+                );
+            }
         }
 
         return $this->done($request, $source);

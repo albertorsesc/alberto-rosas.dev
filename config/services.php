@@ -35,6 +35,9 @@ return [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
+            // Forward error-level logs (and unhandled exceptions) to Slack. Kill
+            // switch for the ambient error firehose; success pings are unaffected.
+            'alert_on_error' => env('SLACK_ALERT_ON_ERROR', true),
         ],
     ],
 

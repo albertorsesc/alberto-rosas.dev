@@ -2,15 +2,18 @@
 
 namespace Tests\Feature;
 
+use App\Jobs\SyncSubscriberToResend;
 use App\Mail\ConfirmSubscription;
 use App\Mail\SubscriptionWelcome;
 use App\Models\Subscriber;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Notifications\NewSubscriberNotification;
+use App\Services\Resend\Audience;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Queue;
 use Tests\TestCase;
 
 class SubscribeTest extends TestCase
@@ -44,8 +47,31 @@ class SubscribeTest extends TestCase
             'status' => 'pending',
             'source' => 'home',
         ]);
+        $this->assertNotNull(Subscriber::first()->confirmation_sent_at);
 
-        Mail::assertSent(ConfirmSubscription::class, fn ($mail) => $mail->hasTo('new@example.com'));
+        Mail::assertQueued(ConfirmSubscription::class, fn ($mail) => $mail->hasTo('new@example.com'));
+    }
+
+    public function test_a_pending_signup_is_not_re_emailed_within_the_cooldown(): void
+    {
+        $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending']);
+        $subscriber->forceFill(['confirmation_sent_at' => now()])->save();
+
+        Mail::fake();
+        $this->postJson(route('newsletter.subscribe'), ['email' => 'p@example.com'])->assertOk();
+
+        Mail::assertNothingQueued();
+    }
+
+    public function test_a_pending_signup_is_re_emailed_after_the_cooldown(): void
+    {
+        $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending']);
+        $subscriber->forceFill(['confirmation_sent_at' => now()->subMinutes(10)])->save();
+
+        Mail::fake();
+        $this->postJson(route('newsletter.subscribe'), ['email' => 'p@example.com'])->assertOk();
+
+        Mail::assertQueued(ConfirmSubscription::class, fn ($mail) => $mail->hasTo('p@example.com'));
     }
 
     public function test_email_is_normalised_before_saving(): void
@@ -70,7 +96,7 @@ class SubscribeTest extends TestCase
 
         // Looks successful to the bot, but nothing was written or emailed.
         $this->assertDatabaseCount('subscribers', 0);
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
     }
 
     public function test_invalid_email_returns_422_for_json_and_writes_nothing(): void
@@ -82,7 +108,7 @@ class SubscribeTest extends TestCase
             ->assertJsonValidationErrors('email');
 
         $this->assertDatabaseCount('subscribers', 0);
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
     }
 
     public function test_invalid_email_redirects_back_with_errors_for_a_plain_post(): void
@@ -99,7 +125,7 @@ class SubscribeTest extends TestCase
         Mail::fake();
         $this->postJson(route('newsletter.subscribe'), ['email' => 'already@example.com'])->assertOk();
 
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
         $this->assertDatabaseCount('subscribers', 1);
     }
 
@@ -108,13 +134,13 @@ class SubscribeTest extends TestCase
         Mail::fake();
         $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending', 'source' => 'footer']);
 
-        $this->get(route('newsletter.confirm', $subscriber->token))
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))
             ->assertOk()
             ->assertSee('on the list');
 
         $this->assertDatabaseHas('subscribers', ['email' => 'p@example.com', 'status' => 'confirmed']);
         $this->assertNotNull($subscriber->fresh()->confirmed_at);
-        Mail::assertSent(SubscriptionWelcome::class, fn ($mail) => $mail->hasTo('p@example.com'));
+        Mail::assertQueued(SubscriptionWelcome::class, fn ($mail) => $mail->hasTo('p@example.com'));
     }
 
     public function test_confirming_pings_slack_when_configured(): void
@@ -125,7 +151,7 @@ class SubscribeTest extends TestCase
         Notification::fake();
         $subscriber = Subscriber::create(['email' => 's@example.com', 'status' => 'pending', 'source' => 'home']);
 
-        $this->get(route('newsletter.confirm', $subscriber->token))->assertOk();
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))->assertOk();
 
         Notification::assertSentOnDemand(NewSubscriberNotification::class);
     }
@@ -137,9 +163,29 @@ class SubscribeTest extends TestCase
         Notification::fake();
         $subscriber = Subscriber::create(['email' => 's@example.com', 'status' => 'pending']);
 
-        $this->get(route('newsletter.confirm', $subscriber->token))->assertOk();
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))->assertOk();
 
         Notification::assertNothingSent();
+    }
+
+    public function test_confirming_queues_the_resend_sync(): void
+    {
+        Queue::fake();
+        $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending']);
+
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))->assertOk();
+
+        Queue::assertPushed(SyncSubscriberToResend::class);
+    }
+
+    public function test_the_resend_sync_job_delegates_to_the_audience(): void
+    {
+        $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'confirmed', 'confirmed_at' => now()]);
+
+        $audience = \Mockery::mock(Audience::class);
+        $audience->shouldReceive('add')->once();
+
+        (new SyncSubscriberToResend($subscriber))->handle($audience);
     }
 
     public function test_confirming_does_not_touch_the_network_when_resend_is_unconfigured(): void
@@ -148,7 +194,7 @@ class SubscribeTest extends TestCase
         Mail::fake();
         $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending']);
 
-        $this->get(route('newsletter.confirm', $subscriber->token))->assertOk();
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))->assertOk();
 
         Http::assertNothingSent();
         $this->assertNull($subscriber->fresh()->synced_at);
@@ -159,20 +205,48 @@ class SubscribeTest extends TestCase
         $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'confirmed', 'confirmed_at' => now()]);
 
         Mail::fake();
-        $this->get(route('newsletter.confirm', $subscriber->token))->assertOk();
+        $this->post(route('newsletter.confirm.submit', $subscriber->token))->assertOk();
 
-        Mail::assertNothingSent();
+        Mail::assertNothingQueued();
     }
 
     public function test_unsubscribing_marks_the_subscriber_unsubscribed(): void
     {
         $subscriber = Subscriber::create(['email' => 'c@example.com', 'status' => 'confirmed', 'confirmed_at' => now()]);
 
-        $this->get(route('newsletter.unsubscribe', $subscriber->token))
+        $this->post(route('newsletter.unsubscribe.submit', $subscriber->token))
             ->assertOk()
             ->assertSee('unsubscribed');
 
         $this->assertDatabaseHas('subscribers', ['email' => 'c@example.com', 'status' => 'unsubscribed']);
+    }
+
+    public function test_the_confirm_link_shows_an_interstitial_without_confirming(): void
+    {
+        Mail::fake();
+        $subscriber = Subscriber::create(['email' => 'p@example.com', 'status' => 'pending']);
+
+        // The emailed GET link must NOT confirm: a mail scanner prefetching it
+        // should see only the interstitial, never trigger the mutation.
+        $this->get(route('newsletter.confirm', $subscriber->token))
+            ->assertOk()
+            ->assertSee('Confirm your subscription');
+
+        $this->assertDatabaseHas('subscribers', ['email' => 'p@example.com', 'status' => 'pending']);
+        $this->assertNull($subscriber->fresh()->confirmed_at);
+        Mail::assertNothingQueued();
+    }
+
+    public function test_the_unsubscribe_link_shows_an_interstitial_without_unsubscribing(): void
+    {
+        $subscriber = Subscriber::create(['email' => 'c@example.com', 'status' => 'confirmed', 'confirmed_at' => now()]);
+
+        // A link prefetch on the unsubscribe URL must not drop a real subscriber.
+        $this->get(route('newsletter.unsubscribe', $subscriber->token))
+            ->assertOk()
+            ->assertSee('Unsubscribe from the list');
+
+        $this->assertDatabaseHas('subscribers', ['email' => 'c@example.com', 'status' => 'confirmed']);
     }
 
     public function test_an_unknown_confirm_token_is_not_found(): void

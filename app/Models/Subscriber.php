@@ -12,6 +12,7 @@ class Subscriber extends Model
     protected $casts = [
         'confirmed_at' => 'datetime',
         'synced_at' => 'datetime',
+        'confirmation_sent_at' => 'datetime',
     ];
 
     protected static function booted(): void
@@ -24,6 +25,11 @@ class Subscriber extends Model
     public function isConfirmed(): bool
     {
         return $this->status === 'confirmed';
+    }
+
+    public function isUnsubscribed(): bool
+    {
+        return $this->status === 'unsubscribed';
     }
 
     public function markConfirmed(): void

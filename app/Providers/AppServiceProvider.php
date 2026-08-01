@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Listeners\ReportErrorToSlack;
 use App\Services\Github\Client;
 use App\Services\Github\Pins;
+use Illuminate\Log\Events\MessageLogged;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
@@ -39,6 +42,13 @@ class AppServiceProvider extends ServiceProvider
         // inbox instead of letting them bounce. No-ops until a reply-to is set.
         if ($replyTo = config('mail.reply_to.address')) {
             Mail::alwaysReplyTo($replyTo, config('mail.reply_to.name'));
+        }
+
+        // Mirror error-level logs (and unhandled exceptions) to Slack. Skipped
+        // under tests so the suite never reaches for the network; the listener is
+        // exercised directly in its own test.
+        if (! $this->app->runningUnitTests()) {
+            Event::listen(MessageLogged::class, ReportErrorToSlack::class);
         }
 
         // Site-wide SEO defaults. Per-page calls (in each view / the blog's

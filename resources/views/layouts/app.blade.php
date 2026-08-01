@@ -16,6 +16,19 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark" x-data="{ darkMode: true }">
 @endif
     <head>
+        @if (request()->is('blog*'))
+            {{-- Resolve the reader's saved theme before first paint. Without this,
+                 the server ships class="dark" and Alpine (deferred) strips it only
+                 after hydration, so a light-mode reader sees a dark flash. --}}
+            <script>
+                try {
+                    if (localStorage.getItem('darkMode') === 'false') {
+                        document.documentElement.classList.remove('dark');
+                    }
+                } catch (e) {}
+            </script>
+        @endif
+
         @production
             <!-- Google tag (gtag.js) -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=G-H1NBRRQX1S"></script>

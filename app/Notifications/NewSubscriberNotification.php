@@ -3,6 +3,8 @@
 namespace App\Notifications;
 
 use App\Models\Subscriber;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Slack\BlockKit\Blocks\ContextBlock;
 use Illuminate\Notifications\Slack\BlockKit\Blocks\SectionBlock;
@@ -10,11 +12,14 @@ use Illuminate\Notifications\Slack\SlackMessage;
 
 /**
  * Sent when a subscriber confirms (double opt-in), so a real, verified signup
- * reaches Slack, not the unconfirmed submit. Deliberately not queued: the confirm
- * route already runs synchronously, and there is no queue worker in every env.
+ * reaches Slack, not the unconfirmed submit. Queued so the confirm click returns
+ * without waiting on the Slack API; a failed send retries and, if it exhausts
+ * retries, surfaces via the error->Slack listener.
  */
-class NewSubscriberNotification extends Notification
+class NewSubscriberNotification extends Notification implements ShouldQueue
 {
+    use Queueable;
+
     public function __construct(public Subscriber $subscriber) {}
 
     public function via(object $notifiable): array

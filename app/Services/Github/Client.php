@@ -38,6 +38,14 @@ class Client
 
         $response->throw();
 
+        // GraphQL signals rate limits and query failures with an `errors` body at
+        // HTTP 200, which $response->throw() doesn't catch. Treat it as a failure so
+        // the caller's stale-tolerant path serves the last good pins instead of
+        // caching an empty result as fresh.
+        if (! empty($response->json('errors'))) {
+            throw new \RuntimeException('GitHub GraphQL returned errors: '.json_encode($response->json('errors')));
+        }
+
         return $response->json('data.user.pinnedItems.nodes') ?? [];
     }
 
