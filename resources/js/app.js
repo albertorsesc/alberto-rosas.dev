@@ -47,7 +47,18 @@ function initSubscribeForms() {
 
                 if (res.ok) {
                     form.hidden = true;
-                    if (success) success.hidden = false;
+                    if (success) {
+                        const msg = success.textContent.trim()
+                            || 'Check your inbox to confirm your subscription.';
+                        // Reset the text so the polite live region registers a change
+                        // and announces it (un-hiding alone doesn't), then take focus,
+                        // which hiding the form dropped to <body>.
+                        success.textContent = '';
+                        success.hidden = false;
+                        success.setAttribute('tabindex', '-1');
+                        success.focus();
+                        requestAnimationFrame(() => { success.textContent = msg; });
+                    }
                     return;
                 }
 

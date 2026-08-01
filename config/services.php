@@ -42,14 +42,15 @@ return [
     ],
 
     'github' => [
-        // A token (any scope, even none) is only needed to authenticate the
-        // GraphQL call that reads pinned repos. Absent in local dev, the service
-        // falls back to the `gh` CLI. Set GITHUB_TOKEN in production.
+        // Token is only used by the LOCAL `github:pins:refresh` command (and only
+        // if you prefer the GraphQL API over the authed `gh` CLI, which needs no
+        // token). Production serves the committed pins file and never calls GitHub,
+        // so no token is needed there.
         'token' => env('GITHUB_TOKEN'),
         'user' => env('GITHUB_USER', 'albertorsesc'),
-        // A week, matching the scheduled refresh. The lazy fetch serves stale
-        // data past this and only refetches when the weekly refresh has lapsed.
-        'pins_ttl_hours' => (int) env('GITHUB_PINS_TTL_HOURS', 168),
+        // Committed pins file: generated locally by the refresh command, read at
+        // request time. Same "index locally, commit, serve" flow as the blog.
+        'pins_file' => database_path('github-pins.json'),
     ],
 
 ];

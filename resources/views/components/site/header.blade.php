@@ -23,22 +23,28 @@
                 @endphp
 
                 @foreach ($navLinks as $link)
+                    @php
+                        // Active on the exact path or any sub-path, so /blog/{slug}
+                        // still highlights Blog.
+                        $path = ltrim($link['href'], '/');
+                        $isActive = $path !== '' && (request()->is($path) || request()->is($path.'/*'));
+                    @endphp
                     <a
                         href="{{ $link['href'] }}"
                         @class([
                             'relative px-4 py-2 text-sm font-body transition-colors duration-200',
-                            'text-cyan-700 dark:text-brand-cyan font-medium' => request()->is(ltrim($link['href'], '/')),
-                            'text-muted hover:text-body dark:text-dark-muted dark:hover:text-dark-body' => !request()->is(ltrim($link['href'], '/')),
+                            'text-cyan-700 dark:text-brand-cyan font-medium' => $isActive,
+                            'text-muted hover:text-body dark:text-dark-muted dark:hover:text-dark-body' => ! $isActive,
                         ])
-                        @if(request()->is(ltrim($link['href'], '/')))
+                        @if($isActive)
                             aria-current="page"
                         @endif
-                        style="font-variation-settings: 'wght' {{ request()->is(ltrim($link['href'], '/')) ? '600' : '400' }};"
+                        style="font-variation-settings: 'wght' {{ $isActive ? '600' : '400' }};"
                         onmouseenter="this.style.fontVariationSettings='\'wght\' 600'"
-                        onmouseleave="this.style.fontVariationSettings='\'wght\' {{ request()->is(ltrim($link['href'], '/')) ? '600' : '400' }}'"
+                        onmouseleave="this.style.fontVariationSettings='\'wght\' {{ $isActive ? '600' : '400' }}'"
                     >
                         {{ $link['name'] }}
-                        @if(request()->is(ltrim($link['href'], '/')))
+                        @if($isActive)
                             <span class="absolute bottom-1 left-4 right-4 h-0.5 rounded-full bg-brand-cyan"></span>
                         @endif
                     </a>
@@ -97,11 +103,15 @@
         class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-surface/95 backdrop-blur-xl dark:bg-dark-surface/95 sm:hidden"
     >
         @foreach ([['/', 'Home'], ['/work', 'Work'], ['/about', 'About'], ['/blog', 'Blog'], ['/now', 'Now'], ['/uses', 'Uses'], ['/#contact', 'Contact']] as [$href, $name])
+            @php
+                $path = ltrim($href, '/') ?: '/';
+                $isActive = request()->is($path) || ($path !== '/' && request()->is($path.'/*'));
+            @endphp
             <a
                 href="{{ $href }}"
                 @click="menuOpen = false"
-                @if(request()->is(ltrim($href, '/') ?: '/')) aria-current="page" @endif
-                class="font-heading text-3xl tracking-tight py-1 transition-colors {{ request()->is(ltrim($href, '/') ?: '/') ? 'text-cyan-700 dark:text-brand-cyan' : 'text-body dark:text-dark-body hover:text-brand-cyan' }}"
+                @if($isActive) aria-current="page" @endif
+                class="font-heading text-3xl tracking-tight py-1 transition-colors {{ $isActive ? 'text-cyan-700 dark:text-brand-cyan' : 'text-body dark:text-dark-body hover:text-brand-cyan' }}"
             >
                 {{ $name }}
             </a>

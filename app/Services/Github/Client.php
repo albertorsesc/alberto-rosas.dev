@@ -56,8 +56,9 @@ class Client
             return [];
         }
 
-        $query = str_replace(['"', "\n"], ['\"', ' '], $this->query());
-        $out = @shell_exec('gh api graphql -f query="'.$query.'" 2>/dev/null');
+        // escapeshellarg single-quotes the whole query, so $(...)/backticks in it
+        // (e.g. via a hostile GITHUB_USER) are inert rather than shell-evaluated.
+        $out = @shell_exec('gh api graphql -f query='.escapeshellarg($this->query()).' 2>/dev/null');
 
         return $out ? (json_decode($out, true)['data']['user']['pinnedItems']['nodes'] ?? []) : [];
     }

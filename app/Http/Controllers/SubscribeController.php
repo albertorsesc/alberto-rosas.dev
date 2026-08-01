@@ -41,33 +41,40 @@ class SubscribeController extends Controller
         }
 
         $email = Str::lower(trim($request->input('email')));
-        $subscriber = Subscriber::firstOrNew(['email' => $email]);
+
+        // Race-safe: firstOrCreate falls back to createOrFirst, which catches the
+        // unique-email violation and re-fetches, so two concurrent signups for the
+        // same new address can't 500.
+        $subscriber = Subscriber::firstOrCreate(
+            ['email' => $email],
+            ['source' => $source, 'status' => 'pending'],
+        );
 
         // Already confirmed: report success without a duplicate email, and without
         // revealing that the address is already on the list.
-        if (! ($subscriber->exists && $subscriber->isConfirmed())) {
-            // Per-email cooldown: skip the send if a confirmation went out within the
-            // window. Without it, a repeated (forged) submit to this CSRF-exempt
-            // endpoint could bomb a victim's inbox, since the per-IP throttle doesn't
-            // stop a proxy pool.
-            $recentlyEmailed = $subscriber->confirmation_sent_at
-                && $subscriber->confirmation_sent_at->gt(now()->subMinutes(self::RESEND_COOLDOWN_MINUTES));
+        if (! $subscriber->wasRecentlyCreated && $subscriber->isConfirmed()) {
+            return $this->done($request, $source);
+        }
 
-            if (! $recentlyEmailed) {
-                if (! $subscriber->exists) {
-                    $subscriber->fill(['source' => $source, 'status' => 'pending']);
-                }
-                $subscriber->forceFill(['confirmation_sent_at' => now()])->save();
+        // Per-email cooldown: skip the resend if a confirmation went out within the
+        // window. Without it, a repeated (forged) submit to this CSRF-exempt endpoint
+        // could bomb a victim's inbox, since the per-IP throttle doesn't stop a proxy
+        // pool. A just-created record is never on cooldown.
+        $recentlyEmailed = ! $subscriber->wasRecentlyCreated
+            && $subscriber->confirmation_sent_at
+            && $subscriber->confirmation_sent_at->gt(now()->subMinutes(self::RESEND_COOLDOWN_MINUTES));
 
-                // Queued (ConfirmSubscription is ShouldQueue): capturing the record
-                // above is the certain part. Delivery happens in the worker and
-                // retries on a transport hiccup, so a signup never fails for a mail
-                // blip; a job that exhausts retries surfaces via the error->Slack
-                // listener. The user just sees "check your inbox".
-                Mail::to($subscriber->email)->send(
-                    new ConfirmSubscription(route('newsletter.confirm', $subscriber->token))
-                );
-            }
+        if (! $recentlyEmailed) {
+            $subscriber->forceFill(['confirmation_sent_at' => now()])->save();
+
+            // Queued (ConfirmSubscription is ShouldQueue): capturing the record above
+            // is the certain part. Delivery happens in the worker and retries on a
+            // transport hiccup, so a signup never fails for a mail blip; a job that
+            // exhausts retries surfaces via the error->Slack listener. The user just
+            // sees "check your inbox".
+            Mail::to($subscriber->email)->send(
+                new ConfirmSubscription(route('newsletter.confirm', $subscriber->token))
+            );
         }
 
         return $this->done($request, $source);

@@ -31,14 +31,19 @@ class Audience
             return false;
         }
 
+        // Always send unsubscribed=false so a previously-unsubscribed contact who
+        // re-confirms is reactivated in Resend. array_filter would drop the `false`
+        // (and a null name) before the request ever went out. first_name is included
+        // only when actually set.
+        $payload = ['email' => $subscriber->email, 'unsubscribed' => false];
+        if (filled($subscriber->name)) {
+            $payload['first_name'] = $subscriber->name;
+        }
+
         try {
             $response = Http::withToken($this->key)
                 ->timeout(8)
-                ->post("https://api.resend.com/audiences/{$this->audienceId}/contacts", array_filter([
-                    'email' => $subscriber->email,
-                    'first_name' => $subscriber->name,
-                    'unsubscribed' => false,
-                ]));
+                ->post("https://api.resend.com/audiences/{$this->audienceId}/contacts", $payload);
 
             if ($response->successful()) {
                 $subscriber->forceFill(['synced_at' => now()])->save();

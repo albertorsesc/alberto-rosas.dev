@@ -2,79 +2,86 @@
 
 namespace Tests\Feature;
 
-use App\Services\Github\Pins;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class GithubPinsTest extends TestCase
 {
+    private string $pinsFile;
+
     protected function setUp(): void
     {
         parent::setUp();
-        Cache::flush();
-        // Force the API path (not the local `gh` fallback) by giving a token.
+        // Point the pins at a throwaway file so tests never touch the committed one.
+        $this->pinsFile = tempnam(sys_get_temp_dir(), 'pins');
+        config()->set('services.github.pins_file', $this->pinsFile);
+        // Token present so the refresh command uses the API path (Http-fakeable),
+        // not the local `gh` CLI.
         config()->set('services.github.token', 'test-token');
         config()->set('services.github.user', 'albertorsesc');
-        config()->set('services.github.pins_ttl_hours', 168);
     }
 
-    private function fakePins(array $nodes): void
+    protected function tearDown(): void
     {
-        Http::fake([
-            'api.github.com/graphql' => Http::response([
-                'data' => ['user' => ['pinnedItems' => ['nodes' => $nodes]]],
-            ]),
-        ]);
+        @unlink($this->pinsFile);
+        parent::tearDown();
     }
 
-    private function repoNode(array $overrides = []): array
+    private function writePins(array $repos): void
+    {
+        file_put_contents($this->pinsFile, json_encode($repos));
+    }
+
+    /** A normalized repo, in the shape the client writes to the file. */
+    private function repo(array $overrides = []): array
     {
         return array_merge([
             'name' => 'kvault-mcp',
             'description' => 'A plugin-first MCP server for operating on knowledge vaults.',
             'url' => 'https://github.com/albertorsesc/kvault-mcp',
-            'stargazerCount' => 0,
-            'primaryLanguage' => ['name' => 'Python'],
-            'languages' => ['nodes' => [['name' => 'Python'], ['name' => 'Dockerfile']]],
-            'repositoryTopics' => ['nodes' => [['topic' => ['name' => 'mcp']]]],
+            'languages' => ['Python', 'Dockerfile'],
+            'topics' => ['mcp'],
         ], $overrides);
     }
 
-    public function test_homepage_experiments_mirror_the_pinned_repositories(): void
+    /** A raw GraphQL node, in the shape the API returns before normalization. */
+    private function apiNode(): array
     {
-        $this->fakePins([
-            $this->repoNode(),
-            $this->repoNode([
+        return [
+            'name' => 'kvault-mcp',
+            'description' => 'desc',
+            'url' => 'https://github.com/albertorsesc/kvault-mcp',
+            'primaryLanguage' => ['name' => 'Python'],
+            'languages' => ['nodes' => [['name' => 'Python']]],
+            'repositoryTopics' => ['nodes' => [['topic' => ['name' => 'mcp']]]],
+        ];
+    }
+
+    public function test_homepage_experiments_mirror_the_committed_pins_file(): void
+    {
+        $this->writePins([
+            $this->repo(),
+            $this->repo([
                 'name' => 'job-seeker',
-                'description' => 'Profile-driven job search engine over MCP and CLI.',
                 'url' => 'https://github.com/albertorsesc/job-seeker',
-                'primaryLanguage' => ['name' => 'Python'],
-                'languages' => ['nodes' => [['name' => 'Python']]],
-                'repositoryTopics' => ['nodes' => [
-                    ['topic' => ['name' => 'agents']],
-                    ['topic' => ['name' => 'cli']],
-                ]],
+                'languages' => ['Python'],
+                'topics' => ['agents', 'cli'],
             ]),
         ]);
 
         $response = $this->get('/');
 
         $response->assertStatus(200);
-        // Title: humanised, acronyms upper-cased natively.
-        $response->assertSee('Kvault MCP');
+        $response->assertSee('Kvault MCP');   // humanised, acronym upper-cased
         $response->assertSee('Job Seeker');
-        // Tech stack rendered.
-        $response->assertSee('Python');
-        // Tags from topics, acronyms upper-cased.
-        $response->assertSee('CLI');
-        // Real pin URLs.
+        $response->assertSee('Python');       // tech stack
+        $response->assertSee('CLI');          // tag from topics
         $response->assertSee('https://github.com/albertorsesc/kvault-mcp');
     }
 
-    public function test_experiments_section_hides_when_no_pins(): void
+    public function test_experiments_section_hides_when_the_pins_file_is_missing(): void
     {
-        $this->fakePins([]);
+        @unlink($this->pinsFile);
 
         $response = $this->get('/');
 
@@ -82,51 +89,48 @@ class GithubPinsTest extends TestCase
         $response->assertDontSee('// experiments', false);
     }
 
-    public function test_service_serves_stale_cache_when_a_refresh_fails(): void
+    public function test_no_github_call_is_made_at_request_time(): void
     {
-        // Prime the cache with one good fetch.
-        $this->fakePins([$this->repoNode()]);
-        $pins = app(Pins::class);
-        $this->assertNotEmpty($pins->cards());
+        Http::fake();
+        $this->writePins([$this->repo()]);
 
-        // Expire freshness, then make GitHub fail: last good data must survive.
-        Cache::forget('github.pins.v1.fresh');
-        Http::fake(['api.github.com/graphql' => Http::response('boom', 500)]);
+        $this->get('/')->assertStatus(200);
 
-        $cards = app(Pins::class)->cards();
-        $this->assertNotEmpty($cards);
-        $this->assertSame('Kvault MCP', $cards[0]['name']);
+        Http::assertNothingSent();
     }
 
-    public function test_a_graphql_errors_body_at_http_200_is_treated_as_a_failure(): void
+    public function test_refresh_writes_the_pins_file_from_github(): void
     {
-        // Prime the cache with one good fetch.
-        $this->fakePins([$this->repoNode()]);
-        $this->assertNotEmpty(app(Pins::class)->cards());
-
-        // GitHub rate-limit shape: HTTP 200 with an `errors` body and null data.
-        // The empty result must not overwrite the good cache as "fresh"; the stale
-        // last-good pins must survive.
-        Cache::forget('github.pins.v1.fresh');
-        Http::fake([
-            'api.github.com/graphql' => Http::response([
-                'data' => ['user' => null],
-                'errors' => [['type' => 'RATE_LIMITED', 'message' => 'API rate limit exceeded']],
-            ], 200),
-        ]);
-
-        $cards = app(Pins::class)->cards();
-
-        $this->assertNotEmpty($cards);
-        $this->assertSame('Kvault MCP', $cards[0]['name']);
-    }
-
-    public function test_refresh_command_populates_the_cache(): void
-    {
-        $this->fakePins([$this->repoNode()]);
+        @unlink($this->pinsFile);
+        Http::fake(['api.github.com/graphql' => Http::response([
+            'data' => ['user' => ['pinnedItems' => ['nodes' => [$this->apiNode()]]]],
+        ])]);
 
         $this->artisan('github:pins:refresh')
             ->expectsOutputToContain('Refreshed 1 pinned repositories.')
             ->assertSuccessful();
+
+        $this->assertFileExists($this->pinsFile);
+        $written = json_decode(file_get_contents($this->pinsFile), true);
+        $this->assertSame('kvault-mcp', $written[0]['name']);
+    }
+
+    public function test_refresh_does_not_clobber_the_file_on_a_graphql_error(): void
+    {
+        $this->writePins([$this->repo()]);
+
+        // Rate-limit shape: HTTP 200 with an errors body → the client throws →
+        // refresh keeps the committed file rather than blanking it.
+        Http::fake(['api.github.com/graphql' => Http::response([
+            'data' => ['user' => null],
+            'errors' => [['type' => 'RATE_LIMITED', 'message' => 'API rate limit exceeded']],
+        ], 200)]);
+
+        $this->artisan('github:pins:refresh')
+            ->expectsOutputToContain('kept the existing file')
+            ->assertSuccessful();
+
+        $kept = json_decode(file_get_contents($this->pinsFile), true);
+        $this->assertSame('kvault-mcp', $kept[0]['name']);
     }
 }

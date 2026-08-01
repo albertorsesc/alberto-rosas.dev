@@ -2,26 +2,20 @@
 
 namespace App\Services\Github;
 
-use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 /**
  * Turns the pinned repositories into cards for the homepage "experiments" grid.
  *
- * The homepage mirrors whatever is pinned on GitHub: re-pin there and the site
- * follows on the next refresh, no code change. GitHub has no API to *set* pins,
- * so re-pinning stays a browser action; everything after it is automatic.
- *
- * Caching is stale-tolerant: a GitHub outage serves the last good result instead
- * of blanking the section, and a cold failure returns [] so the section hides.
+ * Pins are generated locally (`php artisan github:pins:refresh`, which uses the
+ * authed `gh` CLI, no token needed) into a committed JSON file, then served from
+ * that file. Same "index locally, commit, serve" flow as the blog: no GitHub call
+ * or token at request time. Re-run and commit when you re-pin or add a repo.
  */
 class Pins
 {
-    private const CACHE_KEY = 'github.pins.v1';
-
-    private const FRESH_KEY = 'github.pins.v1.fresh';
-
     /** Slugs rendered upper-case (MCP, CLI, …) instead of Title-cased. */
     private const ACRONYMS = ['mcp', 'cli', 'ai', 'api', 'sql', 'llm', 'rag', 'ui', 'ml'];
 
@@ -31,16 +25,12 @@ class Pins
         'roff', 'dotenv', 'procfile', 'powershell', 'mako',
     ];
 
-    public function __construct(
-        private readonly Client $client,
-        private readonly int $ttlHours = 6,
-    ) {}
+    public function __construct(private readonly Client $client) {}
 
     /**
-     * Presentation-ready cards, in pin order. Empty when nothing is pinned or a
-     * cold fetch fails. Each card carries the repo's title, description, tech
-     * stack (languages) and tags (topics) — no vanity metrics; those live on the
-     * repo page itself.
+     * Presentation-ready cards, in pin order. Empty when the pins file is missing
+     * or empty. Each card carries the repo's title, description, tech stack
+     * (languages) and tags (topics), no vanity metrics.
      *
      * @return array<int, array{url:string,name:string,desc:string,stack:array<int,string>,tags:array<int,string>,span:string}>
      */
@@ -53,7 +43,7 @@ class Pins
             'url' => $repo['url'],
             'name' => $this->label($repo['name']),
             // The exact repo description, verbatim. GitHub already caps it, so
-            // there's nothing to truncate — a mid-word cut would only be sloppy.
+            // there's nothing to truncate, a mid-word cut would only be sloppy.
             'desc' => trim((string) $repo['description']),
             'stack' => $this->stack($repo['languages']),
             'tags' => $this->tags($repo),
@@ -61,39 +51,49 @@ class Pins
         ], $repos, array_keys($repos));
     }
 
-    /** Force a fresh fetch into the cache. Returns the new pin count. */
+    /**
+     * Refresh the committed pins file from GitHub. Run locally (uses the `gh` CLI).
+     * Returns the number written, or 0 when the fetch came back empty, in which case
+     * the existing file is left untouched rather than clobbered with nothing.
+     */
     public function refresh(): int
     {
-        return $this->store($this->client->pinnedRepositories());
-    }
-
-    /** Raw pins, stale-tolerant: refetch past the TTL, keep the last good on failure. */
-    private function repositories(): array
-    {
-        $cached = Cache::get(self::CACHE_KEY);
-
-        if (is_array($cached) && Cache::has(self::FRESH_KEY)) {
-            return $cached;
-        }
-
         try {
             $repos = $this->client->pinnedRepositories();
-            $this->store($repos);
-
-            return $repos;
         } catch (\Throwable $e) {
-            Log::warning('GitHub pins fetch failed', ['error' => $e->getMessage()]);
+            // Rate limit, GraphQL error, or `gh` not authed: keep the committed file.
+            Log::warning('GitHub pins refresh failed', ['error' => $e->getMessage()]);
 
-            return is_array($cached) ? $cached : [];
+            return 0;
         }
-    }
 
-    private function store(array $repos): int
-    {
-        Cache::forever(self::CACHE_KEY, $repos);
-        Cache::put(self::FRESH_KEY, true, now()->addHours($this->ttlHours));
+        if ($repos === []) {
+            return 0;
+        }
+
+        File::put(
+            $this->path(),
+            json_encode($repos, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)."\n",
+        );
 
         return count($repos);
+    }
+
+    /** Pins as recorded in the committed file. */
+    private function repositories(): array
+    {
+        $path = $this->path();
+
+        if (! File::exists($path)) {
+            return [];
+        }
+
+        return json_decode(File::get($path), true) ?: [];
+    }
+
+    private function path(): string
+    {
+        return config('services.github.pins_file');
     }
 
     // ── presentation ──────────────────────────────────────────────────────────

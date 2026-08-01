@@ -1,0 +1,53 @@
+[
+    {
+        "name": "planeops",
+        "description": "Reproduce, observe, and govern a personal AI setup as three planes.",
+        "url": "https://github.com/albertorsesc/planeops",
+        "languages": [
+            "Python",
+            "Makefile"
+        ],
+        "topics": [
+            "ai-tools",
+            "cli",
+            "control-plane",
+            "declarative",
+            "drift-detection",
+            "infrastructure-as-code",
+            "local-first",
+            "mcp"
+        ]
+    },
+    {
+        "name": "claude-code-remote",
+        "description": "Steer and approve headless Claude Code sessions from your phone, over an end-to-end-encrypted tailnet.",
+        "url": "https://github.com/albertorsesc/claude-code-remote",
+        "languages": [
+            "TypeScript",
+            "Python",
+            "JavaScript",
+            "Shell"
+        ],
+        "topics": [
+            "ai-agents",
+            "claude-code",
+            "cli",
+            "daemon",
+            "end-to-end-encryption",
+            "nodejs",
+            "react-native",
+            "remote-control"
+        ]
+    },
+    {
+        "name": "soundmind",
+        "description": "A sound-based mind programming system that combines psychoacoustic masking, brainwave entrainment, NLP-patterned affirmations, and targeted memory reactivation (TMR) into layered audio sessions designed for behavioral change and accelerated learning.",
+        "url": "https://github.com/albertorsesc/soundmind",
+        "languages": [
+            "Python",
+            "Makefile",
+            "Dockerfile"
+        ],
+        "topics": []
+    }
+]

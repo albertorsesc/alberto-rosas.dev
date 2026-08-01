@@ -24,7 +24,6 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Pins::class, fn ($app) => new Pins(
             $app->make(Client::class),
-            config('services.github.pins_ttl_hours'),
         ));
 
         $this->app->singleton(\App\Services\Resend\Audience::class, fn () => new \App\Services\Resend\Audience(
