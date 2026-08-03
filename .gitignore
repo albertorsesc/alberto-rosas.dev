@@ -24,3 +24,11 @@ yarn-error.log
 
 # Prezet auto-generates this on index; we serve our own sitemap.xml.
 /public/prezet_sitemap.xml
+
+# Local-only working files: agent/tooling scratch and source-of-truth docs.
+# Never committed; kept on disk for local use.
+/.scratch
+/.hallmark
+/BIO.md
+/design.md
+/GEMINI.md
