@@ -2,11 +2,20 @@
     // Prezet v1 ships no controllers, so the app sets per-post SEO here from the
     // frontmatter (title/excerpt), then marks the type and emits BlogPosting
     // JSON-LD referencing the site-level Person/Org by @id.
+    $ldBase = rtrim(url('/'), '/');
+    // Social card: the post's own frontmatter image (absolute URL) when it has
+    // one, else the site-wide default. Keeps og:image/twitter:image and the
+    // JSON-LD image in sync from a single source.
+    $ogImage = $frontmatter->image
+        ? (\Illuminate\Support\Str::startsWith($frontmatter->image, ['http://', 'https://'])
+            ? $frontmatter->image
+            : $ldBase.'/'.ltrim($frontmatter->image, '/'))
+        : $ldBase.'/og-image.png';
     seo()
         ->title($frontmatter->title.' · Alberto Rosas')
         ->description($frontmatter->excerpt)
+        ->image($ogImage)
         ->type('article');
-    $ldBase = rtrim(url('/'), '/');
     $blogPosting = array_filter([
         '@context' => 'https://schema.org',
         '@type' => 'BlogPosting',
@@ -16,7 +25,7 @@
         'author' => ['@id' => $ldBase.'/#person'],
         'publisher' => ['@id' => $ldBase.'/#triageops'],
         'mainEntityOfPage' => url()->current(),
-        'image' => $ldBase.'/og-image.png',
+        'image' => $ogImage,
     ]);
 @endphp
 <x-prezet::template>
