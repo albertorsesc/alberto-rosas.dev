@@ -1,10 +1,10 @@
 @php
-    /* @var \BenBjurstrom\Prezet\Data\FrontmatterData $article */
+    /* @var \Prezet\Prezet\Data\FrontmatterData $article */
 @endphp
 
 <x-prezet::template>
     @seo([
-        'title' => 'Articles — Alberto Rosas',
+        'title' => 'Articles · Alberto Rosas',
         'description' =>
             'AI & Agentic Systems Engineer. Writing on production agents, hybrid retrieval, security and guardrails, evaluation pipelines, and the engineering behind real AI systems.',
         'url' => route('prezet.index'),
@@ -14,7 +14,7 @@
         {{-- Page Header --}}
         <div class="mb-10 space-y-2">
             <p class="font-mono text-xs uppercase tracking-widest text-cyan-700 dark:text-cyan-400">
-                <span class="text-brand-cyan/50">//</span> Writing & Research
+                <span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> Writing & Research
             </p>
             <h1 class="font-heading text-fluid-3xl tracking-tight text-body dark:text-dark-body">
                 Articles
@@ -32,9 +32,9 @@
                     @if ($featured->image)
                         <div class="overflow-hidden">
                             <img
-                                class="h-64 w-full object-cover object-center transition-transform duration-500 group-hover:scale-105 sm:h-80"
+                                class="h-64 w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02] sm:h-80"
                                 src="{{ $featured->image }}"
-                                alt="{{ $featured->title }}"
+                                alt=""
                             />
                         </div>
                     @endif
@@ -42,19 +42,13 @@
                         @if ($featured->category)
                             <span class="tag">{{ $featured->category }}</span>
                         @endif
-                        <h2 class="mt-3 font-heading text-fluid-xl tracking-tight text-body dark:text-dark-body group-hover:text-brand-cyan transition-colors">
+                        <h2 class="mt-3 font-heading text-fluid-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                             {{ $featured->title }}
                         </h2>
-                        <time
-                            datetime="{{ $featured->createdAt->toIso8601String() }}"
-                            class="mt-2 block font-mono text-sm text-muted dark:text-dark-muted"
-                        >
-                            {{ $featured->createdAt->format('F j, Y') }}
-                        </time>
                         <p class="mt-3 text-fluid-base leading-relaxed text-muted dark:text-dark-muted">
                             {{ $featured->excerpt }}
                         </p>
-                        <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-brand-cyan">
+                        <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-cyan-400">
                             Read article
                             <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
@@ -73,9 +67,9 @@
                                 @if ($article->image)
                                     <div class="overflow-hidden">
                                         <img
-                                            class="h-48 w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                                            class="h-48 w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.02]"
                                             src="{{ $article->image }}"
-                                            alt="{{ $article->title }}"
+                                            alt=""
                                         />
                                     </div>
                                 @endif
@@ -83,19 +77,13 @@
                                     @if ($article->category)
                                         <span class="tag self-start">{{ $article->category }}</span>
                                     @endif
-                                    <h2 class="mt-3 font-heading text-xl tracking-tight text-body dark:text-dark-body group-hover:text-brand-cyan transition-colors">
+                                    <h2 class="mt-3 font-heading text-xl tracking-tight text-body dark:text-dark-body group-hover:text-cyan-700 dark:group-hover:text-cyan-400 transition-colors">
                                         {{ $article->title }}
                                     </h2>
-                                    <time
-                                        datetime="{{ $article->createdAt->toIso8601String() }}"
-                                        class="mt-2 block font-mono text-sm text-muted dark:text-dark-muted"
-                                    >
-                                        {{ $article->createdAt->format('F j, Y') }}
-                                    </time>
                                     <p class="mt-3 flex-1 text-sm leading-relaxed text-muted dark:text-dark-muted line-clamp-3">
                                         {{ $article->excerpt }}
                                     </p>
-                                    <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-brand-cyan">
+                                    <span class="text-link mt-4 inline-flex items-center gap-1 text-sm font-medium text-cyan-700 dark:text-cyan-400">
                                         Read more
                                         <svg class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />

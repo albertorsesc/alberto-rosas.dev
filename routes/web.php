@@ -1,81 +1,77 @@
 <?php
 
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SubscribeController;
+use App\Services\Github\Pins;
 use Illuminate\Support\Facades\Route;
+use Prezet\Prezet\Models\Document;
 
-Route::get('/', function () {
-    $services = [
-        [
-            'title' => 'AI Engineering & Agentic Systems',
-            'description' => "I build custom AI agents and intelligent systems that automate complex workflows. From RAG pipelines to autonomous agents, I turn manual operational drag into automated efficiency.",
-            'tags' => ['Python', 'LangGraph', 'Vector Databases', 'Agentic RAG', 'CAG', 'Docker', 'MongoDB'],
-            'icon' => "\u{1F916}",
-        ],
-        [
-            'title' => 'Strategic Consulting',
-            'description' => 'Stop guessing with your technical strategy. I provide high-level architectural guidance and "Triage" audits to identify operational waste, ensuring your engineering efforts are aligned with business ROI. Co-founder of Triage Ops.',
-            'tags' => ['System Design', 'Operational Audit', 'Tech Strategy'],
-            'url' => 'https://triageops.com',
-            'icon' => "\u{1F4C8}",
-        ],
-        [
-            'title' => 'Full-Stack Architecture',
-            'description' => "Solid foundations matter. I architect and build scalable, secure web applications using modern standards. Whether it's a SaaS platform or a complex internal tool, I deliver production-grade code.",
-            'tags' => ['SaaS Platforms', 'Microservices', 'System Scalability', 'Security Automation'],
-            'icon' => "\u{1F3D7}",
-        ],
-    ];
+Route::get('/', function (Pins $pins) {
+    // The homepage stays up even if the Prezet index is missing or broken;
+    // the writing section simply drops out.
+    try {
+        $published = Document::where('draft', false);
+        $postCount = $published->count();
+        $posts = $published->orderBy('created_at', 'desc')
+            ->take(3)
+            ->get()
+            ->map(fn ($doc) => $doc->frontmatter);
+    } catch (Throwable) {
+        $posts = collect();
+        $postCount = 0;
+    }
 
-    $experiences = [
-        [
-            'title' => 'AI Engineer',
-            'company' => 'Storage360',
-            'type' => 'Contract',
-            'description' => "Developing 'SADIE', a Natural Language to SQL engine. Architected a multi-agent system using LangGraph for orchestrating query understanding and SQL generation. Achieved sub-300ms response times and implemented MCP servers for secure database connectivity.",
-            'logo' => '',
-            'date' => 'July 2024 - Present',
-        ],
-        [
-            'title' => 'Consultant AI Engineer Lead',
-            'company' => 'Founders Workshop',
-            'type' => 'Contract',
-            'description' => "Leading AI strategy and development for enterprise clients. Guiding the implementation of custom AI solutions, from internal automation tools to customer-facing products.",
-            'logo' => 'logos/foundersworkshop.png',
-            'date' => 'Present',
-        ],
-        [
-            'title' => 'Technical Lead & Senior Software Engineer',
-            'company' => 'Bizee (IncFile)',
-            'type' => 'Remote',
-            'description' => "Leading technical initiatives and rebuilding core products. Architected internal AI tools, including a multi-agent document processing system (1,000+ daily requests) and a Hybrid RAG pipeline.",
-            'logo' => 'logos/bizee.png',
-            'date' => 'Dec 2022 - Present',
-        ],
-        [
-            'title' => 'Previous Experience',
-            'company' => 'Multiple Companies',
-            'type' => 'Remote',
-            'description' => 'Nearly a decade as a Senior Full-Stack Engineer and Manager for companies including Global Cybersec, HQ Rental, Buddhi, and Fulcrum Digital. Architected microservices, led security integrations, and built scalable SaaS platforms.',
-            'logo' => '',
-            'date' => '2014 - 2022',
-        ],
-    ];
-
-    $skillsData = [
-        'Agentic Frameworks' => ['LangGraph', 'CrewAI', 'AutoGen', 'LangChain'],
-        'LLM Ops & Evaluation' => ['LangSmith', 'LangFuse', 'Opik', 'W&B'],
-        'Vector Databases' => ['MongoDB Atlas', 'Qdrant', 'Pinecone', 'Weaviate'],
-        'Cloud & Infrastructure' => ['AWS', 'Google Cloud', 'Docker', 'Python'],
-    ];
+    // Experiments mirror the GitHub profile pins. Never breaks the page: on any
+    // failure the service returns [] and the section hides.
+    try {
+        $experiments = $pins->cards();
+    } catch (Throwable) {
+        $experiments = [];
+    }
 
     return view('welcome', [
-        'services' => $services,
-        'experiences' => $experiences,
-        'skillsData' => $skillsData,
+        'posts' => $posts,
+        'postCount' => $postCount,
+        'experiments' => $experiments,
     ]);
 });
 
+Route::view('/work', 'pages.work')->name('work');
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/now', 'pages.now')->name('now');
 Route::view('/uses', 'pages.uses')->name('uses');
+
+// Newsletter capture. Rate-limited and CSRF-exempt (see bootstrap/app.php) so it
+// works from cached blog pages; double opt-in makes forged posts inert.
+Route::post('/newsletter/subscribe', SubscribeController::class)
+    ->middleware('throttle:6,1')
+    ->name('newsletter.subscribe');
+
+// Double opt-in confirm / unsubscribe. The emailed link is the GET, which only
+// renders an interstitial with a button; the POST performs the mutation. This
+// stops mail scanners that prefetch links from auto-confirming a forged signup or
+// silently unsubscribing a real subscriber. CSRF applies normally (these pages are
+// session-backed, unlike the cached-page subscribe endpoint).
+Route::get('/newsletter/confirm/{token}', [NewsletterController::class, 'showConfirm'])
+    ->name('newsletter.confirm');
+Route::post('/newsletter/confirm/{token}', [NewsletterController::class, 'confirm'])
+    ->name('newsletter.confirm.submit');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'showUnsubscribe'])
+    ->name('newsletter.unsubscribe');
+Route::post('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])
+    ->name('newsletter.unsubscribe.submit');
+
+// Blog RSS feed. Registered before Prezet's blog/{slug} catch-all so "feed" isn't
+// matched as a slug. Prezet 0.8.8 ships no feed of its own.
+Route::get('/blog/feed', function () {
+    $docs = Document::where('draft', false)
+        ->orderBy('created_at', 'desc')
+        ->get()
+        ->map(fn ($doc) => $doc->frontmatter);
+
+    return response()
+        ->view('feed', ['docs' => $docs])
+        ->header('Content-Type', 'application/rss+xml; charset=utf-8');
+})->name('blog.feed');
 
 require __DIR__.'/prezet.php';

@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Road Ends Here — Alberto Rosas')
+@php
+    // The layout's title comes from <x-seo::meta>, not @yield('title'); set it the
+    // same way every page does.
+    seo()->title('Road ends here · Alberto Rosas')->url(url()->current());
+@endphp
 
 @section('content')
 <div class="min-h-[60vh] flex flex-col items-center justify-center px-6 pt-32 pb-20">

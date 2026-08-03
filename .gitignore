@@ -21,3 +21,6 @@ yarn-error.log
 
 # Playwright local artifacts
 /.playwright-mcp
+
+# Prezet auto-generates this on index; we serve our own sitemap.xml.
+/public/prezet_sitemap.xml

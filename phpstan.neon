@@ -1,0 +1,25 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - routes
+        - database
+
+    level: 5
+
+    # Single-process: this codebase is small, and the parallel workers were
+    # crashing (exit 255) in this environment.
+    parallel:
+        maximumNumberOfProcesses: 1
+
+    editorUrl: '%%file%%:%%line%%'
+
+    ignoreErrors:
+        # seo() resolves to archtechx's SEOManager at runtime (rebound in
+        # AppServiceProvider::register), but the dual seo() helper makes PHPStan
+        # see Prezet v1's Seo service, which lacks the archtechx fluent methods.
+        -
+            message: '#Call to an undefined method Prezet\\Prezet\\Services\\Seo::#'
+            path: app/Providers/AppServiceProvider.php

@@ -5,8 +5,6 @@ namespace Tests\Unit;
 use App\Models\Site\Contact;
 use App\Notifications\NewContactSubmissionNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Notifications\Slack\BlockKit\Blocks\HeaderBlock;
-use Illuminate\Notifications\Slack\BlockKit\Blocks\SectionBlock;
 use Illuminate\Notifications\Slack\SlackMessage;
 use Tests\TestCase;
 

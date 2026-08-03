@@ -16,6 +16,6 @@
     <script
         type="application/ld+json"
     >
-        {!! json_encode($ytData->toArray(), JSON_UNESCAPED_SLASHES) !!}
+        {!! json_encode($ytData->toArray(), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP) !!}
     </script>
 </div>

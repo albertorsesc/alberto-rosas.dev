@@ -87,6 +87,6 @@ class NewContactSubmissionNotification extends Notification implements ShouldQue
             return $value;
         }
 
-        return mb_substr($value, 0, $limit) . "\n\n_(truncated — full message in DB)_";
+        return mb_substr($value, 0, $limit)."\n\n_(truncated — full message in DB)_";
     }
 }

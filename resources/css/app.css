@@ -1,3 +1,8 @@
+/* Hallmark · macrostructure: Marquee Hero (home) · genre: atmospheric
+ * theme: custom (synthwave neon over warm stone · dark-only outside /blog)
+ * system: design.md · nav: N5 floating pill · footer: Ft2 inline-rule
+ * contrast: pass (40-41) · mobile: pass (34, 49) · honest: pass (46)
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,24 +11,65 @@
    Design Tokens (CSS Custom Properties)
    =========================== */
 :root {
-    /* Surfaces */
-    --color-surface:       #fafaf9;
-    --color-surface-alt:   #f5f5f4;
-    --color-border:        #e7e5e4;
+    /* Surfaces. The -rgb triplets let Tailwind apply opacity modifiers
+       (bg-surface/80, border-border/50, to-surface/40); the hex vars stay for
+       direct CSS use. bg-surface with no modifier is rgb(… / 1), identical output. */
+    --color-surface:         #fafaf9;
+    --color-surface-rgb:     250 250 249;
+    --color-surface-alt:     #f5f5f4;
+    --color-surface-alt-rgb: 245 245 244;
+    --color-border:          #e7e5e4;
+    --color-border-rgb:      231 229 228;
 
     /* Text */
-    --color-text:          #1c1917;
-    --color-text-muted:    #78716c;
-    --color-text-subtle:   #a8a29e;
+    --color-text:            #1c1917;
+    --color-text-rgb:        28 25 23;
+    --color-text-muted:      #78716c;
+    --color-text-muted-rgb:  120 113 108;
+    --color-text-subtle:     #a8a29e;
+    --color-text-subtle-rgb: 168 162 158;
 
     /* Dark mode surfaces */
-    --color-dark-surface:     #0a0a0a;
-    --color-dark-surface-alt: #111111;
-    --color-dark-border:      #1e1e1e;
+    --color-dark-surface:         #0a0a0a;
+    --color-dark-surface-rgb:     10 10 10;
+    --color-dark-surface-alt:     #111111;
+    --color-dark-surface-alt-rgb: 17 17 17;
+    --color-dark-border:          #1e1e1e;
+    --color-dark-border-rgb:      30 30 30;
 
-    /* Dark mode text */
-    --color-dark-text:        #f0f0f0;
-    --color-dark-text-muted:  #a0a0a0;
+    /* Dark mode text. Subtle is the third tier, mirroring light: measured
+       5.01:1 on the page canvas and 4.78:1 on the inset surface. */
+    --color-dark-text:            #f0f0f0;
+    --color-dark-text-rgb:        240 240 240;
+    --color-dark-text-muted:      #a0a0a0;
+    --color-dark-text-muted-rgb:  160 160 160;
+    --color-dark-text-subtle:     #808080;
+    --color-dark-text-subtle-rgb: 128 128 128;
+
+    /* Synthwave neon triad — emission colours.
+       These are NOT text colours: at these chromas they fail contrast on both
+       canvases. They exist for glows, gradient stops, and low-alpha fills.
+       For readable accent text use the cyan-700 / cyan-400 pair instead.
+       The -rgb triplets exist so alpha can be applied: rgb(var(--neon-cyan-rgb) / 0.08) */
+    --neon-cyan:        #00f5ff;
+    --neon-cyan-rgb:    0 245 255;
+    --neon-magenta:     #ff006e;
+    --neon-magenta-rgb: 255 0 110;
+    --neon-violet:      #8b5cf6;
+    --neon-violet-rgb:  139 92 246;
+
+    /* Mode-invariant brand mark. Same value in light and dark by design —
+       used for the // glyphs, the typing cursor, and the reading-progress bar,
+       where staying constant across modes matters more than contrast.
+       Mirrors theme.extend.colors.brand.cyan in tailwind.config.js; keep in sync. */
+    --brand-cyan:       oklch(65% 0.2 230);
+
+    /* Amber accent family. Scoped to the /uses page and the amber gradient
+       variant. These are Tailwind amber-500/600/700, NOT brand.amber. */
+    --amber-500:        #f59e0b;
+    --amber-500-rgb:    245 158 11;
+    --amber-600:        #d97706;
+    --amber-700:        #b45309;
 
     /* Motion */
     --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
@@ -46,8 +92,10 @@ html {
     overflow-y: scroll;
 }
 
+/* clip, not hidden: hidden makes body a scroll container and silently kills
+   position: sticky on descendants (the blog sidebar and TOC stopped sticking). */
 html, body {
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 *, *::before, *::after {
@@ -90,17 +138,105 @@ html, body {
     left: 0;
     height: 3px;
     width: 100%;
-    background: oklch(65% 0.2 230);
+    background: var(--brand-cyan);
+    /* Collapsed by default: without scroll-timeline support the animation below
+       never applies, and a 0s-duration animation would otherwise paint the bar
+       stuck full-width. Degrade to invisible instead. */
+    transform: scaleX(0);
     transform-origin: left;
     z-index: 100;
-    animation: grow-progress linear;
-    animation-timeline: scroll(root block);
+}
+
+@supports (animation-timeline: scroll()) {
+    .reading-progress {
+        animation: grow-progress linear;
+        animation-timeline: scroll(root block);
+    }
 }
 
 @keyframes grow-progress {
     from { transform: scaleX(0); }
     to { transform: scaleX(1); }
 }
+
+/* ===========================
+   Selection
+   =========================== */
+/* Was undefined, so dragging over any text painted OS-default blue across a
+   warm-stone canvas. Emission triad as a low-alpha fill, per design.md. */
+::selection {
+    background: rgb(var(--neon-cyan-rgb) / 0.18);
+    color: var(--color-text);
+}
+
+.dark ::selection {
+    background: rgb(var(--neon-cyan-rgb) / 0.28);
+    color: var(--color-dark-text);
+}
+
+/* Focus parity: app.css previously defined :focus-visible for .btn only, so
+   every card link on the site was invisible to the keyboard. Same ring token. */
+.gradient-border:focus-visible,
+.bento-card:focus-visible,
+a:focus-visible,
+button:focus-visible {
+    outline: 2px solid var(--brand-cyan);
+    outline-offset: 3px;
+    border-radius: 0.35rem;
+}
+
+/* Skip link: first tab stop, invisible until keyboard focus, appears instantly. */
+.skip-link {
+    position: fixed;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-dark-surface-alt);
+    color: var(--color-dark-text);
+    border: 1px solid rgb(var(--neon-cyan-rgb) / 0.4);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    transform: translateY(-200%);
+}
+
+.skip-link:focus-visible {
+    transform: none;
+}
+
+.gradient-border:focus-within::before {
+    opacity: 0.7;
+    padding: 2.5px;
+    animation-play-state: running;
+}
+
+.dark .gradient-border:focus-within::before { opacity: 1; }
+
+/* ===========================
+   Practice / systems rail
+   =========================== */
+/* The section's only structure was a default 1px rule, which at #1e1e1e on
+   #0a0a0a is effectively invisible. Emission carries dark mode; the hairline
+   falls off before the right edge so the rows read as a sequence, not a table. */
+.rail-row { position: relative; }
+
+.rail-row::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgb(var(--neon-cyan-rgb) / 0.05) 0%, transparent 52%);
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    pointer-events: none;
+}
+
+.dark .rail-row::before {
+    background: linear-gradient(90deg, rgb(var(--neon-cyan-rgb) / 0.09) 0%, transparent 52%);
+}
+
+.rail-row:hover::before,
+.rail-row:focus-within::before { opacity: 1; }
 
 /* ===========================
    Component Styles
@@ -125,12 +261,12 @@ html, body {
 /* Hover physics matched to .gradient-border so content + media cards read as one family */
 .bento-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.08);
+    box-shadow: 0 10px 40px rgb(var(--neon-cyan-rgb) / 0.08);
 }
 
 .dark .bento-card:hover {
-    box-shadow: 0 10px 50px rgba(0, 245, 255, 0.2);
-    border-color: rgba(0, 245, 255, 0.25);
+    box-shadow: 0 10px 50px rgb(var(--neon-cyan-rgb) / 0.2);
+    border-color: rgb(var(--neon-cyan-rgb) / 0.25);
 }
 
 /* Animated gradient border — always visible, intensifies on hover */
@@ -158,16 +294,16 @@ html, body {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 25%,
-        #00f5ff 35%,
-        #8b5cf6 50%,
-        #ff006e 65%,
+        var(--neon-cyan) 35%,
+        var(--neon-violet) 50%,
+        var(--neon-magenta) 65%,
         transparent 75%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     opacity: 0.28;
-    transition: opacity 0.4s ease, padding 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
     /* Signature rainbow arc sits static at rest; comes to life on hover */
     animation: rotate-gradient 4s linear infinite;
     animation-play-state: paused;
@@ -191,11 +327,11 @@ html, body {
 
 .gradient-border:hover {
     transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.08);
+    box-shadow: 0 10px 40px rgb(var(--neon-cyan-rgb) / 0.08);
 }
 
 .dark .gradient-border:hover {
-    box-shadow: 0 10px 50px rgba(0, 245, 255, 0.2);
+    box-shadow: 0 10px 50px rgb(var(--neon-cyan-rgb) / 0.2);
 }
 
 /* Ambient glow behind the card on hover */
@@ -207,15 +343,15 @@ html, body {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 25%,
-        #00f5ff 35%,
-        #8b5cf6 50%,
-        #ff006e 65%,
+        var(--neon-cyan) 35%,
+        var(--neon-violet) 50%,
+        var(--neon-magenta) 65%,
         transparent 75%
     );
     opacity: 0;
     filter: blur(20px);
     z-index: -1;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
     /* No at-rest animation: the halo is invisible until hover, so don't burn GPU spinning it */
 }
 
@@ -233,19 +369,19 @@ html, body {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 25%,
-        #f59e0b 35%,
-        #d97706 50%,
-        #b45309 65%,
+        var(--amber-500) 35%,
+        var(--amber-600) 50%,
+        var(--amber-700) 65%,
         transparent 75%
     );
 }
 
 .gradient-border-amber:hover {
-    box-shadow: 0 10px 40px rgba(245, 158, 11, 0.08);
+    box-shadow: 0 10px 40px rgb(var(--amber-500-rgb) / 0.08);
 }
 
 .dark .gradient-border-amber:hover {
-    box-shadow: 0 10px 50px rgba(245, 158, 11, 0.2);
+    box-shadow: 0 10px 50px rgb(var(--amber-500-rgb) / 0.2);
 }
 
 /* Purple/cyberpunk variant */
@@ -254,20 +390,20 @@ html, body {
     background: conic-gradient(
         from var(--gradient-angle, 0deg),
         transparent 20%,
-        #00f5ff 30%,
-        #8b5cf6 45%,
-        #ff006e 60%,
-        #00f5ff 70%,
+        var(--neon-cyan) 30%,
+        var(--neon-violet) 45%,
+        var(--neon-magenta) 60%,
+        var(--neon-cyan) 70%,
         transparent 80%
     );
 }
 
 .gradient-border-cyber:hover {
-    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.1);
+    box-shadow: 0 10px 40px rgb(var(--neon-violet-rgb) / 0.1);
 }
 
 .dark .gradient-border-cyber:hover {
-    box-shadow: 0 10px 50px rgba(139, 92, 246, 0.25);
+    box-shadow: 0 10px 50px rgb(var(--neon-violet-rgb) / 0.25);
 }
 
 @keyframes rotate-gradient {
@@ -283,7 +419,7 @@ html, body {
 /* Link with draw-in underline */
 .text-link {
     text-decoration: none;
-    background-image: linear-gradient(oklch(65% 0.2 230), oklch(65% 0.2 230));
+    background-image: linear-gradient(var(--brand-cyan), var(--brand-cyan));
     background-size: 0% 1.5px;
     background-position: left bottom;
     background-repeat: no-repeat;
@@ -303,43 +439,45 @@ html, body {
     background: var(--color-surface-alt);
     border: 1px solid var(--color-border);
     color: var(--color-text-muted);
-    transition: all 0.3s ease;
+    transition: color var(--duration-normal) var(--ease-out),
+                background-color var(--duration-normal) var(--ease-out),
+                border-color var(--duration-normal) var(--ease-out);
 }
 
 .dark .tag {
-    background: rgba(0, 245, 255, 0.06);
-    border-color: rgba(0, 245, 255, 0.4);
+    background: rgb(var(--neon-cyan-rgb) / 0.06);
+    border-color: rgb(var(--neon-cyan-rgb) / 0.4);
     color: #22d3ee;
 }
 
 .dark .tag:hover {
-    background: rgba(0, 245, 255, 0.12);
-    border-color: rgba(0, 245, 255, 0.6);
-    box-shadow: 0 0 12px rgba(0, 245, 255, 0.15);
+    background: rgb(var(--neon-cyan-rgb) / 0.12);
+    border-color: rgb(var(--neon-cyan-rgb) / 0.6);
+    box-shadow: 0 0 12px rgb(var(--neon-cyan-rgb) / 0.15);
 }
 
 /* Amber tag variant */
 .dark .tag-amber {
-    background: rgba(245, 158, 11, 0.06);
-    border-color: rgba(245, 158, 11, 0.4);
+    background: rgb(var(--amber-500-rgb) / 0.06);
+    border-color: rgb(var(--amber-500-rgb) / 0.4);
     color: #fbbf24;
 }
 
 .dark .tag-amber:hover {
-    background: rgba(245, 158, 11, 0.12);
-    border-color: rgba(245, 158, 11, 0.6);
+    background: rgb(var(--amber-500-rgb) / 0.12);
+    border-color: rgb(var(--amber-500-rgb) / 0.6);
 }
 
 /* Purple tag variant */
 .dark .tag-purple {
-    background: rgba(139, 92, 246, 0.06);
-    border-color: rgba(139, 92, 246, 0.4);
+    background: rgb(var(--neon-violet-rgb) / 0.06);
+    border-color: rgb(var(--neon-violet-rgb) / 0.4);
     color: #a78bfa;
 }
 
 .dark .tag-purple:hover {
-    background: rgba(139, 92, 246, 0.12);
-    border-color: rgba(139, 92, 246, 0.6);
+    background: rgb(var(--neon-violet-rgb) / 0.12);
+    border-color: rgb(var(--neon-violet-rgb) / 0.6);
 }
 
 /* ===========================
@@ -367,7 +505,7 @@ html, body {
 
 /* Focus ring shows instantly (never animated), ≥3:1 contrast */
 .btn:focus-visible {
-    outline: 2px solid oklch(65% 0.2 230);
+    outline: 2px solid var(--brand-cyan);
     outline-offset: 2px;
 }
 
@@ -376,16 +514,21 @@ html, body {
     cursor: not-allowed;
 }
 
-/* Primary — the brand gradient CTA */
+/* Primary — emission CTA. A glowing cyan outline over the paper rather than a
+   solid block of accent: it matches the neon-emission language used everywhere
+   else (bright neon-cyan, not the bluer brand-cyan) and rations the fill. */
 .btn-primary {
-    background-image: linear-gradient(to right, #06b6d4, #3b82f6, #9333ea);
-    color: #fff;
-    box-shadow: 0 10px 20px -6px rgba(6, 182, 212, 0.35);
+    background-color: rgb(var(--neon-cyan-rgb) / 0.08);
+    color: var(--neon-cyan);
+    border: 1px solid rgb(var(--neon-cyan-rgb) / 0.55);
+    box-shadow: 0 0 22px -8px rgb(var(--neon-cyan-rgb) / 0.45);
 }
 
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-2px);
-    box-shadow: 0 14px 34px -6px rgba(147, 51, 234, 0.45);
+    background-color: rgb(var(--neon-cyan-rgb) / 0.14);
+    border-color: rgb(var(--neon-cyan-rgb) / 0.9);
+    box-shadow: 0 0 30px -6px rgb(var(--neon-cyan-rgb) / 0.6);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -406,12 +549,12 @@ html, body {
 
 .btn-ghost:hover:not(:disabled) {
     transform: translateY(-2px);
-    border-color: oklch(65% 0.2 230);
+    border-color: var(--brand-cyan);
     color: oklch(55% 0.22 230);
 }
 
 .dark .btn-ghost:hover:not(:disabled) {
-    color: oklch(65% 0.2 230);
+    color: var(--brand-cyan);
 }
 
 /* External link icon */
@@ -444,14 +587,14 @@ html.transitioning-colors * {
 
 /* Dot grid background — dark mode only, VISIBLE */
 .dark body {
-    background-image: radial-gradient(circle, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+    background-image: radial-gradient(circle, rgb(var(--neon-cyan-rgb) / 0.05) 1px, transparent 1px);
     background-size: 24px 24px;
 }
 
 /* Synthwave gradient divider — thick and vivid in dark */
 .synthwave-divider {
     height: 2px;
-    background: linear-gradient(90deg, transparent 0%, #ff006e 20%, #00f5ff 50%, #8b5cf6 80%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, var(--neon-magenta) 20%, var(--neon-cyan) 50%, var(--neon-violet) 80%, transparent 100%);
     opacity: 0.6;
 }
 
@@ -462,48 +605,38 @@ html.transitioning-colors * {
 
 /* Neon glow — applied selectively */
 .neon-glow {
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.15), 0 0 40px rgba(0, 245, 255, 0.05);
+    text-shadow: 0 0 10px rgb(var(--neon-cyan-rgb) / 0.15), 0 0 40px rgb(var(--neon-cyan-rgb) / 0.05);
 }
 
 .dark .neon-glow {
-    text-shadow: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 60px rgba(0, 245, 255, 0.2), 0 0 100px rgba(0, 245, 255, 0.08);
+    text-shadow: 0 0 20px rgb(var(--neon-cyan-rgb) / 0.5), 0 0 60px rgb(var(--neon-cyan-rgb) / 0.2), 0 0 100px rgb(var(--neon-cyan-rgb) / 0.08);
 }
 
 /* NEON TEXT — strong glow for hero elements like Mushin, 4:20, headings */
 .neon-text {
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.3), 0 0 30px rgba(0, 245, 255, 0.1);
+    text-shadow: 0 0 10px rgb(var(--neon-cyan-rgb) / 0.3), 0 0 30px rgb(var(--neon-cyan-rgb) / 0.1);
 }
 
 .dark .neon-text {
-    text-shadow: 0 0 20px rgba(0, 245, 255, 0.6), 0 0 60px rgba(0, 245, 255, 0.3), 0 0 100px rgba(0, 245, 255, 0.15);
+    text-shadow: 0 0 20px rgb(var(--neon-cyan-rgb) / 0.6), 0 0 60px rgb(var(--neon-cyan-rgb) / 0.3), 0 0 100px rgb(var(--neon-cyan-rgb) / 0.15);
 }
 
 /* Amber neon variant */
 .neon-text-amber {
-    text-shadow: 0 0 10px rgba(245, 158, 11, 0.3), 0 0 30px rgba(245, 158, 11, 0.1);
+    text-shadow: 0 0 10px rgb(var(--amber-500-rgb) / 0.3), 0 0 30px rgb(var(--amber-500-rgb) / 0.1);
 }
 
 .dark .neon-text-amber {
-    text-shadow: 0 0 20px rgba(245, 158, 11, 0.6), 0 0 60px rgba(245, 158, 11, 0.3), 0 0 100px rgba(245, 158, 11, 0.15);
+    text-shadow: 0 0 20px rgb(var(--amber-500-rgb) / 0.6), 0 0 60px rgb(var(--amber-500-rgb) / 0.3), 0 0 100px rgb(var(--amber-500-rgb) / 0.15);
 }
 
 /* Purple neon variant */
 .neon-text-purple {
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.3), 0 0 30px rgba(139, 92, 246, 0.1);
+    text-shadow: 0 0 10px rgb(var(--neon-violet-rgb) / 0.3), 0 0 30px rgb(var(--neon-violet-rgb) / 0.1);
 }
 
 .dark .neon-text-purple {
-    text-shadow: 0 0 20px rgba(139, 92, 246, 0.6), 0 0 60px rgba(139, 92, 246, 0.3), 0 0 100px rgba(139, 92, 246, 0.15);
-}
-
-/* Float animation — gentle up/down bob */
-@keyframes float {
-    0% { transform: translateY(0px); }
-    100% { transform: translateY(-8px); }
-}
-
-.float {
-    animation: float 4s ease-in-out infinite alternate;
+    text-shadow: 0 0 20px rgb(var(--neon-violet-rgb) / 0.6), 0 0 60px rgb(var(--neon-violet-rgb) / 0.3), 0 0 100px rgb(var(--neon-violet-rgb) / 0.15);
 }
 
 /* Scan-line overlay — VISIBLE */
@@ -527,8 +660,8 @@ html.transitioning-colors * {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 245, 255, 0.03) 2px,
-        rgba(0, 245, 255, 0.03) 4px
+        rgb(var(--neon-cyan-rgb) / 0.03) 2px,
+        rgb(var(--neon-cyan-rgb) / 0.03) 4px
     );
 }
 
@@ -542,34 +675,56 @@ html.transitioning-colors * {
     100% { clip-path: inset(58% 0 43% 0); transform: translate(0); }
 }
 
-.glitch-hover {
+/* The ghost copies live on each line, not the block: a multi-line heading's
+   single attr(data-text) overlay breaks lines differently than the real text
+   and shows the name twice on hover. Each line carries its own data-text. */
+.glitch-hover [data-text] {
     position: relative;
 }
 
-.glitch-hover::before,
-.glitch-hover::after {
+.glitch-hover [data-text]::before,
+.glitch-hover [data-text]::after {
     content: attr(data-text);
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     opacity: 0;
     pointer-events: none;
 }
 
-.glitch-hover:hover::before {
+.glitch-hover:hover [data-text]::before {
     opacity: 0.8;
-    color: #00f5ff;
+    color: var(--neon-cyan);
     animation: glitch 300ms linear;
-    text-shadow: -2px 0 #ff006e;
+    text-shadow: -2px 0 var(--neon-magenta);
 }
 
-.glitch-hover:hover::after {
+.glitch-hover:hover [data-text]::after {
     opacity: 0.8;
-    color: #ff006e;
+    color: var(--neon-magenta);
     animation: glitch 300ms linear reverse;
-    text-shadow: 2px 0 #00f5ff;
+    text-shadow: 2px 0 var(--neon-cyan);
+}
+
+/* Hermetic seal — the engineer card rewards a patient hover: the ankh from
+   the console signature (無心 ☥) fades in only after the cursor has rested
+   on the card. Casual passes never see it. Emission, not text. A real child
+   element, not a pseudo: .gradient-border owns both ::before and ::after. */
+.hermetic-eye {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--neon-violet);
+    text-shadow: 0 0 12px rgb(var(--neon-violet-rgb) / 0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 600ms var(--ease-out);
+}
+
+[data-hermetic="eye"]:hover .hermetic-eye {
+    opacity: 0.6;
+    transition-delay: 1.6s;
 }
 
 /* Typing cursor blink */
@@ -613,19 +768,19 @@ html.transitioning-colors * {
     inset: 0;
     border-radius: inherit;
     background: linear-gradient(135deg,
-        rgba(0, 245, 255, 0.03) 0%,
-        rgba(139, 92, 246, 0.05) 50%,
-        rgba(255, 0, 110, 0.03) 100%
+        rgb(var(--neon-cyan-rgb) / 0.03) 0%,
+        rgb(var(--neon-violet-rgb) / 0.05) 50%,
+        rgb(var(--neon-magenta-rgb) / 0.03) 100%
     );
     opacity: 0.5;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s var(--ease-out);
 }
 
 .dark .cyber-gradient-bg::before {
     background: linear-gradient(135deg,
-        rgba(0, 245, 255, 0.06) 0%,
-        rgba(139, 92, 246, 0.08) 50%,
-        rgba(255, 0, 110, 0.06) 100%
+        rgb(var(--neon-cyan-rgb) / 0.06) 0%,
+        rgb(var(--neon-violet-rgb) / 0.08) 50%,
+        rgb(var(--neon-magenta-rgb) / 0.06) 100%
     );
     opacity: 1;
     animation: cyber-bg-shift 6s ease-in-out infinite alternate;
@@ -634,16 +789,16 @@ html.transitioning-colors * {
 @keyframes cyber-bg-shift {
     0% {
         background: linear-gradient(135deg,
-            rgba(0, 245, 255, 0.06) 0%,
-            rgba(139, 92, 246, 0.08) 50%,
-            rgba(255, 0, 110, 0.06) 100%
+            rgb(var(--neon-cyan-rgb) / 0.06) 0%,
+            rgb(var(--neon-violet-rgb) / 0.08) 50%,
+            rgb(var(--neon-magenta-rgb) / 0.06) 100%
         );
     }
     100% {
         background: linear-gradient(225deg,
-            rgba(255, 0, 110, 0.06) 0%,
-            rgba(0, 245, 255, 0.08) 50%,
-            rgba(139, 92, 246, 0.06) 100%
+            rgb(var(--neon-magenta-rgb) / 0.06) 0%,
+            rgb(var(--neon-cyan-rgb) / 0.08) 50%,
+            rgb(var(--neon-violet-rgb) / 0.06) 100%
         );
     }
 }
@@ -659,7 +814,7 @@ html.transitioning-colors * {
 }
 
 .synthwave-mode .neon-glow {
-    text-shadow: 0 0 20px rgba(0, 245, 255, 0.6), 0 0 60px rgba(0, 245, 255, 0.3), 0 0 100px rgba(139, 92, 246, 0.2) !important;
+    text-shadow: 0 0 20px rgb(var(--neon-cyan-rgb) / 0.6), 0 0 60px rgb(var(--neon-cyan-rgb) / 0.3), 0 0 100px rgb(var(--neon-violet-rgb) / 0.2) !important;
 }
 
 @keyframes synthwave-pulse {
@@ -680,10 +835,6 @@ html.transitioning-colors * {
     .reading-progress {
         animation: none;
         transform: scaleX(1);
-    }
-
-    .float {
-        animation: none;
     }
 
     *, *::before, *::after {

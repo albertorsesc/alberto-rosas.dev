@@ -1,5 +1,14 @@
 <?php
 
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
+use League\CommonMark\Extension\ExternalLink\ExternalLinkExtension;
+use League\CommonMark\Extension\FrontMatter\FrontMatterExtension;
+use League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension;
+use Phiki\Adapters\CommonMark\PhikiExtension;
+use Phiki\Theme\Theme;
+use Prezet\Prezet\Extensions\MarkdownBladeExtension;
+use Prezet\Prezet\Extensions\MarkdownImageExtension;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -17,17 +26,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Data Classes
+    | Slug Configuration
     |--------------------------------------------------------------------------
     |
-    | These classes are used to store markdown information in a Validated DTO.
-    | You can override the default classes with your own and configure Pezet to
-    | use them here.
+    | Configure how document slugs are generated. The source can be 'filepath'
+    | or 'title'. Note that a slug defined in front matter will take precedence
+    | over the generated slug. When 'keyed' is true, the key present in the
+    | front matter key will be appended to the slug (e.g., my-post-123).
     |
     */
 
-    'data' => [
-        'frontmatter' => BenBjurstrom\Prezet\Data\FrontmatterData::class,
+    'slug' => [
+        'source' => 'filepath', // 'filepath' or 'title'
+        'keyed' => false, // 'true' or 'false'
     ],
 
     /*
@@ -44,17 +55,18 @@ return [
     'commonmark' => [
 
         'extensions' => [
-            League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension::class,
-            League\CommonMark\Extension\HeadingPermalink\HeadingPermalinkExtension::class,
-            League\CommonMark\Extension\ExternalLink\ExternalLinkExtension::class,
-            League\CommonMark\Extension\FrontMatter\FrontMatterExtension::class,
-            BenBjurstrom\Prezet\Extensions\MarkdownBladeExtension::class,
-            BenBjurstrom\Prezet\Extensions\MarkdownImageExtension::class,
+            CommonMarkCoreExtension::class,
+            HeadingPermalinkExtension::class,
+            ExternalLinkExtension::class,
+            FrontMatterExtension::class,
+            MarkdownBladeExtension::class,
+            MarkdownImageExtension::class,
+            PhikiExtension::class,
         ],
 
         'config' => [
             'heading_permalink' => [
-                'html_class' => 'mr-2 scroll-mt-12',
+                'html_class' => 'prezet-heading',
                 'id_prefix' => 'content',
                 'apply_id_to_heading' => false,
                 'heading_class' => '',
@@ -67,12 +79,16 @@ return [
                 'aria_hidden' => false,
             ],
             'external_link' => [
-                'internal_hosts' => config('app.url'), // Don't forget to set this!
+                'internal_hosts' => 'www.example.com', // Don't forget to set this!
                 'open_in_new_window' => true,
                 'html_class' => 'external-link',
                 'nofollow' => 'external',
                 'noopener' => 'external',
                 'noreferrer' => 'external',
+            ],
+            'phiki' => [
+                'theme' => Theme::NightOwl,
+                'with_gutter' => true,
             ],
         ],
     ],
@@ -84,9 +100,9 @@ return [
     |
     | Configure how image tags are handled when converting from markdown.
     |
-    | 'path' specifies the route for serving images.
     | 'widths' defines the various widths for responsive images.
     | 'sizes' indicates the sizes attribute for responsive images.
+    | 'zoomable' determines if images are zoomable.
     */
 
     'image' => [
@@ -96,5 +112,50 @@ return [
         ],
 
         'sizes' => '92vw, (max-width: 1024px) 92vw, 768px',
+
+        'zoomable' => true,
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Sitemap
+    |--------------------------------------------------------------------------
+    | The sitemap origin is used to generate absolute URLs for the sitemap.
+    | An origin consists of a scheme/host/port combination, but no path.
+    | (e.g., https://example.com:8000) https://www.rfc-editor.org/rfc/rfc6454
+    */
+
+    'sitemap' => [
+        'origin' => env('PREZET_SITEMAP_ORIGIN', env('APP_URL')),
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Structured Data
+    |--------------------------------------------------------------------------
+    |
+    | Prezet uses these values for JSON-LD structured data. 'authors' defines
+    | named authors you can reference in front matter, and 'publisher' is used
+    | as the default publisher for all content.
+    |
+    */
+
+    // https://schema.org/author
+    'authors' => [
+        'prezet' => [
+            '@type' => 'Person',
+            'name' => 'Prezet Author',
+            'url' => 'https://prezet.com',
+            'image' => 'https://prezet.com/favicon.svg',
+        ],
+    ],
+
+    // https://schema.org/publisher
+    'publisher' => [
+        '@type' => 'Organization',
+        'name' => 'Prezet',
+        'url' => 'https://prezet.com',
+        'logo' => 'https://prezet.com/favicon.svg',
+        'image' => 'https://prezet.com/ogimage.png',
     ],
 ];

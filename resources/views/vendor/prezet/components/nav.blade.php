@@ -1,4 +1,4 @@
-<nav class="text-base lg:text-sm">
+<nav class="text-base lg:text-sm" aria-label="Articles">
     <ul role="list" class="space-y-9">
         @foreach ($nav as $section)
             <li>
