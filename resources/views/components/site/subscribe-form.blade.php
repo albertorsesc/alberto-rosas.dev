@@ -5,6 +5,13 @@
     // not run on cached, cookie-stripped blog pages. Default it so the component
     // renders anywhere.
     $errors ??= new \Illuminate\Support\ViewErrorBag;
+
+    // Any non-footer subscribe form marks the page as already having one, so the
+    // global footer form suppresses itself (see components/site/footer.blade.php).
+    // Content renders before the footer, so the flag is set in time.
+    if ($source !== 'footer') {
+        app('view')->share('pageHasInlineSubscribe', true);
+    }
 @endphp
 
 {{-- Cache-safe newsletter capture: a plain POST form (works without JS) that
