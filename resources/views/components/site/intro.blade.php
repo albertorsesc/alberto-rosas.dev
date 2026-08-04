@@ -200,7 +200,7 @@
             <dl class="font-mono text-[11px] sm:text-xs uppercase tracking-[0.08em] sm:tracking-[0.18em] text-muted dark:text-dark-muted space-y-1.5 min-w-0 max-w-full">
                 <div class="flex gap-3 min-w-0">
                     <dt class="text-cyan-700 dark:text-cyan-400/70 shrink-0">role</dt>
-                    <dd class="text-cyan-700 dark:text-cyan-400 min-w-0 [overflow-wrap:anywhere]">AI &amp; Agentic Systems Engineer</dd>
+                    <dd class="text-cyan-700 dark:text-cyan-400 min-w-0 [overflow-wrap:anywhere]">Cybersecurity-focused AI &amp; Agentic Systems Engineer</dd>
                 </div>
                 <div class="flex gap-3 min-w-0">
                     <dt class="text-cyan-700 dark:text-cyan-400/70 shrink-0">exp</dt>

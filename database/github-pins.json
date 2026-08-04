@@ -38,16 +38,5 @@
             "react-native",
             "remote-control"
         ]
-    },
-    {
-        "name": "soundmind",
-        "description": "A sound-based mind programming system that combines psychoacoustic masking, brainwave entrainment, NLP-patterned affirmations, and targeted memory reactivation (TMR) into layered audio sessions designed for behavioral change and accelerated learning.",
-        "url": "https://github.com/albertorsesc/soundmind",
-        "languages": [
-            "Python",
-            "Makefile",
-            "Dockerfile"
-        ],
-        "topics": []
     }
 ]

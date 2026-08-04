@@ -62,8 +62,8 @@ class AppServiceProvider extends ServiceProvider
         // SetSeo action) override these; anything not overridden falls back here.
         seo()
             ->site('Alberto Rosas')
-            ->title('Alberto Rosas · AI & Agentic Systems Engineer')
-            ->description('AI & Agentic Systems Engineer with 12+ years in software and 5+ in production AI. Agentic systems, hybrid retrieval, and eval-first delivery. Based in Mexico, US-timezone friendly.')
+            ->title('Alberto Rosas · Cybersecurity-focused AI & Agentic Systems Engineer')
+            ->description('Cybersecurity & compliance-focused AI & Agentic Systems Engineer & Architect. Agent security, guardrails, evals, and AI governance (EU AI Act, NIST AI RMF, SOC 2). 12+ years in software, 5+ in production AI. Based in Mexico, US-timezone friendly.')
             ->image(url('/og-image.png'))
             ->locale('en_US')
             ->twitter()

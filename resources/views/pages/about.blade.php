@@ -3,7 +3,7 @@
 @php
     seo()
         ->title('About · Alberto Rosas')
-        ->description('AI & Agentic Systems Engineer in Mexico. How I work: production agentic systems, hybrid retrieval, and eval-first delivery, from a security-automation background.')
+        ->description('Cybersecurity & compliance-focused AI & Agentic Systems Engineer in Mexico. How I work: production agentic systems with agent security, guardrails, evals, and AI governance (EU AI Act, NIST AI RMF, SOC 2), from a security-automation background.')
         ->url(route('about'));
 @endphp
 
@@ -26,7 +26,7 @@
                 <p class="text-xs font-mono uppercase tracking-widest text-cyan-700 dark:text-cyan-400 mb-3"><span class="text-cyan-700 dark:text-cyan-400/70" aria-hidden="true">//</span> The Engineer</p>
                 <h1 class="font-heading text-fluid-3xl text-body dark:text-dark-body mb-3 neon-text">Alberto Rosas</h1>
                 <p class="font-mono text-sm text-muted dark:text-dark-muted leading-relaxed">
-                    <span class="text-cyan-700 dark:text-cyan-400">AI &amp; Agentic Systems Engineer</span>
+                    <span class="text-cyan-700 dark:text-cyan-400">Cybersecurity &amp; compliance-focused AI &amp; Agentic Systems Engineer &amp; Architect</span>
                     &middot; 12+ yrs software / 5+ yrs production AI
                     &middot; <span class="text-cyan-700 dark:text-cyan-400">Mexico</span>
                     &middot; EN/ES native
@@ -167,7 +167,7 @@
                         <div class="gradient-border group">
                             <p class="font-mono text-xs text-muted dark:text-dark-muted transition-colors duration-300 group-hover:text-cyan-700 dark:group-hover:text-cyan-400 mb-2">Governance</p>
                             <p class="text-sm text-body dark:text-dark-body font-medium mb-2">Governance and compliance readiness</p>
-                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Built the AI layer for a platform used by compliance auditors, with systems classified against the EU AI Act, NIST AI RMF, and ISO/IEC 42001. Refusal and confidence tiering surfaced to users when certainty is low.</p>
+                            <p class="text-xs text-muted dark:text-dark-muted leading-relaxed">Built the AI layer for a platform used by compliance auditors, with systems mapped to the EU AI Act, NIST AI RMF, ISO/IEC 42001, and SOC 2. Immutable audit trails over agent actions; refusal and confidence tiering surfaced to users when certainty is low.</p>
                         </div>
                     </div>
                 </section>
