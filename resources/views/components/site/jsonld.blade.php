@@ -19,13 +19,14 @@
                 '@type' => 'Person',
                 '@id' => $base.'/#person',
                 'name' => 'Alberto Rosas',
-                'jobTitle' => 'AI & Agentic Systems Engineer',
+                'jobTitle' => 'Cybersecurity-focused AI & Agentic Systems Engineer',
                 'url' => $base,
                 'image' => $base.'/og-image.png',
                 'worksFor' => ['@id' => $base.'/#triageops'],
                 'knowsAbout' => [
-                    'Agentic AI systems', 'LLM evaluation', 'Retrieval-augmented generation',
-                    'Model Context Protocol', 'AI security', 'NL-to-SQL',
+                    'Agentic AI systems', 'AI security', 'AI governance and compliance',
+                    'LLM guardrails', 'AI red-teaming', 'LLM evaluation',
+                    'Retrieval-augmented generation', 'Model Context Protocol', 'NL-to-SQL',
                 ],
                 'address' => ['@type' => 'PostalAddress', 'addressCountry' => 'MX'],
                 'sameAs' => [
