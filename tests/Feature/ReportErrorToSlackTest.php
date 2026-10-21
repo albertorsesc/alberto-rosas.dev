@@ -6,6 +6,7 @@ use App\Listeners\ReportErrorToSlack;
 use App\Notifications\SystemFailureNotification;
 use App\Services\Slack\SlackNotifier;
 use Illuminate\Log\Events\MessageLogged;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
@@ -24,6 +25,16 @@ class ReportErrorToSlackTest extends TestCase
         (new ReportErrorToSlack(new SlackNotifier))->handle(
             new MessageLogged($level, $message, $context)
         );
+    }
+
+    public function test_it_is_registered_for_log_events_exactly_once(): void
+    {
+        $registrations = array_filter(
+            Event::getRawListeners()[MessageLogged::class] ?? [],
+            fn ($listener) => is_string($listener) && str_starts_with($listener, ReportErrorToSlack::class),
+        );
+
+        $this->assertCount(1, $registrations);
     }
 
     public function test_it_forwards_error_level_logs_to_slack(): void
