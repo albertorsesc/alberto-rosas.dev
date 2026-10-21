@@ -3,6 +3,9 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Request;
+use Livewire\Features\SupportFileUploads\MissingFileUploadsTraitException;
+use Psr\Log\LogLevel;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,5 +23,13 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        // Bots replay a component's Livewire snapshot with a `_startUpload`
+        // call. No component here has a file input, so Livewire refuses the
+        // call with this exception. It is answered as a client error and
+        // recorded at warning: the log keeps a trace, and nothing reaches
+        // Slack, which forwards error level and above.
+        $exceptions->level(MissingFileUploadsTraitException::class, LogLevel::WARNING);
+        $exceptions->render(fn (MissingFileUploadsTraitException $e, Request $request) => response()->json(
+            ['message' => 'File uploads are not accepted.'], 400
+        ));
     })->create();
